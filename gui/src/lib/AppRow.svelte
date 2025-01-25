@@ -81,9 +81,18 @@
     td {
         padding: 12px;
         color: #e0e0e0;
+        font-weight: 600;
+        text-align: left;
+    }
+    td:first-child {
+        min-width: 200px;
+    }
+    td:nth-child(2) {
+        min-width: 200px;
     }
 
     .controls {
+        min-width: 200px;
         display: flex;
         gap: 8px;
     }
