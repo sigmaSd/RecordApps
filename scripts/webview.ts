@@ -1,3 +1,4 @@
+import "data:text/javascript,Deno.env.set('PLUGIN_URL', Deno.cwd())";
 import { Webview } from "jsr:@webview/webview@0.8.1";
 
 const worker = new Worker(import.meta.resolve("./start.ts"), {
