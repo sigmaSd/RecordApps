@@ -10,3 +10,4 @@ webview.navigate("http://localhost:8000");
 webview.run();
 
 worker.terminate();
+Deno.exit(0);
