@@ -22,7 +22,7 @@ export async function playingApps(): Promise<App[]> {
         name: match[1],
         id: Number.parseInt(match[2], 10),
       }))
-      .filter((app) => !Number.isNaN(app.id)),
+      .filter((app) => !Number.isNaN(app.id) && app.name !== "pacat"),
   );
 
   return apps;

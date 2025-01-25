@@ -18,6 +18,7 @@
                 method: "POST",
                 body: JSON.stringify(app),
             });
+            playing = false;
             recording = false;
         }
     }
@@ -39,19 +40,70 @@
     }
 </script>
 
-<tr>
+<tr class:recording>
     <td>{app.name}</td>
     <td>{app.id}</td>
-    <td>
-        <button onclick={() => recordApp(app)}
-            >{recording ? "Stop Recording" : "Record"}</button
+    <td class="controls">
+        <button
+            class="control-btn"
+            class:active={recording}
+            onclick={() => recordApp(app)}
         >
-    </td>
-    {#if recording}
-        <td>
-            <button onclick={() => playAudio(app)}
-                >{playing ? "Mute" : "Play"}</button
+            {recording ? "⏹️" : "⏺️"}
+        </button>
+
+        {#if recording}
+            <button
+                class="control-btn"
+                class:active={playing}
+                onclick={() => playAudio(app)}
             >
-        </td>
-    {/if}
+                {playing ? "🔇" : "🔊"}
+            </button>
+        {/if}
+    </td>
 </tr>
+
+<style>
+    tr {
+        border-bottom: 1px solid #2c2c2c;
+        transition: background-color 0.2s;
+    }
+
+    tr:hover {
+        background-color: #2a2a2a;
+    }
+
+    tr.recording {
+        background-color: #3d2626;
+    }
+
+    td {
+        padding: 12px;
+        color: #e0e0e0;
+    }
+
+    .controls {
+        display: flex;
+        gap: 8px;
+    }
+
+    .control-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 8px;
+        border-radius: 4px;
+        transition: all 0.2s;
+        font-size: 1.2em;
+    }
+
+    .control-btn:hover {
+        background: #3a3a3a;
+    }
+
+    .control-btn.active {
+        background: #ff3e00;
+        color: white;
+    }
+</style>

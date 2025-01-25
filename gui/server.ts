@@ -87,13 +87,20 @@ if (import.meta.main) {
 
     if (req.url.endsWith("/stop-recording")) {
       const app = await req.json() as App;
-      const abortController = recordings.get(app.id);
-      if (abortController === undefined) {
+      const recordingAbortController = recordings.get(app.id);
+      if (recordingAbortController === undefined) {
         return new Response("Recording not found", { status: 404, headers });
       }
-      abortController.abort();
+      const playingAbortController = playing.get(app.id);
+      if (playingAbortController !== undefined) {
+        playingAbortController.abort();
+        playing.delete(app.id);
+      }
+
+      recordingAbortController.abort();
       await moveAppToSink({ app, sink: originalSink });
       recordings.delete(app.id);
+
       return new Response("Recording stopped", { headers });
     }
 
