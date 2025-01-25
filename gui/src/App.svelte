@@ -4,7 +4,7 @@
     import Counter from "./lib/Counter.svelte";
     import AppRow from "./lib/AppRow.svelte";
     import { onMount } from "svelte";
-    import type { App } from "../../../lib";
+    import type { App } from "../../lib";
 
     let apps: App[] = [];
     onMount(() => {

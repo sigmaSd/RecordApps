@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { App } from "../../../../lib";
+    import type { App } from "../../../lib";
 
     const { app } = $props();
 

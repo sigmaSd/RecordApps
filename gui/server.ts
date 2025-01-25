@@ -7,9 +7,9 @@ import {
   playingApps,
   playSinkAudio,
   recordFromSink,
-} from "../../lib.ts";
+} from "../lib.ts";
 import { ensureDirSync } from "jsr:@std/fs";
-import { unloadAllVirtualSinks } from "../../lib.ts";
+import { unloadAllVirtualSinks } from "../lib.ts";
 
 if (import.meta.main) {
   let musicDir = `${Deno.env.get("HOME")}/Music`;
