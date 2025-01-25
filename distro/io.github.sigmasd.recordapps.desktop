@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=RecordApps
+Name=Record Apps
 Comment=Record audio from individual applications
 Exec=run.sh
 Icon=io.github.sigmasd.recordapps

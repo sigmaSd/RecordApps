@@ -10,7 +10,7 @@
     "frontend": "cd gui && deno task dev",
     "build": "cd gui && deno task build && cd .. && rm -rf ./dist && mv gui/dist . && cp gui/server.ts ./dist && cp scripts/* ./dist",
     "compile": {
-      "command": "cd dist && curl -L https://github.com/webview/webview_deno/releases/download/0.8.1/libwebview.so --output libwebview.so && deno compile -o record --include start.ts --include . -A webview.ts && mv record ../",
+      "command": "cd dist && deno compile -o record --include start.ts --include . -A webview.ts && mv record ../",
       "dependencies": [
         "build"
       ]

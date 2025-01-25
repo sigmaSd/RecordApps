@@ -1,8 +1,4 @@
-const dirName = import.meta.dirname;
-if (dirName) {
-  Deno.env.set("PLUGIN_URL", dirName);
-}
-const { Webview } = await import("jsr:@webview/webview@0.8.1");
+import { Webview } from "jsr:@sigmasd/webview-deno";
 
 const worker = new Worker(import.meta.resolve("./start.ts"), {
   type: "module",
