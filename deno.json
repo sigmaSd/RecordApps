@@ -1,8 +1,19 @@
 {
   "tasks": {
-    "start": "deno task backend & deno task frontend",
+    "start": {
+      "dependencies": [
+        "backend",
+        "frontend"
+      ]
+    },
     "backend": "cd gui && deno run -A server.ts",
     "frontend": "cd gui && deno task dev",
-    "build": "cd gui && deno task build && cd .. && rm -rf ./dist && mv gui/dist . && cp gui/server.ts ./dist && cp scripts/* ./dist"
+    "build": "cd gui && deno task build && cd .. && rm -rf ./dist && mv gui/dist . && cp gui/server.ts ./dist && cp scripts/* ./dist",
+    "compile": {
+      "command": "cd dist && deno compile -o record --include start.ts --include . -A webview.ts && mv record ../",
+      "dependencies": [
+        "build"
+      ]
+    }
   }
 }
