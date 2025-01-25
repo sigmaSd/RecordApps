@@ -2,6 +2,8 @@
 
 A desktop application that allows you to record audio from specific applications on Linux. Built with Deno, Svelte, and WebView.
 
+![image](https://github.com/user-attachments/assets/c7943bd6-d96c-46de-86de-5f062655a258)
+
 ## Features
 
 - List running applications with audio output
