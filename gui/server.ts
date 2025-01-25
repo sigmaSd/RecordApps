@@ -12,6 +12,10 @@ import { ensureDirSync } from "jsr:@std/fs";
 import { unloadAllVirtualSinks } from "../lib.ts";
 
 if (import.meta.main) {
+  main()
+}
+
+export async function main() {
   let musicDir = `${Deno.env.get("HOME")}/Music`;
   try {
     await new Deno.Command("xdg-user-dir", { args: ["MUSIC"] }).output().then(

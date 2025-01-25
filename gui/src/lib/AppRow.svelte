@@ -49,7 +49,7 @@
             class:active={recording}
             onclick={() => recordApp(app)}
         >
-            {recording ? "⏹️" : "⏺️"}
+            {recording ? "⏹️" : "🔴"}
         </button>
 
         {#if recording}

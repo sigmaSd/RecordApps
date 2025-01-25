@@ -1,0 +1,8 @@
+{
+  "tasks": {
+    "start": "deno task backend & deno task frontend",
+    "backend": "cd gui && deno run -A server.ts",
+    "frontend": "cd gui && deno task dev",
+    "build": "cd gui && deno task build && cd .. && rm -rf ./dist && mv gui/dist . && cp gui/server.ts ./dist && cp scripts/* ./dist"
+  }
+}
