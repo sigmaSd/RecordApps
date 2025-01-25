@@ -16,7 +16,7 @@
 </script>
 
 <main class="container">
-    <h1>Sound Recorder</h1>
+    <h1>Record Apps</h1>
     <div class="table-wrapper">
         <table>
             <thead>
