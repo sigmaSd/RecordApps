@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=RecordApps
+Comment=Record audio from individual applications
+Exec=run.sh
+Icon=io.github.sigmasd.recordapps
+Terminal=false
+Type=Application
+Categories=Audio;AudioVideo;Utility;

@@ -1,0 +1,45 @@
+app-id: io.github.sigmasd.recordapps
+runtime: org.gnome.Platform
+runtime-version: '47'
+sdk: org.gnome.Sdk
+command: run.sh
+finish-args:
+  - --share=ipc
+  - --socket=fallback-x11
+  - --socket=wayland
+  - --socket=pulseaudio
+  - --device=all # audio + grpahics
+  - --filesystem=xdg-music # for saving recordings
+  - --share=network # local server
+modules:
+  - name: webkit-compat
+    buildsystem: simple
+    build-commands:
+      - mkdir -p /app/lib
+      - cp /usr/lib/x86_64-linux-gnu/libwebkit2gtk-4.1.so.0.16.7 /app/lib/libwebkit2gtk-4.0.so.37
+      - cp /usr/lib/x86_64-linux-gnu/libjavascriptcoregtk-4.1.so.0.6.14 /app/lib/libjavascriptcoregtk-4.0.so.18
+    cleanup:
+      - /include
+      - /lib/pkgconfig
+
+  - name: recordapps
+    buildsystem: simple
+    build-commands:
+      - install -D run.sh /app/bin/run.sh
+      - chmod +x /app/bin/run.sh
+      - install -D record /app/bin/record
+      - mkdir -p /app/share/applications
+      - install -D io.github.sigmasd.recordapps.desktop /app/share/applications/
+      - mkdir -p /app/share/icons/hicolor/64x64/apps
+      - mkdir -p /app/share/icons/hicolor/128x128/apps
+      - mkdir -p /app/share/icons/hicolor/256x256/apps
+      - install -D icons/64x64/io.github.sigmasd.recordapps.png /app/share/icons/hicolor/64x64/apps/
+      - install -D icons/128x128/io.github.sigmasd.recordapps.png /app/share/icons/hicolor/128x128/apps/
+      - install -D icons/256x256/io.github.sigmasd.recordapps.png /app/share/icons/hicolor/256x256/apps/
+    sources:
+      - type: file
+        path: ../record
+      - type: file
+        path: run.sh
+      - type: dir
+        path: .
