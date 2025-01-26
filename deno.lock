@@ -2,13 +2,13 @@
   "version": "4",
   "specifiers": {
     "jsr:@denosaurs/plug@^1.0.6": "1.0.6",
-    "jsr:@sigmasd/webview-deno@*": "2.3.0",
+    "jsr:@sigmasd/webview-temp-fork@0.9.1": "0.9.1",
     "jsr:@std/assert@0.221": "0.221.0",
-    "jsr:@std/cli@^1.0.8": "1.0.8",
+    "jsr:@std/cli@^1.0.8": "1.0.11",
     "jsr:@std/encoding@0.221": "0.221.0",
-    "jsr:@std/encoding@^1.0.5": "1.0.5",
+    "jsr:@std/encoding@^1.0.5": "1.0.6",
     "jsr:@std/fmt@0.221": "0.221.0",
-    "jsr:@std/fmt@^1.0.3": "1.0.3",
+    "jsr:@std/fmt@^1.0.3": "1.0.4",
     "jsr:@std/fs@*": "0.221.0",
     "jsr:@std/fs@0.221": "0.221.0",
     "jsr:@std/html@^1.0.3": "1.0.3",
@@ -17,8 +17,7 @@
     "jsr:@std/net@^1.0.4": "1.0.4",
     "jsr:@std/path@0.221": "0.221.0",
     "jsr:@std/path@^1.0.8": "1.0.8",
-    "jsr:@std/streams@^1.0.8": "1.0.8",
-    "jsr:@webview/webview@0.8.1": "0.8.1"
+    "jsr:@std/streams@^1.0.8": "1.0.8"
   },
   "jsr": {
     "@denosaurs/plug@1.0.6": {
@@ -30,26 +29,29 @@
         "jsr:@std/path@0.221"
       ]
     },
-    "@sigmasd/webview-deno@2.3.0": {
-      "integrity": "74be923d4187b602994767c577d45d9f196aa0ce5f6fa373901327112b0d8130"
+    "@sigmasd/webview-temp-fork@0.9.1": {
+      "integrity": "cda563939adfc592f64ee3ea88a61e5ca5e80d0f5e5e8c8a800869882ecc4393",
+      "dependencies": [
+        "jsr:@denosaurs/plug"
+      ]
     },
     "@std/assert@0.221.0": {
       "integrity": "a5f1aa6e7909dbea271754fd4ab3f4e687aeff4873b4cef9a320af813adb489a"
     },
-    "@std/cli@1.0.8": {
-      "integrity": "3762d8dc9a373715c08d871c38d45e637b25266f013a1d0bbe560bca409de94e"
+    "@std/cli@1.0.11": {
+      "integrity": "ec219619fdcd31bcf0d8e53bee1e2706ec9a02f70255365a094f69755dadd340"
     },
     "@std/encoding@0.221.0": {
       "integrity": "d1dd76ef0dc5d14088411e6dc1dede53bf8308c95d1537df1214c97137208e45"
     },
-    "@std/encoding@1.0.5": {
-      "integrity": "ecf363d4fc25bd85bd915ff6733a7e79b67e0e7806334af15f4645c569fefc04"
+    "@std/encoding@1.0.6": {
+      "integrity": "ca87122c196e8831737d9547acf001766618e78cd8c33920776c7f5885546069"
     },
     "@std/fmt@0.221.0": {
       "integrity": "379fed69bdd9731110f26b9085aeb740606b20428ce6af31ef6bd45ef8efa62a"
     },
-    "@std/fmt@1.0.3": {
-      "integrity": "97765c16aa32245ff4e2204ecf7d8562496a3cb8592340a80e7e554e0bb9149f"
+    "@std/fmt@1.0.4": {
+      "integrity": "e14fe5bedee26f80877e6705a97a79c7eed599e81bb1669127ef9e8bc1e29a74"
     },
     "@std/fs@0.221.0": {
       "integrity": "028044450299de8ed5a716ade4e6d524399f035513b85913794f4e81f07da286",
@@ -91,12 +93,6 @@
     },
     "@std/streams@1.0.8": {
       "integrity": "b41332d93d2cf6a82fe4ac2153b930adf1a859392931e2a19d9fabfb6f154fb3"
-    },
-    "@webview/webview@0.8.1": {
-      "integrity": "5f906bae9a1b7c38fcab212b7d15bd0d83c6bd3c5ddb4ef595a549b341be95f3",
-      "dependencies": [
-        "jsr:@denosaurs/plug"
-      ]
     }
   }
 }

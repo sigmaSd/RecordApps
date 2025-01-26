@@ -1,4 +1,4 @@
-import { Webview } from "jsr:@sigmasd/webview-deno";
+import { Webview } from "jsr:@sigmasd/webview-temp-fork@0.9.1";
 
 const worker = new Worker(import.meta.resolve("./start.ts"), {
   type: "module",
