@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.sigmasd.recordapps</id>
+  <name>Record Apps</name>
+  <summary>Record audio from individual applications</summary>
+  <developer_name>Bedis Nbiba</developer_name>
+  <description>
+    <p>
+      Record Apps is a simple application that allows you to record audio from individual applications.
+      It uses PulseAudio to capture the audio output of each application separately.
+    </p>
+  </description>
+  <launchable type="desktop-id">io.github.sigmasd.recordapps.desktop</launchable>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/sigmaSd/RecordApps/refs/heads/master/distro/demo.png</image>
+    </screenshot>
+  </screenshots>
+    <provides>
+        <binary>run.sh</binary>
+    </provides>
+    <keywords>
+      <keyword>audio</keyword>
+      <keyword>record</keyword>
+      <keyword>pulseaudio</keyword>
+      <keyword>application</keyword>
+    </keywords>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT</project_license>
+    <releases>
+      <release version="1.4.0" date="2025-01-26">
+        <description>
+          <p>Add support for recording from multiple applications</p>
+        </description>
+      </release>
+    </releases>
+  <url type="homepage">https://github.com/sigmasd/recordapps</url>
+    <url type="bugtracker">https://github.com/sigmasd/recordapps/issues</url>
+    <url type="vcs-browser">https://github.com/sigmasd/recordapps</url>
+</component>
