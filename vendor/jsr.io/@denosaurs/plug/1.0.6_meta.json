@@ -1,0 +1,246 @@
+{
+  "manifest": {
+    "/download_test.ts": {
+      "size": 9300,
+      "checksum": "sha256-9dbe825f543096cc20b1f6cc70d1f239fcad6444f25f8e95ccadfb95a421beb0"
+    },
+    "/README.md": {
+      "size": 4633,
+      "checksum": "sha256-2d58d95ce1e2614dd3e74cb9e55566f5f03dfcd621ccaa181557426083fff73a"
+    },
+    "/mod.ts": {
+      "size": 4760,
+      "checksum": "sha256-15c683abe87ed5df6cdccd5ff45ff46438ef68b825729f8463a6c8b605a9d19b"
+    },
+    "/.github/workflows/publish.yml": {
+      "size": 267,
+      "checksum": "sha256-a3f12d6833d9a43bc8453e63c95610a950538191899852bddadd2cf31c071ad7"
+    },
+    "/LICENSE": {
+      "size": 1080,
+      "checksum": "sha256-0546a91da726c46e6d54a352c707ca46e4a47924d13518fa3140c4f71bb4f3e3"
+    },
+    "/.github/FUNDING.yml": {
+      "size": 45,
+      "checksum": "sha256-f7d5bd53b9a6add2d05771a6edeb3192701e92fb60c0725cbd861ebadd5e4181"
+    },
+    "/deno.json": {
+      "size": 417,
+      "checksum": "sha256-79aeb6b285543f6c96f3900359467d80aaeb8d89a1a820aa2e847a8e701dd34e"
+    },
+    "/util.ts": {
+      "size": 3562,
+      "checksum": "sha256-91fb019b500ee81c5cb50754dd598abdab15bc22c80610790d9fe05eed8f948e"
+    },
+    "/.editorconfig": {
+      "size": 99,
+      "checksum": "sha256-561e2d9d8035e8b9861e31b3934557da651481d95dfd8992e12dbbee03c285c2"
+    },
+    "/download.ts": {
+      "size": 8041,
+      "checksum": "sha256-a0dc7084ed428cd95d66840176c9c4318a3a70270fc92a4ada5530adc7f52860"
+    },
+    "/types.ts": {
+      "size": 5585,
+      "checksum": "sha256-944a7abaded38515f0b06a4499d462c99d1c018ced7b33c2ee32607224e4e039"
+    },
+    "/test_import_map.json": {
+      "size": 472,
+      "checksum": "sha256-3db76688daeb0658d136afa66271844953a56b82bac9e786c6337b6ac7e899a2"
+    },
+    "/.github/workflows/checks.yml": {
+      "size": 566,
+      "checksum": "sha256-c9dbd47a446d6756355521e9d98cde8168854e915996b345b4a050605c15a56a"
+    },
+    "/util_test.ts": {
+      "size": 11546,
+      "checksum": "sha256-fcc4302200b7608be814957e147ca4b4fe162551404050939fc5f37cf7fd1753"
+    }
+  },
+  "moduleGraph1": {
+    "/mod.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./download.ts",
+          "specifierRange": [
+            [
+              90,
+              25
+            ],
+            [
+              90,
+              40
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "importType",
+          "specifier": "./types.ts",
+          "specifierRange": [
+            [
+              91,
+              34
+            ],
+            [
+              91,
+              46
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "exportType",
+          "specifier": "./types.ts",
+          "specifierRange": [
+            [
+              104,
+              7
+            ],
+            [
+              104,
+              19
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./download.ts",
+          "specifierRange": [
+            [
+              105,
+              25
+            ],
+            [
+              105,
+              40
+            ]
+          ]
+        }
+      ]
+    },
+    "/download.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "jsr:@std/path@^0.221.0",
+          "specifierRange": [
+            [
+              13,
+              7
+            ],
+            [
+              13,
+              31
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "jsr:@std/fs@^0.221.0",
+          "specifierRange": [
+            [
+              14,
+              26
+            ],
+            [
+              14,
+              48
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "jsr:@std/fmt@^0.221.0/colors",
+          "specifierRange": [
+            [
+              15,
+              22
+            ],
+            [
+              15,
+              52
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "importType",
+          "specifier": "./types.ts",
+          "specifierRange": [
+            [
+              22,
+              7
+            ],
+            [
+              22,
+              19
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./util.ts",
+          "specifierRange": [
+            [
+              29,
+              7
+            ],
+            [
+              29,
+              18
+            ]
+          ]
+        }
+      ]
+    },
+    "/util.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "jsr:@std/path@^0.221.0",
+          "specifierRange": [
+            [
+              6,
+              64
+            ],
+            [
+              6,
+              88
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "jsr:@std/encoding@^0.221.0/hex",
+          "specifierRange": [
+            [
+              7,
+              26
+            ],
+            [
+              7,
+              58
+            ]
+          ]
+        }
+      ]
+    },
+    "/types.ts": {}
+  },
+  "exports": {
+    ".": "./mod.ts",
+    "./types": "./types.ts",
+    "./download": "./download.ts",
+    "./util": "./util.ts"
+  }
+}

@@ -1,0 +1,232 @@
+{
+  "manifest": {
+    "/examples/multi-window/window-denoland.ts": {
+      "size": 350,
+      "checksum": "sha256-6c30bb7f73c7bf1e9852c65f79be56766a3dbae34209f371d9dd6292dde62848"
+    },
+    "/.github/workflows/publish.yml": {
+      "size": 272,
+      "checksum": "sha256-b9c64a292a287dee706a4a40608ba85e731cd6e1e95959d4c338462ab63f4a09"
+    },
+    "/CHANGELOG.md": {
+      "size": 5719,
+      "checksum": "sha256-b49ba5b96f0bc5ef3b5e837f303eb56cd1266a7fc48d1b2c0c586ccf733e63f7"
+    },
+    "/examples/server.ts": {
+      "size": 464,
+      "checksum": "sha256-0dfc25fda06a53b5bf459028e37d453282b75cf2e3004db099307dce67a67b2e"
+    },
+    "/test_import_map.json": {
+      "size": 111,
+      "checksum": "sha256-62120da3e45ecfa9b21be94af2b1ec82dde170693bd06b4d1a100e4c0e32b05a"
+    },
+    "/src/ffi.ts": {
+      "size": 4677,
+      "checksum": "sha256-e82e767a169d12a450fc1c77904ec88f9d1ebc102caac9acca5a29a398971401"
+    },
+    "/images/webview_deno.png": {
+      "size": 113104,
+      "checksum": "sha256-d003f293a2ece788ed15efeb43d77db3eaeff2793529d3ff5e575373c3222e83"
+    },
+    "/src/webview.ts": {
+      "size": 11406,
+      "checksum": "sha256-0b9e6c0584e9512705f4dff269d352f553a54a30b86cecafea7da4c7c4b46add"
+    },
+    "/examples/multiple.ts": {
+      "size": 369,
+      "checksum": "sha256-3e20410d80b904721228adbf0685d6e647254a083a1edeea6101f3ca32bb699d"
+    },
+    "/examples/ssr/main.ts": {
+      "size": 368,
+      "checksum": "sha256-c852da53870f02766858fa057e211dd2647cd33f9491577657d4a56bcf7ea24f"
+    },
+    "/examples/ssr/worker.tsx": {
+      "size": 804,
+      "checksum": "sha256-b208446810d8e377e3f8ed77d0afe96e4ae0b5202dde08d40740c63cd7d1933d"
+    },
+    "/script/build.bat": {
+      "size": 947,
+      "checksum": "sha256-cc43d22ee02efc0d4d5060dc76734733a5d3c368565371439c5b81927ec73670"
+    },
+    "/mod.ts": {
+      "size": 533,
+      "checksum": "sha256-281b770b148b97ad17f675e7a1dff9f5d13b879d08c611c133391d5a45a791c0"
+    },
+    "/.github/FUNDING.yml": {
+      "size": 45,
+      "checksum": "sha256-f7d5bd53b9a6add2d05771a6edeb3192701e92fb60c0725cbd861ebadd5e4181"
+    },
+    "/examples/multi-window/window-localhost.ts": {
+      "size": 353,
+      "checksum": "sha256-6192fbd6bb4acbdaeabaa4c385fa9b0d43e043b4d1cf9ce705bfdb0c5b1b8c1a"
+    },
+    "/examples/local.ts": {
+      "size": 257,
+      "checksum": "sha256-75ef126e2795546501a85d2163be41ed135334658e6d4fe51a10fa65a1bafd10"
+    },
+    "/.github/workflows/build.yml": {
+      "size": 2071,
+      "checksum": "sha256-71fc50f8a1681613cf95751c839072046874304ab3710c722ef8ebcd7dea0982"
+    },
+    "/.github/workflows/checks.yml": {
+      "size": 561,
+      "checksum": "sha256-7bb5ac5c659ad9fbc2bf0afa689c4d0d37f922c6964b11a526e681562c50b462"
+    },
+    "/script/build.ts": {
+      "size": 1647,
+      "checksum": "sha256-507bc7d960586ea969d24fc7fee0937e8ef2c4e8924053d68206fa28e39b07ce"
+    },
+    "/examples/ssr/tsconfig.json": {
+      "size": 117,
+      "checksum": "sha256-d1e34866fe35d98f7602a621839d840c884d53b3b82782ad0db15cf0ab63a50e"
+    },
+    "/examples/bind.ts": {
+      "size": 535,
+      "checksum": "sha256-6fbf8dd43ed92af53d96bcf7a1bcd1339be071f3ea44bf27fc7b06909156fa81"
+    },
+    "/LICENSE": {
+      "size": 1078,
+      "checksum": "sha256-11f0f8e19bbf93d5f502c18652516f2a5185a46683d3dfe3f9c7c39af5349fd0"
+    },
+    "/README.md": {
+      "size": 5992,
+      "checksum": "sha256-6cfc3d6fdb63eabf7eab738bc5e596bf51d8e4485edb00f0daa5fa35c83836ef"
+    },
+    "/examples/multi-window/main.ts": {
+      "size": 2511,
+      "checksum": "sha256-7ebdcedf201055f0341a98aa30b21c92effd4f5eb7f31f8ce8e146c2b82091ec"
+    },
+    "/examples/remote.ts": {
+      "size": 124,
+      "checksum": "sha256-77a3236a292d4646c509dcec30ad8a3bcb4839c3bb01b363d1f29d7a16606381"
+    },
+    "/.gitmodules": {
+      "size": 84,
+      "checksum": "sha256-2d3547485111247f80114113d88f9e41f558aca0d17c36d46d1097688d38f8b2"
+    },
+    "/deno.json": {
+      "size": 707,
+      "checksum": "sha256-8317cf48cce233d27fffe5553224b6828319eb9ddec309825fb3c19bdb4473c2"
+    },
+    "/examples/user_agent.ts": {
+      "size": 282,
+      "checksum": "sha256-7e28c243a4065893500acbcdf7d6b7a4a08f3b8c58824031c0bdc439212d8ec8"
+    },
+    "/examples/run.ts": {
+      "size": 84,
+      "checksum": "sha256-76d852fca9a310d231561638bcedd00eaf82d8ee960333473cb78b9ee575fdd9"
+    }
+  },
+  "moduleGraph2": {
+    "/mod.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./src/webview.ts",
+          "specifierRange": [
+            [
+              25,
+              14
+            ],
+            [
+              25,
+              32
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./src/ffi.ts",
+          "specifierRange": [
+            [
+              26,
+              32
+            ],
+            [
+              26,
+              46
+            ]
+          ]
+        }
+      ]
+    },
+    "/src/ffi.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../deno.json",
+          "specifierRange": [
+            [
+              0,
+              21
+            ],
+            [
+              0,
+              35
+            ]
+          ],
+          "importAttributes": {
+            "known": {
+              "type": "json"
+            }
+          }
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "jsr:@denosaurs/plug@^1.0.6",
+          "specifierRange": [
+            [
+              2,
+              33
+            ],
+            [
+              2,
+              61
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "importType",
+          "specifier": "./webview.ts",
+          "specifierRange": [
+            [
+              3,
+              29
+            ],
+            [
+              3,
+              43
+            ]
+          ]
+        }
+      ]
+    },
+    "/src/webview.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./ffi.ts",
+          "specifierRange": [
+            [
+              0,
+              46
+            ],
+            [
+              0,
+              56
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "exports": {
+    ".": "./mod.ts"
+  }
+}

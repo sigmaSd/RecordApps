@@ -1,0 +1,5 @@
+{
+  "modules": {
+    "https://jsr.io/@std/net/1.0.4/unstable_get_network_address.ts": {}
+  }
+}

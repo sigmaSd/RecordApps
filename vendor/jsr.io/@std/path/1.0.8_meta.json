@@ -1,0 +1,4721 @@
+{
+  "manifest": {
+    "/deno.json": {
+      "size": 3751,
+      "checksum": "sha256-c6d989649f28dff80a70ee72c41fec1fe7fb7227597f379c28664b63cc44e114"
+    },
+    "/_common/assert_path.ts": {
+      "size": 309,
+      "checksum": "sha256-136d47e3580667f7835507a33d5d63d4cc3f71671d17ddfdb17d79a31625bb41"
+    },
+    "/posix/mod.ts": {
+      "size": 1459,
+      "checksum": "sha256-5444edd059a9c3241dfe06f4ed07b0a42f7dbfbdfc82618e5ef712c9938b4901"
+    },
+    "/mod.ts": {
+      "size": 1854,
+      "checksum": "sha256-1c9071c51c33236d2fa90654539e01faeb504b378e8342f69e202988b791bfb8"
+    },
+    "/normalize_glob.ts": {
+      "size": 1443,
+      "checksum": "sha256-9b68e2d1fceaf75715a9e4b736e7ad5bae05441e73c6f9b206aa7bee10080655"
+    },
+    "/windows/join_globs.ts": {
+      "size": 1301,
+      "checksum": "sha256-54408430a1230a8f02a23e554adc0a5a71009464ce125d663b81a5928298f8cf"
+    },
+    "/_common/normalize.ts": {
+      "size": 263,
+      "checksum": "sha256-684df4aa71a04bbcc346c692c8485594fc8a90b9408dfbc26ff32cf3e0c98cc8"
+    },
+    "/_common/format.ts": {
+      "size": 809,
+      "checksum": "sha256-348b7acfd94d522c327f9afe09f5b0821d6760e50f7f9917d3a9ba5cdde9dd37"
+    },
+    "/windows/unstable_basename.ts": {
+      "size": 1273,
+      "checksum": "sha256-8cfd2198fa5c8c988850f2c88b1e42384f5d4ef2eada0b60dca1dc9b8b39e1ab"
+    },
+    "/from_file_url.ts": {
+      "size": 1050,
+      "checksum": "sha256-d553e06a95ad050398ab2a6f129ef358a178ee377331b9cc3c68e056f656bf6a"
+    },
+    "/_common/relative.ts": {
+      "size": 287,
+      "checksum": "sha256-faa2753d9b32320ed4ada0733261e3357c186e5705678d9dd08b97527deae607"
+    },
+    "/posix/glob_to_regexp.ts": {
+      "size": 3758,
+      "checksum": "sha256-36f99a82f11b53c852e4ba6babae6e29bd020aeda169207da68fd78457777028"
+    },
+    "/windows/glob_to_regexp.ts": {
+      "size": 3775,
+      "checksum": "sha256-2ea59f0b2ea6aba8616864d4e5fc64a210c8cc6469651ea0de1cced34a732238"
+    },
+    "/relative_test.ts": {
+      "size": 2994,
+      "checksum": "sha256-340bcb6a4f18a116deb2d3f0199431f0a733faf54e899c34eaab064ff781c12a"
+    },
+    "/join_globs_test.ts": {
+      "size": 869,
+      "checksum": "sha256-91fbe6967a46e7af29abbcc3c89a99706dbc3d1c3c02e95d01dcd9d307adfc4d"
+    },
+    "/windows/to_namespaced_path.ts": {
+      "size": 1787,
+      "checksum": "sha256-08cece3b269f7a708f5562604ad3546c47dd3888e4c1edae41d816931612eefa"
+    },
+    "/posix/constants.ts": {
+      "size": 459,
+      "checksum": "sha256-f83bf8eae5a94941001d2af567d573a4ad93c0df46a5e183e2268cb19f42779f"
+    },
+    "/unstable_extname.ts": {
+      "size": 1208,
+      "checksum": "sha256-7638d65c2624cddb1a00bffd0f60069a1007df2ee421df4f2015cfd52c9f3335"
+    },
+    "/to_namespaced_path_test.ts": {
+      "size": 1079,
+      "checksum": "sha256-563de8b35a20d473e010707263c041289696a4efef8afa7e880e4a1f235a15f2"
+    },
+    "/relative.ts": {
+      "size": 1108,
+      "checksum": "sha256-d775a20f9d44c23d6940d820f1f198114460cfb420685847fba5013ad8dcf306"
+    },
+    "/posix/join.ts": {
+      "size": 1405,
+      "checksum": "sha256-d2bd271f407dfd73726a16cf73bdd1fea02f0f3df445f928bca6a14f8a883894"
+    },
+    "/windows/dirname.ts": {
+      "size": 3268,
+      "checksum": "sha256-fb36bd747dbfc1374c64a6979f05f33e8a10dd34041eb2acf9c4c12afc1e07ca"
+    },
+    "/windows/format.ts": {
+      "size": 814,
+      "checksum": "sha256-f3af6440766380cbe8de698acd63f9453aeaf3d7a8eab6dd2830f8b6f9b25beb"
+    },
+    "/windows/from_file_url.ts": {
+      "size": 1189,
+      "checksum": "sha256-33c85238be4184aa22877cc3f06219c20202edbc1f42abfb9e8efd65833e7926"
+    },
+    "/constants.ts": {
+      "size": 705,
+      "checksum": "sha256-7470d589dfd85337d09cc8806e19b257ee4f4b040503a17c3e5c708495fb252f"
+    },
+    "/posix/to_file_url.ts": {
+      "size": 928,
+      "checksum": "sha256-8fd63223c4f99644e8dcef97d133690605e2758eb4cf698c4d8f4ea81035a872"
+    },
+    "/windows/extname.ts": {
+      "size": 2684,
+      "checksum": "sha256-d9aec8eb6dda14050cc918d3e570b733a114ea31ff28ffe18706aff972ebfd97"
+    },
+    "/posix/relative.ts": {
+      "size": 3331,
+      "checksum": "sha256-b9c0d8a4398697a9014c4df80e4c6a339ba74b8616a946c7ac6708d0dd2a2331"
+    },
+    "/types.ts": {
+      "size": 997,
+      "checksum": "sha256-c85cbfd82fde333773448e6f40d6ca6f300d366dfcadd0c0bf26454c86cdf942"
+    },
+    "/windows/unstable_dirname.ts": {
+      "size": 870,
+      "checksum": "sha256-f618717a0fba348c92fb74d200e5f78f66f4c63e8b8a276182f7cc551efd242e"
+    },
+    "/posix/format.ts": {
+      "size": 799,
+      "checksum": "sha256-f82f084215eee88deecaa607f3da2d463f3c7cee30ab1b087a4655a3d872d302"
+    },
+    "/dirname.ts": {
+      "size": 1020,
+      "checksum": "sha256-b5415597df8efd8b2adc1afdc0b11adfac13f328154368a47e44bed1086d46dc"
+    },
+    "/glob_to_regexp_test.ts": {
+      "size": 17236,
+      "checksum": "sha256-6c856c9b066c0219fb7cb387cd620b79bb8dd902eb77bb8bbffc6519f085b6d8"
+    },
+    "/posix/_util.ts": {
+      "size": 391,
+      "checksum": "sha256-1e3937da30f080bfc99fe45d7ed23c47dd8585c5e473b2d771380d3a6937cf9d"
+    },
+    "/windows/is_absolute.ts": {
+      "size": 1113,
+      "checksum": "sha256-2eb65e7b5024090696fd9a34720e9cac3be1fa9d2f67542389753e02040df2ad"
+    },
+    "/extname.ts": {
+      "size": 1024,
+      "checksum": "sha256-95f94e835ad500dce8f79e496b5758bd98727742995ed524fdae77ca1efe03e3"
+    },
+    "/parse_test.ts": {
+      "size": 441,
+      "checksum": "sha256-04fe3bb87504baaffb264f1919a5f82e279d47542cd7fa9bc4e8f356b8d3fb4e"
+    },
+    "/windows/to_file_url.ts": {
+      "size": 1292,
+      "checksum": "sha256-19dbd8e634516cac2d8653bab851ef8b7b8fdcdd22cda9382ef4663a77c2d9c0"
+    },
+    "/windows/join.ts": {
+      "size": 2589,
+      "checksum": "sha256-c672f33af5c1331ca01d98b7c41be2092d099bece9c66c60dc62f1e0ac360aa6"
+    },
+    "/resolve_test.ts": {
+      "size": 2076,
+      "checksum": "sha256-a0b6cb5e6372252f04850153e03cdc5cc0ccf7435f6d07cc7fb76b5853c600fc"
+    },
+    "/join_test.ts": {
+      "size": 5792,
+      "checksum": "sha256-20020385848f39321c6281b37e668b7d9d8ddce49d160b5d2612629973a98a4c"
+    },
+    "/is_glob_test.ts": {
+      "size": 3614,
+      "checksum": "sha256-1185fcc5465cb7c65c9fc9e9e471c0fbc19d4b324f156825898f4972b07dcc19"
+    },
+    "/parse_format_test.ts": {
+      "size": 5906,
+      "checksum": "sha256-a49da44f4aeda37cabc16985ac5506b45aa988dc3fc20418280831b4ba899eca"
+    },
+    "/glob_to_regexp.ts": {
+      "size": 3930,
+      "checksum": "sha256-f60eb471d81f688c9d6530399095a550b4527cbaa115056129085a638e6c6b4c"
+    },
+    "/posix/unstable_join.ts": {
+      "size": 1064,
+      "checksum": "sha256-f4dea8c7a2ce58cb40af31881485291f2807f465c424794c158651fdbaf0c994"
+    },
+    "/unstable_join.ts": {
+      "size": 1207,
+      "checksum": "sha256-c3b40b11b73746575ba13331a10aa45c001f61b42d83e30688c4768bbf4b5904"
+    },
+    "/posix/basename.ts": {
+      "size": 2213,
+      "checksum": "sha256-dc4d08dd90f64b955b5b7b88d72c8039399c9f34e580d33c72735f999b86979f"
+    },
+    "/windows/common.ts": {
+      "size": 705,
+      "checksum": "sha256-0b271e0a711fe2f092df6d329b2b15ea379debca845ed6acd3d79380b7ac97de"
+    },
+    "/to_file_url_test.ts": {
+      "size": 2051,
+      "checksum": "sha256-d03040322bd7fff08137b4726a978c6e87b0d7041ed0335333534e147182b236"
+    },
+    "/_common/basename.ts": {
+      "size": 1264,
+      "checksum": "sha256-3b15fc31f9db13b601ee65a29acbab0956594e7db5ac48d37308727dbe53004c"
+    },
+    "/_os.ts": {
+      "size": 454,
+      "checksum": "sha256-6b420bf7d2e76d9597932b729e5b3dea9540416d38e88937d4c39c484e34fa21"
+    },
+    "/basename_test.ts": {
+      "size": 5850,
+      "checksum": "sha256-90b12199a5d12ca00bb57c0be6b2d5f8baa93cf5ba23f366ec64196a4c95fe0c"
+    },
+    "/posix/normalize.ts": {
+      "size": 2102,
+      "checksum": "sha256-d8fa8500b6e262bcb23f7fbacaecf36cc3ee1b95915c8cfa41e0ff1a78f87238"
+    },
+    "/normalize_test.ts": {
+      "size": 1159,
+      "checksum": "sha256-1eb4999faa8828945f9f025b24eb8a81fece19ecdcb443f090b8a3371a760bd5"
+    },
+    "/posix/unstable_dirname.ts": {
+      "size": 973,
+      "checksum": "sha256-9f3b612ca3fdd4ade961fb14458ce2295e6e1e2893a9699f4e6a2a22e1891bcc"
+    },
+    "/windows/normalize.ts": {
+      "size": 4066,
+      "checksum": "sha256-b04cc6a1ae86ff2715b9482796bfe5cd3bdc3e5ebee822666b6fcdb240e53f7d"
+    },
+    "/unstable_dirname.ts": {
+      "size": 1244,
+      "checksum": "sha256-2b195dc7900bb6b810795aa43b97051283738618b94714443b3833f436176a55"
+    },
+    "/windows/relative.ts": {
+      "size": 4341,
+      "checksum": "sha256-fd2d65b242a0053f35e14bd9746b471053045dcbe037229b36b968d76b7d26e5"
+    },
+    "/extname_test.ts": {
+      "size": 3262,
+      "checksum": "sha256-46e71c51f84af07ed9217a580dc323f5a19855685ca0775fafe190c2fa1ff85b"
+    },
+    "/_common/normalize_string.ts": {
+      "size": 2301,
+      "checksum": "sha256-33edef773c2a8e242761f731adeb2bd6d683e9c69e4e3d0092985bede74f4ac3"
+    },
+    "/windows/normalize_glob.ts": {
+      "size": 1330,
+      "checksum": "sha256-ac58f75171160bed0af8fd30e304487a82a3845ec449ae56b38ae1714b24f1dd"
+    },
+    "/_common/constants.ts": {
+      "size": 2020,
+      "checksum": "sha256-dc5f8057159f4b48cd304eb3027e42f1148cf4df1fb4240774d3492b5d12ac0c"
+    },
+    "/windows/constants.ts": {
+      "size": 463,
+      "checksum": "sha256-ae2131fb3fe0ddccfef82a9773bbbe625819b11ab30c32a3eb2c376731d86e83"
+    },
+    "/normalize_glob_test.ts": {
+      "size": 1105,
+      "checksum": "sha256-441345c0f9621639d8ce8a62ec32eb06796cb40f37ddbd9a3ceadf7894457097"
+    },
+    "/_common/dirname.ts": {
+      "size": 263,
+      "checksum": "sha256-684df4aa71a04bbcc346c692c8485594fc8a90b9408dfbc26ff32cf3e0c98cc8"
+    },
+    "/posix/common.ts": {
+      "size": 718,
+      "checksum": "sha256-98e83883dd0039cffc11880104bbc29cce8742025307bf87343a0856e41490a2"
+    },
+    "/windows/basename.ts": {
+      "size": 1838,
+      "checksum": "sha256-e87e09f055a2443f6b5342349d0ad008b827130cd8ecfbfe4f2ca0f740bff38c"
+    },
+    "/windows/mod.ts": {
+      "size": 1149,
+      "checksum": "sha256-2eba5c8f4f3e1307d5ee713b7910f5c8c14d63dfdc5979930e4a2960bbe0eb1d"
+    },
+    "/LICENSE": {
+      "size": 1075,
+      "checksum": "sha256-0961f97da6619d5fe9ddb98649191d5ca6e958856ea5252f4cce7c9b85513819"
+    },
+    "/is_absolute_test.ts": {
+      "size": 1838,
+      "checksum": "sha256-f2aa921b8d723d4fe14c1ceffc67ebec1757c56ace6a3e502c6b1432431c385a"
+    },
+    "/join.ts": {
+      "size": 1038,
+      "checksum": "sha256-39fef9407532bcaa7177607cf829c173477e9e5cbd9bdddffd726db631cddb9b"
+    },
+    "/posix/dirname.ts": {
+      "size": 2095,
+      "checksum": "sha256-9d723e97720534d18aa9739793ffafe6631a287762dad692f49661dfa85b5be7"
+    },
+    "/format.ts": {
+      "size": 1083,
+      "checksum": "sha256-164d6a9200ecb8d72e26754e5c2e330f071aa5474be762d81efd97ccb5014216"
+    },
+    "/basename.ts": {
+      "size": 1184,
+      "checksum": "sha256-93e047a98e8393341b0d62b9fc822e0c48623b3255fa5c3ec7e47ca9c48269d2"
+    },
+    "/resolve.ts": {
+      "size": 1042,
+      "checksum": "sha256-10a518c616f14fe3d73fae0b0ea6e5e5a55c49e9bff8a9076716b7a0376e07d0"
+    },
+    "/_common/basename_test.ts": {
+      "size": 1517,
+      "checksum": "sha256-0fc43d3716d29a5d6ae369ab54eee10accd14b2b2be8681b552968aa67e8ab3b"
+    },
+    "/_common/strip_trailing_separators.ts": {
+      "size": 592,
+      "checksum": "sha256-7024a93447efcdcfeaa9339a98fa63ef9d53de363f1fbe9858970f1bba02655a"
+    },
+    "/windows/unstable_extname.ts": {
+      "size": 863,
+      "checksum": "sha256-bae90c48bf25ee0e2ed884e42d8656706a42e584b22a6b384c3ed379950d9586"
+    },
+    "/_common/common.ts": {
+      "size": 718,
+      "checksum": "sha256-af935c0d001d9094358393455c5046e0c3bb9f0f200945065e89073c97f2a5b1"
+    },
+    "/windows/unstable_normalize.ts": {
+      "size": 1091,
+      "checksum": "sha256-ad5abc5f9ea0d643198036cb3b9c4beeda44107abe94d2f23d751df5c032ac26"
+    },
+    "/_common/glob_to_reg_exp.ts": {
+      "size": 7588,
+      "checksum": "sha256-5d76e085e4d99583e2eec758828a2df4d6d6d1f928bdda6a9b040a19ab9af85f"
+    },
+    "/posix/is_absolute.ts": {
+      "size": 756,
+      "checksum": "sha256-f83938688175373503e6aafde89fd1841e1d05d193b3673b627cb8a5939865e2"
+    },
+    "/_common/to_file_url_test.ts": {
+      "size": 1071,
+      "checksum": "sha256-15eaabb327cbdac2aa57fd9a91ff1941b629857f873ea22d58484abfe6957efa"
+    },
+    "/is_glob.ts": {
+      "size": 1247,
+      "checksum": "sha256-c2872ccb6738d735946f8d93ec60ebf65a8b27b7f471ca197d04beaf934468d5"
+    },
+    "/common.ts": {
+      "size": 941,
+      "checksum": "sha256-18ecfb46c70d2c0f19bcb28dc8bf5b2865ad68c7589fa8da1d9ee0f92c7520b5"
+    },
+    "/unstable_basename.ts": {
+      "size": 1372,
+      "checksum": "sha256-109b13541335569da7e92e571930fe49c4f73c2420f3e852d05187906c3ef5ce"
+    },
+    "/common_test.ts": {
+      "size": 2217,
+      "checksum": "sha256-f5a9f23a3a10c127c47bd4ffe181b0451e32e5e6e2cc52ee24a538a8e4e71995"
+    },
+    "/normalize.ts": {
+      "size": 1206,
+      "checksum": "sha256-de5f63500b4b93842797ec3fc729415c809f95f526e95d113ae2ccfd5ea21294"
+    },
+    "/posix/extname.ts": {
+      "size": 3151,
+      "checksum": "sha256-8a364cc1803d09d60fcd856d375ef6caad7bcacbdfec2c62c1c21b8f22d694c6"
+    },
+    "/to_file_url.ts": {
+      "size": 1078,
+      "checksum": "sha256-fae11f54aa7aefa4d6a64856f6fa6f9e2e6ae942314842ccba771da2edc4ad0a"
+    },
+    "/from_file_url_test.ts": {
+      "size": 2451,
+      "checksum": "sha256-40cc3daa15a2c4ac7c601c3e06492f1b8dfe0ae99865ed89e16b9fa428fec35c"
+    },
+    "/posix/unstable_basename.ts": {
+      "size": 1275,
+      "checksum": "sha256-986735e1297645e28ac2e8bdc14622cfe1e81f82216f2ff2f8d5eecd3a4c5783"
+    },
+    "/windows/resolve.ts": {
+      "size": 5238,
+      "checksum": "sha256-e086edd02c7b7bfcacab6caca2d1b8784476e2c6cc22a0a1ecfcad8077d0f636"
+    },
+    "/_common/assert_path_test.ts": {
+      "size": 486,
+      "checksum": "sha256-f328f3c976eb8198976d6a66610bb4a845aed7021864cf9c749d70bd6341676c"
+    },
+    "/windows/_util.ts": {
+      "size": 828,
+      "checksum": "sha256-d5f47363e5293fced22c984550d5e70e98e266cc3f31769e1710511803d04808"
+    },
+    "/posix/to_namespaced_path.ts": {
+      "size": 596,
+      "checksum": "sha256-66a1cb782953dbeb7732d69a85cf4edd15a79c6bbbffa8c8e0469a77c840a1e9"
+    },
+    "/parse.ts": {
+      "size": 1472,
+      "checksum": "sha256-d6fafd94e41be9b230ac1c09248d29def1b64d58f79395769e9708551f674f3b"
+    },
+    "/posix/resolve.ts": {
+      "size": 1931,
+      "checksum": "sha256-e572f2de47e132066c16b851464b4b485771b1441a8a1108408f147426e30054"
+    },
+    "/posix/unstable_normalize.ts": {
+      "size": 1133,
+      "checksum": "sha256-08911af570cf87575f153764797223de5572261a179580b2b9d3625a10a27bad"
+    },
+    "/join_globs.ts": {
+      "size": 1458,
+      "checksum": "sha256-14ebd94d54e079f8ca66c4eba07ead05565f4b6f55743beef56964187ca2754c"
+    },
+    "/posix/join_globs.ts": {
+      "size": 1272,
+      "checksum": "sha256-1e8c8f2f39584705b480e30b5cc5c59f4f0dd4ee124b6733370cb634106ddbaf"
+    },
+    "/_common/to_file_url.ts": {
+      "size": 440,
+      "checksum": "sha256-7f76adbc83ece1bba173e6e98a27c647712cab773d3f8cbe0398b74afc817883"
+    },
+    "/_common/normalize_string_test.ts": {
+      "size": 1020,
+      "checksum": "sha256-e075d056d4b834d97eaba0ecfd504f19a579bb2e1d2380c59d6d50777d32f7cd"
+    },
+    "/windows/parse.ts": {
+      "size": 5341,
+      "checksum": "sha256-d70ec0c61c8ca47994b8ba970c4be4d74cc380fb1ecf06e0eba2bfa2ad7ecb49"
+    },
+    "/posix/from_file_url.ts": {
+      "size": 689,
+      "checksum": "sha256-0bd4ec0a3019f4c2c8e2ae0adf8834b2494a5b29d297ea996e22c1794c62d9c0"
+    },
+    "/dirname_test.ts": {
+      "size": 3832,
+      "checksum": "sha256-08ffe8d83e801116903d7aaf3297d317c79289ec47ef8ae07252ef7518866ab5"
+    },
+    "/posix/parse.ts": {
+      "size": 3470,
+      "checksum": "sha256-8630560bbedd90d7273712cf7faba8e3fc17fbdb4af6d723aa349f3292130b73"
+    },
+    "/posix/is_glob.ts": {
+      "size": 154,
+      "checksum": "sha256-8a8b08c08bf731acf2c1232218f1f45a11131bc01de81e5f803450a5914434b9"
+    },
+    "/posix/normalize_glob.ts": {
+      "size": 1284,
+      "checksum": "sha256-fcfc68f400d0a91154dadba6f267377303a5693b9cef2355a7e643918ef296dc"
+    },
+    "/windows/is_glob.ts": {
+      "size": 154,
+      "checksum": "sha256-8a8b08c08bf731acf2c1232218f1f45a11131bc01de81e5f803450a5914434b9"
+    },
+    "/is_absolute.ts": {
+      "size": 958,
+      "checksum": "sha256-a24aeb130f2f20a82e91d9f4a65e339e28bc1125d89833ffbdfda358f0f1118b"
+    },
+    "/unstable_normalize.ts": {
+      "size": 1445,
+      "checksum": "sha256-354b2fd85a7d3ce89e864da2e3c5df1a4c0eff8d2fb08d0b9bae8843f2ba1d15"
+    },
+    "/windows/unstable_join.ts": {
+      "size": 994,
+      "checksum": "sha256-499b44420fd943b8d4ae5dd8a677008ca78f55c176fd82292fdc02c16ecdf1c3"
+    },
+    "/_common/format_test.ts": {
+      "size": 1988,
+      "checksum": "sha256-d81aa36428b33ebbe059c92ff13f62f6290dc0566bc841ed84087d267e4573dc"
+    },
+    "/posix/unstable_extname.ts": {
+      "size": 1285,
+      "checksum": "sha256-21a94d057f9ea2bf6bc4879aedf282fc86e1d7f0c025f3583a961ce13647b643"
+    },
+    "/_common/from_file_url.ts": {
+      "size": 356,
+      "checksum": "sha256-ab0ed799065db75c2b94ed9d2b05644a3078fc0a71efc301cdb9f20274a1c4af"
+    },
+    "/to_namespaced_path.ts": {
+      "size": 1014,
+      "checksum": "sha256-cf16676c047447254aa65e491797a260a6241123d11061a5e51233a5cab4d7bf"
+    }
+  },
+  "moduleGraph2": {
+    "/posix/extname.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/constants.ts",
+          "specifierRange": [
+            [
+              3,
+              25
+            ],
+            [
+              3,
+              50
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/assert_path.ts",
+          "specifierRange": [
+            [
+              4,
+              27
+            ],
+            [
+              4,
+              54
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./_util.ts",
+          "specifierRange": [
+            [
+              5,
+              37
+            ],
+            [
+              5,
+              49
+            ]
+          ]
+        }
+      ]
+    },
+    "/windows/unstable_extname.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./extname.ts",
+          "specifierRange": [
+            [
+              3,
+              41
+            ],
+            [
+              3,
+              55
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./from_file_url.ts",
+          "specifierRange": [
+            [
+              4,
+              28
+            ],
+            [
+              4,
+              48
+            ]
+          ]
+        }
+      ]
+    },
+    "/posix/unstable_join.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./join.ts",
+          "specifierRange": [
+            [
+              3,
+              35
+            ],
+            [
+              3,
+              46
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./from_file_url.ts",
+          "specifierRange": [
+            [
+              4,
+              28
+            ],
+            [
+              4,
+              48
+            ]
+          ]
+        }
+      ]
+    },
+    "/parse.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./_os.ts",
+          "specifierRange": [
+            [
+              3,
+              26
+            ],
+            [
+              3,
+              36
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "importType",
+          "specifier": "./types.ts",
+          "specifierRange": [
+            [
+              4,
+              32
+            ],
+            [
+              4,
+              44
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./posix/parse.ts",
+          "specifierRange": [
+            [
+              5,
+              36
+            ],
+            [
+              5,
+              54
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./windows/parse.ts",
+          "specifierRange": [
+            [
+              6,
+              38
+            ],
+            [
+              6,
+              58
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "exportType",
+          "specifier": "./types.ts",
+          "specifierRange": [
+            [
+              8,
+              32
+            ],
+            [
+              8,
+              44
+            ]
+          ]
+        }
+      ]
+    },
+    "/windows/normalize.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/normalize.ts",
+          "specifierRange": [
+            [
+              3,
+              26
+            ],
+            [
+              3,
+              51
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/constants.ts",
+          "specifierRange": [
+            [
+              4,
+              27
+            ],
+            [
+              4,
+              52
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/normalize_string.ts",
+          "specifierRange": [
+            [
+              5,
+              32
+            ],
+            [
+              5,
+              64
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./_util.ts",
+          "specifierRange": [
+            [
+              6,
+              53
+            ],
+            [
+              6,
+              65
+            ]
+          ]
+        }
+      ]
+    },
+    "/posix/normalize_glob.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "importType",
+          "specifier": "../_common/glob_to_reg_exp.ts",
+          "specifierRange": [
+            [
+              3,
+              33
+            ],
+            [
+              3,
+              64
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./normalize.ts",
+          "specifierRange": [
+            [
+              4,
+              26
+            ],
+            [
+              4,
+              42
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./constants.ts",
+          "specifierRange": [
+            [
+              5,
+              34
+            ],
+            [
+              5,
+              50
+            ]
+          ]
+        }
+      ]
+    },
+    "/unstable_normalize.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./_os.ts",
+          "specifierRange": [
+            [
+              3,
+              26
+            ],
+            [
+              3,
+              36
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./posix/unstable_normalize.ts",
+          "specifierRange": [
+            [
+              4,
+              52
+            ],
+            [
+              4,
+              83
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./windows/unstable_normalize.ts",
+          "specifierRange": [
+            [
+              5,
+              54
+            ],
+            [
+              5,
+              87
+            ]
+          ]
+        }
+      ]
+    },
+    "/posix/is_glob.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "../is_glob.ts",
+          "specifierRange": [
+            [
+              3,
+              23
+            ],
+            [
+              3,
+              38
+            ]
+          ]
+        }
+      ]
+    },
+    "/windows/unstable_dirname.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./dirname.ts",
+          "specifierRange": [
+            [
+              3,
+              41
+            ],
+            [
+              3,
+              55
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./from_file_url.ts",
+          "specifierRange": [
+            [
+              4,
+              28
+            ],
+            [
+              4,
+              48
+            ]
+          ]
+        }
+      ]
+    },
+    "/_common/from_file_url.ts": {},
+    "/join_globs.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "importType",
+          "specifier": "./_common/glob_to_reg_exp.ts",
+          "specifierRange": [
+            [
+              3,
+              33
+            ],
+            [
+              3,
+              63
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./_os.ts",
+          "specifierRange": [
+            [
+              4,
+              26
+            ],
+            [
+              4,
+              36
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./posix/join_globs.ts",
+          "specifierRange": [
+            [
+              5,
+              44
+            ],
+            [
+              5,
+              67
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./windows/join_globs.ts",
+          "specifierRange": [
+            [
+              6,
+              46
+            ],
+            [
+              6,
+              71
+            ]
+          ]
+        }
+      ]
+    },
+    "/posix/mod.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./basename.ts",
+          "specifierRange": [
+            [
+              24,
+              14
+            ],
+            [
+              24,
+              29
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./constants.ts",
+          "specifierRange": [
+            [
+              25,
+              14
+            ],
+            [
+              25,
+              30
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./dirname.ts",
+          "specifierRange": [
+            [
+              26,
+              14
+            ],
+            [
+              26,
+              28
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./extname.ts",
+          "specifierRange": [
+            [
+              27,
+              14
+            ],
+            [
+              27,
+              28
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./format.ts",
+          "specifierRange": [
+            [
+              28,
+              14
+            ],
+            [
+              28,
+              27
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./from_file_url.ts",
+          "specifierRange": [
+            [
+              29,
+              14
+            ],
+            [
+              29,
+              34
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./is_absolute.ts",
+          "specifierRange": [
+            [
+              30,
+              14
+            ],
+            [
+              30,
+              32
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./join.ts",
+          "specifierRange": [
+            [
+              31,
+              14
+            ],
+            [
+              31,
+              25
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./normalize.ts",
+          "specifierRange": [
+            [
+              32,
+              14
+            ],
+            [
+              32,
+              30
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./parse.ts",
+          "specifierRange": [
+            [
+              33,
+              14
+            ],
+            [
+              33,
+              26
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./relative.ts",
+          "specifierRange": [
+            [
+              34,
+              14
+            ],
+            [
+              34,
+              29
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./resolve.ts",
+          "specifierRange": [
+            [
+              35,
+              14
+            ],
+            [
+              35,
+              28
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./to_file_url.ts",
+          "specifierRange": [
+            [
+              36,
+              14
+            ],
+            [
+              36,
+              32
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./to_namespaced_path.ts",
+          "specifierRange": [
+            [
+              37,
+              14
+            ],
+            [
+              37,
+              39
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./common.ts",
+          "specifierRange": [
+            [
+              38,
+              14
+            ],
+            [
+              38,
+              27
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "../types.ts",
+          "specifierRange": [
+            [
+              39,
+              14
+            ],
+            [
+              39,
+              27
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./glob_to_regexp.ts",
+          "specifierRange": [
+            [
+              40,
+              14
+            ],
+            [
+              40,
+              35
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./is_glob.ts",
+          "specifierRange": [
+            [
+              41,
+              14
+            ],
+            [
+              41,
+              28
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./join_globs.ts",
+          "specifierRange": [
+            [
+              42,
+              14
+            ],
+            [
+              42,
+              31
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./normalize_glob.ts",
+          "specifierRange": [
+            [
+              43,
+              14
+            ],
+            [
+              43,
+              35
+            ]
+          ]
+        }
+      ]
+    },
+    "/join.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./_os.ts",
+          "specifierRange": [
+            [
+              3,
+              26
+            ],
+            [
+              3,
+              36
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./posix/join.ts",
+          "specifierRange": [
+            [
+              4,
+              34
+            ],
+            [
+              4,
+              51
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./windows/join.ts",
+          "specifierRange": [
+            [
+              5,
+              36
+            ],
+            [
+              5,
+              55
+            ]
+          ]
+        }
+      ]
+    },
+    "/windows/from_file_url.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/from_file_url.ts",
+          "specifierRange": [
+            [
+              3,
+              26
+            ],
+            [
+              3,
+              55
+            ]
+          ]
+        }
+      ]
+    },
+    "/windows/constants.ts": {},
+    "/windows/unstable_join.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./join.ts",
+          "specifierRange": [
+            [
+              3,
+              35
+            ],
+            [
+              3,
+              46
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./from_file_url.ts",
+          "specifierRange": [
+            [
+              4,
+              28
+            ],
+            [
+              4,
+              48
+            ]
+          ]
+        }
+      ]
+    },
+    "/types.ts": {},
+    "/_common/to_file_url.ts": {},
+    "/windows/resolve.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/constants.ts",
+          "specifierRange": [
+            [
+              3,
+              27
+            ],
+            [
+              3,
+              52
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/normalize_string.ts",
+          "specifierRange": [
+            [
+              4,
+              32
+            ],
+            [
+              4,
+              64
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/assert_path.ts",
+          "specifierRange": [
+            [
+              5,
+              27
+            ],
+            [
+              5,
+              54
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./_util.ts",
+          "specifierRange": [
+            [
+              6,
+              53
+            ],
+            [
+              6,
+              65
+            ]
+          ]
+        }
+      ]
+    },
+    "/basename.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./_os.ts",
+          "specifierRange": [
+            [
+              3,
+              26
+            ],
+            [
+              3,
+              36
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./posix/basename.ts",
+          "specifierRange": [
+            [
+              4,
+              42
+            ],
+            [
+              4,
+              63
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./windows/basename.ts",
+          "specifierRange": [
+            [
+              5,
+              44
+            ],
+            [
+              5,
+              67
+            ]
+          ]
+        }
+      ]
+    },
+    "/posix/unstable_dirname.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./dirname.ts",
+          "specifierRange": [
+            [
+              3,
+              41
+            ],
+            [
+              3,
+              55
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./from_file_url.ts",
+          "specifierRange": [
+            [
+              4,
+              28
+            ],
+            [
+              4,
+              48
+            ]
+          ]
+        }
+      ]
+    },
+    "/unstable_extname.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./_os.ts",
+          "specifierRange": [
+            [
+              3,
+              26
+            ],
+            [
+              3,
+              36
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./posix/unstable_extname.ts",
+          "specifierRange": [
+            [
+              4,
+              48
+            ],
+            [
+              4,
+              77
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./windows/unstable_extname.ts",
+          "specifierRange": [
+            [
+              5,
+              50
+            ],
+            [
+              5,
+              81
+            ]
+          ]
+        }
+      ]
+    },
+    "/_common/normalize_string.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./constants.ts",
+          "specifierRange": [
+            [
+              5,
+              45
+            ],
+            [
+              5,
+              61
+            ]
+          ]
+        }
+      ]
+    },
+    "/resolve.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./_os.ts",
+          "specifierRange": [
+            [
+              3,
+              26
+            ],
+            [
+              3,
+              36
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./posix/resolve.ts",
+          "specifierRange": [
+            [
+              4,
+              40
+            ],
+            [
+              4,
+              60
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./windows/resolve.ts",
+          "specifierRange": [
+            [
+              5,
+              42
+            ],
+            [
+              5,
+              64
+            ]
+          ]
+        }
+      ]
+    },
+    "/unstable_basename.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./_os.ts",
+          "specifierRange": [
+            [
+              3,
+              26
+            ],
+            [
+              3,
+              36
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./posix/unstable_basename.ts",
+          "specifierRange": [
+            [
+              4,
+              50
+            ],
+            [
+              4,
+              80
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./windows/unstable_basename.ts",
+          "specifierRange": [
+            [
+              5,
+              52
+            ],
+            [
+              5,
+              84
+            ]
+          ]
+        }
+      ]
+    },
+    "/format.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./_os.ts",
+          "specifierRange": [
+            [
+              3,
+              26
+            ],
+            [
+              3,
+              36
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./posix/format.ts",
+          "specifierRange": [
+            [
+              4,
+              38
+            ],
+            [
+              4,
+              57
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./windows/format.ts",
+          "specifierRange": [
+            [
+              5,
+              40
+            ],
+            [
+              5,
+              61
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "importType",
+          "specifier": "./types.ts",
+          "specifierRange": [
+            [
+              6,
+              32
+            ],
+            [
+              6,
+              44
+            ]
+          ]
+        }
+      ]
+    },
+    "/_os.ts": {},
+    "/posix/basename.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/basename.ts",
+          "specifierRange": [
+            [
+              7,
+              7
+            ],
+            [
+              7,
+              31
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/strip_trailing_separators.ts",
+          "specifierRange": [
+            [
+              8,
+              40
+            ],
+            [
+              8,
+              81
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./_util.ts",
+          "specifierRange": [
+            [
+              9,
+              37
+            ],
+            [
+              9,
+              49
+            ]
+          ]
+        }
+      ]
+    },
+    "/posix/unstable_basename.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./basename.ts",
+          "specifierRange": [
+            [
+              3,
+              43
+            ],
+            [
+              3,
+              58
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./from_file_url.ts",
+          "specifierRange": [
+            [
+              4,
+              28
+            ],
+            [
+              4,
+              48
+            ]
+          ]
+        }
+      ]
+    },
+    "/posix/unstable_normalize.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./normalize.ts",
+          "specifierRange": [
+            [
+              3,
+              45
+            ],
+            [
+              3,
+              61
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./from_file_url.ts",
+          "specifierRange": [
+            [
+              4,
+              28
+            ],
+            [
+              4,
+              48
+            ]
+          ]
+        }
+      ]
+    },
+    "/posix/dirname.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/dirname.ts",
+          "specifierRange": [
+            [
+              3,
+              26
+            ],
+            [
+              3,
+              49
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/strip_trailing_separators.ts",
+          "specifierRange": [
+            [
+              4,
+              40
+            ],
+            [
+              4,
+              81
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./_util.ts",
+          "specifierRange": [
+            [
+              5,
+              37
+            ],
+            [
+              5,
+              49
+            ]
+          ]
+        }
+      ]
+    },
+    "/_common/constants.ts": {},
+    "/to_file_url.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./_os.ts",
+          "specifierRange": [
+            [
+              3,
+              26
+            ],
+            [
+              3,
+              36
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./posix/to_file_url.ts",
+          "specifierRange": [
+            [
+              4,
+              44
+            ],
+            [
+              4,
+              68
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./windows/to_file_url.ts",
+          "specifierRange": [
+            [
+              5,
+              46
+            ],
+            [
+              5,
+              72
+            ]
+          ]
+        }
+      ]
+    },
+    "/windows/to_namespaced_path.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/constants.ts",
+          "specifierRange": [
+            [
+              8,
+              7
+            ],
+            [
+              8,
+              32
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./_util.ts",
+          "specifierRange": [
+            [
+              9,
+              36
+            ],
+            [
+              9,
+              48
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./resolve.ts",
+          "specifierRange": [
+            [
+              10,
+              24
+            ],
+            [
+              10,
+              38
+            ]
+          ]
+        }
+      ]
+    },
+    "/dirname.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./_os.ts",
+          "specifierRange": [
+            [
+              3,
+              26
+            ],
+            [
+              3,
+              36
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./posix/dirname.ts",
+          "specifierRange": [
+            [
+              4,
+              40
+            ],
+            [
+              4,
+              60
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./windows/dirname.ts",
+          "specifierRange": [
+            [
+              5,
+              42
+            ],
+            [
+              5,
+              64
+            ]
+          ]
+        }
+      ]
+    },
+    "/windows/common.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/common.ts",
+          "specifierRange": [
+            [
+              3,
+              34
+            ],
+            [
+              3,
+              56
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./constants.ts",
+          "specifierRange": [
+            [
+              4,
+              26
+            ],
+            [
+              4,
+              42
+            ]
+          ]
+        }
+      ]
+    },
+    "/windows/mod.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./basename.ts",
+          "specifierRange": [
+            [
+              17,
+              14
+            ],
+            [
+              17,
+              29
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./constants.ts",
+          "specifierRange": [
+            [
+              18,
+              14
+            ],
+            [
+              18,
+              30
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./dirname.ts",
+          "specifierRange": [
+            [
+              19,
+              14
+            ],
+            [
+              19,
+              28
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./extname.ts",
+          "specifierRange": [
+            [
+              20,
+              14
+            ],
+            [
+              20,
+              28
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./format.ts",
+          "specifierRange": [
+            [
+              21,
+              14
+            ],
+            [
+              21,
+              27
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./from_file_url.ts",
+          "specifierRange": [
+            [
+              22,
+              14
+            ],
+            [
+              22,
+              34
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./is_absolute.ts",
+          "specifierRange": [
+            [
+              23,
+              14
+            ],
+            [
+              23,
+              32
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./join.ts",
+          "specifierRange": [
+            [
+              24,
+              14
+            ],
+            [
+              24,
+              25
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./normalize.ts",
+          "specifierRange": [
+            [
+              25,
+              14
+            ],
+            [
+              25,
+              30
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./parse.ts",
+          "specifierRange": [
+            [
+              26,
+              14
+            ],
+            [
+              26,
+              26
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./relative.ts",
+          "specifierRange": [
+            [
+              27,
+              14
+            ],
+            [
+              27,
+              29
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./resolve.ts",
+          "specifierRange": [
+            [
+              28,
+              14
+            ],
+            [
+              28,
+              28
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./to_file_url.ts",
+          "specifierRange": [
+            [
+              29,
+              14
+            ],
+            [
+              29,
+              32
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./to_namespaced_path.ts",
+          "specifierRange": [
+            [
+              30,
+              14
+            ],
+            [
+              30,
+              39
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./common.ts",
+          "specifierRange": [
+            [
+              31,
+              14
+            ],
+            [
+              31,
+              27
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "../types.ts",
+          "specifierRange": [
+            [
+              32,
+              14
+            ],
+            [
+              32,
+              27
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./glob_to_regexp.ts",
+          "specifierRange": [
+            [
+              33,
+              14
+            ],
+            [
+              33,
+              35
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./is_glob.ts",
+          "specifierRange": [
+            [
+              34,
+              14
+            ],
+            [
+              34,
+              28
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./join_globs.ts",
+          "specifierRange": [
+            [
+              35,
+              14
+            ],
+            [
+              35,
+              31
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./normalize_glob.ts",
+          "specifierRange": [
+            [
+              36,
+              14
+            ],
+            [
+              36,
+              35
+            ]
+          ]
+        }
+      ]
+    },
+    "/_common/normalize.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./assert_path.ts",
+          "specifierRange": [
+            [
+              3,
+              27
+            ],
+            [
+              3,
+              45
+            ]
+          ]
+        }
+      ]
+    },
+    "/windows/join_globs.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "importType",
+          "specifier": "../_common/glob_to_reg_exp.ts",
+          "specifierRange": [
+            [
+              3,
+              33
+            ],
+            [
+              3,
+              64
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./join.ts",
+          "specifierRange": [
+            [
+              4,
+              21
+            ],
+            [
+              4,
+              32
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./constants.ts",
+          "specifierRange": [
+            [
+              5,
+              26
+            ],
+            [
+              5,
+              42
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./normalize_glob.ts",
+          "specifierRange": [
+            [
+              6,
+              30
+            ],
+            [
+              6,
+              51
+            ]
+          ]
+        }
+      ]
+    },
+    "/extname.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./_os.ts",
+          "specifierRange": [
+            [
+              3,
+              26
+            ],
+            [
+              3,
+              36
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./posix/extname.ts",
+          "specifierRange": [
+            [
+              4,
+              40
+            ],
+            [
+              4,
+              60
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./windows/extname.ts",
+          "specifierRange": [
+            [
+              5,
+              42
+            ],
+            [
+              5,
+              64
+            ]
+          ]
+        }
+      ]
+    },
+    "/posix/unstable_extname.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./extname.ts",
+          "specifierRange": [
+            [
+              3,
+              41
+            ],
+            [
+              3,
+              55
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./from_file_url.ts",
+          "specifierRange": [
+            [
+              4,
+              28
+            ],
+            [
+              4,
+              48
+            ]
+          ]
+        }
+      ]
+    },
+    "/_common/glob_to_reg_exp.ts": {},
+    "/windows/unstable_normalize.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./normalize.ts",
+          "specifierRange": [
+            [
+              3,
+              45
+            ],
+            [
+              3,
+              61
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./from_file_url.ts",
+          "specifierRange": [
+            [
+              4,
+              28
+            ],
+            [
+              4,
+              48
+            ]
+          ]
+        }
+      ]
+    },
+    "/unstable_dirname.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./_os.ts",
+          "specifierRange": [
+            [
+              3,
+              26
+            ],
+            [
+              3,
+              36
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./posix/unstable_dirname.ts",
+          "specifierRange": [
+            [
+              4,
+              48
+            ],
+            [
+              4,
+              77
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./windows/unstable_dirname.ts",
+          "specifierRange": [
+            [
+              5,
+              50
+            ],
+            [
+              5,
+              81
+            ]
+          ]
+        }
+      ]
+    },
+    "/to_namespaced_path.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./_os.ts",
+          "specifierRange": [
+            [
+              3,
+              26
+            ],
+            [
+              3,
+              36
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./posix/to_namespaced_path.ts",
+          "specifierRange": [
+            [
+              4,
+              58
+            ],
+            [
+              4,
+              89
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./windows/to_namespaced_path.ts",
+          "specifierRange": [
+            [
+              5,
+              60
+            ],
+            [
+              5,
+              93
+            ]
+          ]
+        }
+      ]
+    },
+    "/posix/glob_to_regexp.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/glob_to_reg_exp.ts",
+          "specifierRange": [
+            [
+              7,
+              7
+            ],
+            [
+              7,
+              38
+            ]
+          ]
+        }
+      ]
+    },
+    "/windows/format.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/format.ts",
+          "specifierRange": [
+            [
+              3,
+              35
+            ],
+            [
+              3,
+              57
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "importType",
+          "specifier": "../types.ts",
+          "specifierRange": [
+            [
+              4,
+              32
+            ],
+            [
+              4,
+              45
+            ]
+          ]
+        }
+      ]
+    },
+    "/_common/dirname.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./assert_path.ts",
+          "specifierRange": [
+            [
+              3,
+              27
+            ],
+            [
+              3,
+              45
+            ]
+          ]
+        }
+      ]
+    },
+    "/posix/parse.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/constants.ts",
+          "specifierRange": [
+            [
+              3,
+              25
+            ],
+            [
+              3,
+              50
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "importType",
+          "specifier": "../types.ts",
+          "specifierRange": [
+            [
+              4,
+              32
+            ],
+            [
+              4,
+              45
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/strip_trailing_separators.ts",
+          "specifierRange": [
+            [
+              5,
+              40
+            ],
+            [
+              5,
+              81
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/assert_path.ts",
+          "specifierRange": [
+            [
+              6,
+              27
+            ],
+            [
+              6,
+              54
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./_util.ts",
+          "specifierRange": [
+            [
+              7,
+              37
+            ],
+            [
+              7,
+              49
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "exportType",
+          "specifier": "../types.ts",
+          "specifierRange": [
+            [
+              9,
+              32
+            ],
+            [
+              9,
+              45
+            ]
+          ]
+        }
+      ]
+    },
+    "/_common/strip_trailing_separators.ts": {},
+    "/mod.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./basename.ts",
+          "specifierRange": [
+            [
+              38,
+              14
+            ],
+            [
+              38,
+              29
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./constants.ts",
+          "specifierRange": [
+            [
+              39,
+              14
+            ],
+            [
+              39,
+              30
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./dirname.ts",
+          "specifierRange": [
+            [
+              40,
+              14
+            ],
+            [
+              40,
+              28
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./extname.ts",
+          "specifierRange": [
+            [
+              41,
+              14
+            ],
+            [
+              41,
+              28
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./format.ts",
+          "specifierRange": [
+            [
+              42,
+              14
+            ],
+            [
+              42,
+              27
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./from_file_url.ts",
+          "specifierRange": [
+            [
+              43,
+              14
+            ],
+            [
+              43,
+              34
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./is_absolute.ts",
+          "specifierRange": [
+            [
+              44,
+              14
+            ],
+            [
+              44,
+              32
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./join.ts",
+          "specifierRange": [
+            [
+              45,
+              14
+            ],
+            [
+              45,
+              25
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./normalize.ts",
+          "specifierRange": [
+            [
+              46,
+              14
+            ],
+            [
+              46,
+              30
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./parse.ts",
+          "specifierRange": [
+            [
+              47,
+              14
+            ],
+            [
+              47,
+              26
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./relative.ts",
+          "specifierRange": [
+            [
+              48,
+              14
+            ],
+            [
+              48,
+              29
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./resolve.ts",
+          "specifierRange": [
+            [
+              49,
+              14
+            ],
+            [
+              49,
+              28
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./to_file_url.ts",
+          "specifierRange": [
+            [
+              50,
+              14
+            ],
+            [
+              50,
+              32
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./to_namespaced_path.ts",
+          "specifierRange": [
+            [
+              51,
+              14
+            ],
+            [
+              51,
+              39
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./common.ts",
+          "specifierRange": [
+            [
+              52,
+              14
+            ],
+            [
+              52,
+              27
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./types.ts",
+          "specifierRange": [
+            [
+              53,
+              14
+            ],
+            [
+              53,
+              26
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./glob_to_regexp.ts",
+          "specifierRange": [
+            [
+              54,
+              14
+            ],
+            [
+              54,
+              35
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./is_glob.ts",
+          "specifierRange": [
+            [
+              55,
+              14
+            ],
+            [
+              55,
+              28
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./join_globs.ts",
+          "specifierRange": [
+            [
+              56,
+              14
+            ],
+            [
+              56,
+              31
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "./normalize_glob.ts",
+          "specifierRange": [
+            [
+              57,
+              14
+            ],
+            [
+              57,
+              35
+            ]
+          ]
+        }
+      ]
+    },
+    "/from_file_url.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./_os.ts",
+          "specifierRange": [
+            [
+              3,
+              26
+            ],
+            [
+              3,
+              36
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./posix/from_file_url.ts",
+          "specifierRange": [
+            [
+              4,
+              48
+            ],
+            [
+              4,
+              74
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./windows/from_file_url.ts",
+          "specifierRange": [
+            [
+              5,
+              50
+            ],
+            [
+              5,
+              78
+            ]
+          ]
+        }
+      ]
+    },
+    "/_common/format.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "importType",
+          "specifier": "../types.ts",
+          "specifierRange": [
+            [
+              3,
+              32
+            ],
+            [
+              3,
+              45
+            ]
+          ]
+        }
+      ]
+    },
+    "/windows/is_absolute.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/constants.ts",
+          "specifierRange": [
+            [
+              3,
+              27
+            ],
+            [
+              3,
+              52
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/assert_path.ts",
+          "specifierRange": [
+            [
+              4,
+              27
+            ],
+            [
+              4,
+              54
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./_util.ts",
+          "specifierRange": [
+            [
+              5,
+              53
+            ],
+            [
+              5,
+              65
+            ]
+          ]
+        }
+      ]
+    },
+    "/windows/relative.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/constants.ts",
+          "specifierRange": [
+            [
+              3,
+              36
+            ],
+            [
+              3,
+              61
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./resolve.ts",
+          "specifierRange": [
+            [
+              4,
+              24
+            ],
+            [
+              4,
+              38
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/relative.ts",
+          "specifierRange": [
+            [
+              5,
+              27
+            ],
+            [
+              5,
+              51
+            ]
+          ]
+        }
+      ]
+    },
+    "/normalize_glob.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "importType",
+          "specifier": "./_common/glob_to_reg_exp.ts",
+          "specifierRange": [
+            [
+              3,
+              33
+            ],
+            [
+              3,
+              63
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./_os.ts",
+          "specifierRange": [
+            [
+              4,
+              26
+            ],
+            [
+              4,
+              36
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./posix/normalize_glob.ts",
+          "specifierRange": [
+            [
+              5,
+              52
+            ],
+            [
+              5,
+              79
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./windows/normalize_glob.ts",
+          "specifierRange": [
+            [
+              8,
+              7
+            ],
+            [
+              8,
+              36
+            ]
+          ]
+        }
+      ]
+    },
+    "/posix/_util.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/constants.ts",
+          "specifierRange": [
+            [
+              5,
+              35
+            ],
+            [
+              5,
+              60
+            ]
+          ]
+        }
+      ]
+    },
+    "/unstable_join.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./_os.ts",
+          "specifierRange": [
+            [
+              3,
+              26
+            ],
+            [
+              3,
+              36
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./posix/unstable_join.ts",
+          "specifierRange": [
+            [
+              4,
+              42
+            ],
+            [
+              4,
+              68
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./windows/unstable_join.ts",
+          "specifierRange": [
+            [
+              5,
+              44
+            ],
+            [
+              5,
+              72
+            ]
+          ]
+        }
+      ]
+    },
+    "/_common/relative.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./assert_path.ts",
+          "specifierRange": [
+            [
+              3,
+              27
+            ],
+            [
+              3,
+              45
+            ]
+          ]
+        }
+      ]
+    },
+    "/_common/assert_path.ts": {},
+    "/windows/parse.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/constants.ts",
+          "specifierRange": [
+            [
+              3,
+              37
+            ],
+            [
+              3,
+              62
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "importType",
+          "specifier": "../types.ts",
+          "specifierRange": [
+            [
+              4,
+              32
+            ],
+            [
+              4,
+              45
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/assert_path.ts",
+          "specifierRange": [
+            [
+              5,
+              27
+            ],
+            [
+              5,
+              54
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./_util.ts",
+          "specifierRange": [
+            [
+              6,
+              53
+            ],
+            [
+              6,
+              65
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "exportType",
+          "specifier": "../types.ts",
+          "specifierRange": [
+            [
+              8,
+              32
+            ],
+            [
+              8,
+              45
+            ]
+          ]
+        }
+      ]
+    },
+    "/posix/to_file_url.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/to_file_url.ts",
+          "specifierRange": [
+            [
+              3,
+              33
+            ],
+            [
+              3,
+              60
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./is_absolute.ts",
+          "specifierRange": [
+            [
+              4,
+              27
+            ],
+            [
+              4,
+              45
+            ]
+          ]
+        }
+      ]
+    },
+    "/windows/extname.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/constants.ts",
+          "specifierRange": [
+            [
+              3,
+              37
+            ],
+            [
+              3,
+              62
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/assert_path.ts",
+          "specifierRange": [
+            [
+              4,
+              27
+            ],
+            [
+              4,
+              54
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./_util.ts",
+          "specifierRange": [
+            [
+              5,
+              53
+            ],
+            [
+              5,
+              65
+            ]
+          ]
+        }
+      ]
+    },
+    "/windows/glob_to_regexp.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/glob_to_reg_exp.ts",
+          "specifierRange": [
+            [
+              7,
+              7
+            ],
+            [
+              7,
+              38
+            ]
+          ]
+        }
+      ]
+    },
+    "/is_glob.ts": {},
+    "/is_absolute.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./_os.ts",
+          "specifierRange": [
+            [
+              3,
+              26
+            ],
+            [
+              3,
+              36
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./posix/is_absolute.ts",
+          "specifierRange": [
+            [
+              4,
+              46
+            ],
+            [
+              4,
+              70
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./windows/is_absolute.ts",
+          "specifierRange": [
+            [
+              5,
+              48
+            ],
+            [
+              5,
+              74
+            ]
+          ]
+        }
+      ]
+    },
+    "/windows/normalize_glob.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "importType",
+          "specifier": "../_common/glob_to_reg_exp.ts",
+          "specifierRange": [
+            [
+              3,
+              33
+            ],
+            [
+              3,
+              64
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./normalize.ts",
+          "specifierRange": [
+            [
+              4,
+              26
+            ],
+            [
+              4,
+              42
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./constants.ts",
+          "specifierRange": [
+            [
+              5,
+              34
+            ],
+            [
+              5,
+              50
+            ]
+          ]
+        }
+      ]
+    },
+    "/_common/common.ts": {},
+    "/glob_to_regexp.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "importType",
+          "specifier": "./_common/glob_to_reg_exp.ts",
+          "specifierRange": [
+            [
+              3,
+              33
+            ],
+            [
+              3,
+              63
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./_os.ts",
+          "specifierRange": [
+            [
+              4,
+              26
+            ],
+            [
+              4,
+              36
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./posix/glob_to_regexp.ts",
+          "specifierRange": [
+            [
+              6,
+              50
+            ],
+            [
+              6,
+              77
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./windows/glob_to_regexp.ts",
+          "specifierRange": [
+            [
+              9,
+              7
+            ],
+            [
+              9,
+              36
+            ]
+          ]
+        }
+      ]
+    },
+    "/constants.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./_os.ts",
+          "specifierRange": [
+            [
+              2,
+              26
+            ],
+            [
+              2,
+              36
+            ]
+          ]
+        }
+      ]
+    },
+    "/posix/join.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/assert_path.ts",
+          "specifierRange": [
+            [
+              3,
+              27
+            ],
+            [
+              3,
+              54
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./normalize.ts",
+          "specifierRange": [
+            [
+              4,
+              26
+            ],
+            [
+              4,
+              42
+            ]
+          ]
+        }
+      ]
+    },
+    "/posix/constants.ts": {},
+    "/windows/join.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/assert_path.ts",
+          "specifierRange": [
+            [
+              3,
+              27
+            ],
+            [
+              3,
+              54
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./_util.ts",
+          "specifierRange": [
+            [
+              4,
+              32
+            ],
+            [
+              4,
+              44
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./normalize.ts",
+          "specifierRange": [
+            [
+              5,
+              26
+            ],
+            [
+              5,
+              42
+            ]
+          ]
+        }
+      ]
+    },
+    "/windows/is_glob.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "export",
+          "specifier": "../is_glob.ts",
+          "specifierRange": [
+            [
+              3,
+              23
+            ],
+            [
+              3,
+              38
+            ]
+          ]
+        }
+      ]
+    },
+    "/common.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./_common/common.ts",
+          "specifierRange": [
+            [
+              3,
+              34
+            ],
+            [
+              3,
+              55
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./constants.ts",
+          "specifierRange": [
+            [
+              4,
+              26
+            ],
+            [
+              4,
+              42
+            ]
+          ]
+        }
+      ]
+    },
+    "/normalize.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./_os.ts",
+          "specifierRange": [
+            [
+              3,
+              26
+            ],
+            [
+              3,
+              36
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./posix/normalize.ts",
+          "specifierRange": [
+            [
+              4,
+              44
+            ],
+            [
+              4,
+              66
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./windows/normalize.ts",
+          "specifierRange": [
+            [
+              5,
+              46
+            ],
+            [
+              5,
+              70
+            ]
+          ]
+        }
+      ]
+    },
+    "/windows/unstable_basename.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./basename.ts",
+          "specifierRange": [
+            [
+              3,
+              43
+            ],
+            [
+              3,
+              58
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./from_file_url.ts",
+          "specifierRange": [
+            [
+              4,
+              28
+            ],
+            [
+              4,
+              48
+            ]
+          ]
+        }
+      ]
+    },
+    "/posix/join_globs.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "importType",
+          "specifier": "../_common/glob_to_reg_exp.ts",
+          "specifierRange": [
+            [
+              3,
+              33
+            ],
+            [
+              3,
+              64
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./join.ts",
+          "specifierRange": [
+            [
+              4,
+              21
+            ],
+            [
+              4,
+              32
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./constants.ts",
+          "specifierRange": [
+            [
+              5,
+              26
+            ],
+            [
+              5,
+              42
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./normalize_glob.ts",
+          "specifierRange": [
+            [
+              6,
+              30
+            ],
+            [
+              6,
+              51
+            ]
+          ]
+        }
+      ]
+    },
+    "/posix/normalize.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/normalize.ts",
+          "specifierRange": [
+            [
+              3,
+              26
+            ],
+            [
+              3,
+              51
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/normalize_string.ts",
+          "specifierRange": [
+            [
+              4,
+              32
+            ],
+            [
+              4,
+              64
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./_util.ts",
+          "specifierRange": [
+            [
+              5,
+              37
+            ],
+            [
+              5,
+              49
+            ]
+          ]
+        }
+      ]
+    },
+    "/_common/basename.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./assert_path.ts",
+          "specifierRange": [
+            [
+              3,
+              27
+            ],
+            [
+              3,
+              45
+            ]
+          ]
+        }
+      ]
+    },
+    "/posix/from_file_url.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/from_file_url.ts",
+          "specifierRange": [
+            [
+              3,
+              26
+            ],
+            [
+              3,
+              55
+            ]
+          ]
+        }
+      ]
+    },
+    "/windows/to_file_url.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/to_file_url.ts",
+          "specifierRange": [
+            [
+              3,
+              33
+            ],
+            [
+              3,
+              60
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./is_absolute.ts",
+          "specifierRange": [
+            [
+              4,
+              27
+            ],
+            [
+              4,
+              45
+            ]
+          ]
+        }
+      ]
+    },
+    "/posix/is_absolute.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/assert_path.ts",
+          "specifierRange": [
+            [
+              3,
+              27
+            ],
+            [
+              3,
+              54
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./_util.ts",
+          "specifierRange": [
+            [
+              4,
+              37
+            ],
+            [
+              4,
+              49
+            ]
+          ]
+        }
+      ]
+    },
+    "/relative.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./_os.ts",
+          "specifierRange": [
+            [
+              3,
+              26
+            ],
+            [
+              3,
+              36
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./posix/relative.ts",
+          "specifierRange": [
+            [
+              4,
+              42
+            ],
+            [
+              4,
+              63
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./windows/relative.ts",
+          "specifierRange": [
+            [
+              5,
+              44
+            ],
+            [
+              5,
+              67
+            ]
+          ]
+        }
+      ]
+    },
+    "/posix/resolve.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/normalize_string.ts",
+          "specifierRange": [
+            [
+              3,
+              32
+            ],
+            [
+              3,
+              64
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/assert_path.ts",
+          "specifierRange": [
+            [
+              4,
+              27
+            ],
+            [
+              4,
+              54
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./_util.ts",
+          "specifierRange": [
+            [
+              5,
+              37
+            ],
+            [
+              5,
+              49
+            ]
+          ]
+        }
+      ]
+    },
+    "/windows/basename.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/basename.ts",
+          "specifierRange": [
+            [
+              7,
+              7
+            ],
+            [
+              7,
+              31
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/constants.ts",
+          "specifierRange": [
+            [
+              8,
+              27
+            ],
+            [
+              8,
+              52
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/strip_trailing_separators.ts",
+          "specifierRange": [
+            [
+              9,
+              40
+            ],
+            [
+              9,
+              81
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./_util.ts",
+          "specifierRange": [
+            [
+              10,
+              53
+            ],
+            [
+              10,
+              65
+            ]
+          ]
+        }
+      ]
+    },
+    "/posix/format.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/format.ts",
+          "specifierRange": [
+            [
+              3,
+              35
+            ],
+            [
+              3,
+              57
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "importType",
+          "specifier": "../types.ts",
+          "specifierRange": [
+            [
+              4,
+              32
+            ],
+            [
+              4,
+              45
+            ]
+          ]
+        }
+      ]
+    },
+    "/posix/to_namespaced_path.ts": {},
+    "/posix/relative.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./_util.ts",
+          "specifierRange": [
+            [
+              3,
+              37
+            ],
+            [
+              3,
+              49
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./resolve.ts",
+          "specifierRange": [
+            [
+              4,
+              24
+            ],
+            [
+              4,
+              38
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/relative.ts",
+          "specifierRange": [
+            [
+              5,
+              27
+            ],
+            [
+              5,
+              51
+            ]
+          ]
+        }
+      ]
+    },
+    "/posix/common.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/common.ts",
+          "specifierRange": [
+            [
+              3,
+              34
+            ],
+            [
+              3,
+              56
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./constants.ts",
+          "specifierRange": [
+            [
+              4,
+              26
+            ],
+            [
+              4,
+              42
+            ]
+          ]
+        }
+      ]
+    },
+    "/windows/dirname.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/dirname.ts",
+          "specifierRange": [
+            [
+              3,
+              26
+            ],
+            [
+              3,
+              49
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/constants.ts",
+          "specifierRange": [
+            [
+              4,
+              27
+            ],
+            [
+              4,
+              52
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/strip_trailing_separators.ts",
+          "specifierRange": [
+            [
+              5,
+              40
+            ],
+            [
+              5,
+              81
+            ]
+          ]
+        },
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./_util.ts",
+          "specifierRange": [
+            [
+              10,
+              7
+            ],
+            [
+              10,
+              19
+            ]
+          ]
+        }
+      ]
+    },
+    "/windows/_util.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "../_common/constants.ts",
+          "specifierRange": [
+            [
+              12,
+              7
+            ],
+            [
+              12,
+              32
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "exports": {
+    ".": "./mod.ts",
+    "./basename": "./basename.ts",
+    "./common": "./common.ts",
+    "./constants": "./constants.ts",
+    "./dirname": "./dirname.ts",
+    "./extname": "./extname.ts",
+    "./format": "./format.ts",
+    "./from-file-url": "./from_file_url.ts",
+    "./glob-to-regexp": "./glob_to_regexp.ts",
+    "./is-absolute": "./is_absolute.ts",
+    "./is-glob": "./is_glob.ts",
+    "./join": "./join.ts",
+    "./join-globs": "./join_globs.ts",
+    "./normalize": "./normalize.ts",
+    "./normalize-glob": "./normalize_glob.ts",
+    "./parse": "./parse.ts",
+    "./posix": "./posix/mod.ts",
+    "./posix/basename": "./posix/basename.ts",
+    "./posix/common": "./posix/common.ts",
+    "./posix/constants": "./posix/constants.ts",
+    "./posix/dirname": "./posix/dirname.ts",
+    "./posix/extname": "./posix/extname.ts",
+    "./posix/format": "./posix/format.ts",
+    "./posix/from-file-url": "./posix/from_file_url.ts",
+    "./posix/glob-to-regexp": "./posix/glob_to_regexp.ts",
+    "./posix/is-absolute": "./posix/is_absolute.ts",
+    "./posix/is-glob": "./posix/is_glob.ts",
+    "./posix/join": "./posix/join.ts",
+    "./posix/join-globs": "./posix/join_globs.ts",
+    "./posix/normalize": "./posix/normalize.ts",
+    "./posix/normalize-glob": "./posix/normalize_glob.ts",
+    "./posix/parse": "./posix/parse.ts",
+    "./posix/relative": "./posix/relative.ts",
+    "./posix/resolve": "./posix/resolve.ts",
+    "./posix/to-file-url": "./posix/to_file_url.ts",
+    "./posix/to-namespaced-path": "./posix/to_namespaced_path.ts",
+    "./posix/unstable-basename": "./posix/unstable_basename.ts",
+    "./posix/unstable-dirname": "./posix/unstable_dirname.ts",
+    "./posix/unstable-extname": "./posix/unstable_extname.ts",
+    "./posix/unstable-join": "./posix/unstable_join.ts",
+    "./posix/unstable-normalize": "./posix/unstable_normalize.ts",
+    "./relative": "./relative.ts",
+    "./resolve": "./resolve.ts",
+    "./to-file-url": "./to_file_url.ts",
+    "./to-namespaced-path": "./to_namespaced_path.ts",
+    "./types": "./types.ts",
+    "./unstable-basename": "./unstable_basename.ts",
+    "./unstable-dirname": "./unstable_dirname.ts",
+    "./unstable-extname": "./unstable_extname.ts",
+    "./unstable-join": "./unstable_join.ts",
+    "./unstable-normalize": "./unstable_normalize.ts",
+    "./windows": "./windows/mod.ts",
+    "./windows/basename": "./windows/basename.ts",
+    "./windows/common": "./windows/common.ts",
+    "./windows/constants": "./windows/constants.ts",
+    "./windows/dirname": "./windows/dirname.ts",
+    "./windows/extname": "./windows/extname.ts",
+    "./windows/format": "./windows/format.ts",
+    "./windows/from-file-url": "./windows/from_file_url.ts",
+    "./windows/glob-to-regexp": "./windows/glob_to_regexp.ts",
+    "./windows/is-absolute": "./windows/is_absolute.ts",
+    "./windows/is-glob": "./windows/is_glob.ts",
+    "./windows/join": "./windows/join.ts",
+    "./windows/join-globs": "./windows/join_globs.ts",
+    "./windows/normalize": "./windows/normalize.ts",
+    "./windows/normalize-glob": "./windows/normalize_glob.ts",
+    "./windows/parse": "./windows/parse.ts",
+    "./windows/relative": "./windows/relative.ts",
+    "./windows/resolve": "./windows/resolve.ts",
+    "./windows/to-file-url": "./windows/to_file_url.ts",
+    "./windows/to-namespaced-path": "./windows/to_namespaced_path.ts",
+    "./windows/unstable-basename": "./windows/unstable_basename.ts",
+    "./windows/unstable-dirname": "./windows/unstable_dirname.ts",
+    "./windows/unstable-extname": "./windows/unstable_extname.ts",
+    "./windows/unstable-join": "./windows/unstable_join.ts",
+    "./windows/unstable-normalize": "./windows/unstable_normalize.ts"
+  }
+}
