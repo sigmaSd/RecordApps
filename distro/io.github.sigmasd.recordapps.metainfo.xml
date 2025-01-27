@@ -13,6 +13,7 @@
   <launchable type="desktop-id">io.github.sigmasd.recordapps.desktop</launchable>
   <screenshots>
     <screenshot type="default">
+      <caption>Record Apps main window showing the list of applications to record</caption>
       <image>https://raw.githubusercontent.com/sigmaSd/RecordApps/refs/heads/master/distro/demo.png</image>
     </screenshot>
   </screenshots>
@@ -27,13 +28,14 @@
     </keywords>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>MIT</project_license>
-    <releases>
+  <content_rating type="oars-1.1" />
+  <releases>
       <release version="1.4.0" date="2025-01-26">
-        <description>
+      <description>
           <p>Add support for recording from multiple applications</p>
-        </description>
+      </description>
       </release>
-    </releases>
+  </releases>
   <url type="homepage">https://github.com/sigmasd/recordapps</url>
     <url type="bugtracker">https://github.com/sigmasd/recordapps/issues</url>
     <url type="vcs-browser">https://github.com/sigmasd/recordapps</url>
