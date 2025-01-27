@@ -1,5 +1,6 @@
 /// <reference lib="webworker" />
 import { main as frontendServer } from "./front-server.ts";
+// Will be bundled with deno task build
 import { main as apiServer } from "./server.ts";
 
 if (import.meta.main) {
