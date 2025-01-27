@@ -6,8 +6,10 @@ const worker = new Worker(import.meta.resolve("./start.ts"), {
 const webview = new Webview();
 webview.title = "Record Apps";
 
-webview.navigate("http://localhost:8000");
-webview.run();
-
-worker.terminate();
-Deno.exit(0);
+worker.onmessage = (e) => {
+  const { port } = e.data;
+  webview.navigate(`http://localhost:${port}`);
+  webview.run();
+  worker.terminate();
+  Deno.exit(0);
+};

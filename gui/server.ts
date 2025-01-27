@@ -12,10 +12,11 @@ import { ensureDirSync } from "jsr:@std/fs";
 import { unloadAllVirtualSinks } from "../lib.ts";
 
 if (import.meta.main) {
-  main()
+  main();
 }
 
 export async function main() {
+  let port = undefined;
   let musicDir = `${Deno.env.get("HOME")}/Music`;
   try {
     await new Deno.Command("xdg-user-dir", { args: ["MUSIC"] }).output().then(
@@ -40,7 +41,12 @@ export async function main() {
 
   const recordings = new Map<number, AbortController>();
   const playing = new Map<number, AbortController>();
-  Deno.serve({ port: 3000 }, async (req) => {
+  Deno.serve({
+    port: 0,
+    onListen: ({ port: p }) => {
+      port = p;
+    },
+  }, async (req) => {
     // Add CORS headers
     const headers = new Headers({
       "Access-Control-Allow-Origin": "*", // Allow all origins
@@ -139,4 +145,9 @@ export async function main() {
       headers,
     });
   });
+
+  while (port === undefined) {
+    await new Promise((resolve) => setTimeout(resolve, 100));
+  }
+  return { port };
 }

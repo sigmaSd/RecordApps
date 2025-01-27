@@ -3,10 +3,19 @@
     import { onMount } from "svelte";
     import type { App } from "../../lib";
 
-    let apps: App[] = [];
-    onMount(() => {
+    const fontPort = Number.parseInt(window.location.port);
+    let apiPort: number | undefined = $state(undefined);
+    let apps: App[] = $state([]);
+
+    onMount(async () => {
+        await fetch(`http://localhost:${fontPort}/apiPort`)
+            .then((res) => res.text())
+            .then((p) => {
+                apiPort = Number.parseInt(p);
+            });
+
         setInterval(() => {
-            fetch("http://localhost:3000/apps")
+            fetch(`http://localhost:${apiPort}/apps`)
                 .then((res) => res.json())
                 .then((data) => {
                     apps = data;
@@ -28,7 +37,7 @@
             </thead>
             <tbody>
                 {#each apps as app}
-                    <AppRow {app} />
+                    <AppRow {app} {apiPort} />
                 {/each}
             </tbody>
         </table>

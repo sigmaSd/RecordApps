@@ -1,20 +1,20 @@
 <script lang="ts">
     import type { App } from "../../../lib";
 
-    const { app } = $props();
+    const { app, apiPort } = $props();
 
     let recording = $state();
     let playing = $state();
 
     async function recordApp(app: App) {
         if (!recording) {
-            await fetch("http://localhost:3000/record", {
+            await fetch(`http://localhost:${apiPort}/record`, {
                 method: "POST",
                 body: JSON.stringify(app),
             });
             recording = true;
         } else {
-            await fetch("http://localhost:3000/stop-recording", {
+            await fetch(`http://localhost:${apiPort}/stop-recording`, {
                 method: "POST",
                 body: JSON.stringify(app),
             });
@@ -25,13 +25,13 @@
 
     async function playAudio(app: App) {
         if (!playing) {
-            await fetch("http://localhost:3000/play", {
+            await fetch(`http://localhost:${apiPort}/play`, {
                 method: "POST",
                 body: JSON.stringify(app),
             });
             playing = true;
         } else {
-            await fetch("http://localhost:3000/stop-playing", {
+            await fetch(`http://localhost:${apiPort}/stop-playing`, {
                 method: "POST",
                 body: JSON.stringify(app),
             });
