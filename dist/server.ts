@@ -43,6 +43,7 @@ export async function main() {
   const playing = new Map<number, AbortController>();
   Deno.serve({
     port: 0,
+    hostname: "localhost",
     onListen: ({ port: p }) => {
       port = p;
     },

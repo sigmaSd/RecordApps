@@ -8,6 +8,7 @@ export async function main({ apiPort }: { apiPort: number }) {
   let port = undefined;
   Deno.serve({
     port: 0,
+    hostname: "localhost",
     onListen: ({ port: p }) => {
       port = p;
     },
