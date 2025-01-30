@@ -68,12 +68,13 @@ export async function main() {
 
     if (req.url.endsWith("/record")) {
       const app = await req.json() as App;
+      const sinkName = `${app.name}-${app.id}`;
       const currentSinks = await listSinks();
-      if (currentSinks.find((s) => s.name === app.name) === undefined) {
-        const _virtualSinkId = await createVirtualSink({ name: app.name });
+      if (currentSinks.find((s) => s.name === sinkName) === undefined) {
+        const _virtualSinkId = await createVirtualSink({ name: sinkName });
       }
       const virtualSink = await listSinks().then((sinks) =>
-        sinks.find((s) => s.name === app.name)
+        sinks.find((s) => s.name === sinkName)
       );
       if (virtualSink === undefined) {
         return new Response("Sink not found", { status: 404, headers });
@@ -89,7 +90,8 @@ export async function main() {
       recordFromSink(
         {
           sink: virtualSink,
-          outputFile: `${recordAppsDir}/${app.name}/${timestamp}.flac`,
+          outputFile:
+            `${recordAppsDir}/${app.name}/${timestamp}.${app.id}.flac`,
           abortController,
         },
       );
@@ -117,8 +119,9 @@ export async function main() {
 
     if (req.url.endsWith("/play")) {
       const app = await req.json() as App;
+      const sinkName = `${app.name}-${app.id}`;
       const virtualSink = await listSinks().then((sinks) =>
-        sinks.find((s) => s.name === app.name)
+        sinks.find((s) => s.name === sinkName)
       );
       if (virtualSink === undefined) {
         return new Response("Sink not found", { status: 404, headers });

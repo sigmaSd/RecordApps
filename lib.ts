@@ -28,6 +28,12 @@ export async function playingApps(): Promise<App[]> {
   return apps;
 }
 
+/**
+ * Creates a virtual audio sink.
+ * @param {Object} options - Optional parameters for creating the virtual sink.
+ * @param {string} options.name - Optional name for the virtual sink. The name should be unique.
+ * @returns {Promise<number>} The ID of the newly created sink.
+ */
 export async function createVirtualSink({
   name,
 }: { name?: string } = {}): Promise<number> {
@@ -98,7 +104,7 @@ export async function recordFromSink(
   },
 ): Promise<void> {
   await new Deno.Command("ffmpeg", {
-    args: ["-f", "pulse", "-i", sink.name, outputFile],
+    args: ["-f", "pulse", "-i", `${sink.name}.monitor`, outputFile],
     stderr: "null",
     signal: abortController?.signal,
   }).spawn().status;
