@@ -30,11 +30,19 @@
   <project_license>MIT</project_license>
   <content_rating type="oars-1.1" />
   <releases>
-      <release version="1.5.2" date="2025-01-26">
-      <description>
-          <p>Add support for recording from multiple applications</p>
-      </description>
-      </release>
+    <release version="1.6.0" date="2025-01-30">
+        <description>
+        <ul>
+          <li>Add a column to show the media name</li>
+          <li>Allow recording from multiple outputs of the same application</li>
+        </ul>
+        </description>
+    </release>
+    <release version="1.5.2" date="2025-01-26">
+        <description>
+        <p>Add support for recording from multiple applications</p>
+        </description>
+    </release>
   </releases>
   <url type="homepage">https://github.com/sigmasd/recordapps</url>
     <url type="bugtracker">https://github.com/sigmasd/recordapps/issues</url>
