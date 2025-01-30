@@ -1,9 +1,0 @@
-{
-  "scope": "sigmasd",
-  "name": "webview-temp-fork",
-  "latest": "0.9.1",
-  "versions": {
-    "0.9.1": {},
-    "0.9.0": {}
-  }
-}

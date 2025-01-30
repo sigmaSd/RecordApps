@@ -1,0 +1,9 @@
+{
+  "scope": "webview",
+  "name": "webview",
+  "latest": "0.8.1",
+  "versions": {
+    "0.8.1": {},
+    "0.8.0": {}
+  }
+}

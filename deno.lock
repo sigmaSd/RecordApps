@@ -1,6 +1,7 @@
 {
   "version": "4",
   "specifiers": {
+    "jsr:@denosaurs/plug@1": "1.0.6",
     "jsr:@denosaurs/plug@^1.0.6": "1.0.6",
     "jsr:@sigmasd/webview-temp-fork@0.9.1": "0.9.1",
     "jsr:@std/assert@0.221": "0.221.0",
@@ -17,7 +18,8 @@
     "jsr:@std/net@^1.0.4": "1.0.4",
     "jsr:@std/path@0.221": "0.221.0",
     "jsr:@std/path@^1.0.8": "1.0.8",
-    "jsr:@std/streams@^1.0.8": "1.0.8"
+    "jsr:@std/streams@^1.0.8": "1.0.8",
+    "jsr:@webview/webview@0.9.0": "0.9.0"
   },
   "jsr": {
     "@denosaurs/plug@1.0.6": {
@@ -32,7 +34,7 @@
     "@sigmasd/webview-temp-fork@0.9.1": {
       "integrity": "cda563939adfc592f64ee3ea88a61e5ca5e80d0f5e5e8c8a800869882ecc4393",
       "dependencies": [
-        "jsr:@denosaurs/plug"
+        "jsr:@denosaurs/plug@^1.0.6"
       ]
     },
     "@std/assert@0.221.0": {
@@ -93,6 +95,12 @@
     },
     "@std/streams@1.0.8": {
       "integrity": "b41332d93d2cf6a82fe4ac2153b930adf1a859392931e2a19d9fabfb6f154fb3"
+    },
+    "@webview/webview@0.9.0": {
+      "integrity": "a7c4d787aafa43258ff287f71a16679d5ca3d9b65e5d232c60c3985f9ab3e0ce",
+      "dependencies": [
+        "jsr:@denosaurs/plug@1"
+      ]
     }
   }
 }
