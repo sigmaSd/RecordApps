@@ -66,6 +66,7 @@ export async function unloadSink(id: number): Promise<void> {
 export async function unloadAllVirtualSinks(): Promise<void> {
   await new Deno.Command("pactl", {
     args: ["unload-module", "module-null-sink"],
+    stderr: "null",
   }).spawn().status;
 }
 

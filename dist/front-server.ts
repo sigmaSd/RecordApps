@@ -21,6 +21,7 @@ export async function main({ apiPort }: { apiPort: number }) {
     if (pathname.startsWith("/")) {
       return serveDir(req, {
         fsRoot: import.meta.dirname,
+        quiet: true,
       });
     }
 
