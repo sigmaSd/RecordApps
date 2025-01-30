@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { App } from "../../../lib";
 
-    const { app, apiPort } = $props();
+    const { app, apiPort }: { app: App; apiPort: number } = $props();
 
     let recording = $state();
     let playing = $state();
@@ -41,8 +41,9 @@
 </script>
 
 <tr class:recording>
-    <td>{app.name}</td>
-    <td>{app.id}</td>
+    <td>{app.appName}</td>
+    <td>{app.mediaName}</td>
+    <td>{app.serial}</td>
     <td class="controls">
         <button
             class="control-btn"

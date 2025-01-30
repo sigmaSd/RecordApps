@@ -1,6 +1,9 @@
+import { zip } from "jsr:@std/collections@1";
+
 export interface App {
-  name: string;
-  id: number;
+  appName: string;
+  mediaName: string;
+  serial: number;
 }
 
 export interface Sink {
@@ -15,15 +18,19 @@ export async function playingApps(): Promise<App[]> {
     .output()
     .then((o) => new TextDecoder().decode(o.stdout));
 
-  const apps = Array.from(
-    output
-      .matchAll(/application\.name = "(.*?)".*?object\.serial = "(\d+)"/gs)
-      .map((match) => ({
-        name: match[1],
-        id: Number.parseInt(match[2], 10),
-      }))
-      .filter((app) => !Number.isNaN(app.id) && app.name !== "pacat"),
+  const appNames = [...output.matchAll(/application\.name = "(.*?)"/g)].map(
+    (m) => m[1],
   );
+  const mediaNames = [...output.matchAll(/media\.name = "(.*?)"/g)].map((m) =>
+    m[1]
+  );
+  const serials = [...output.matchAll(/object\.serial = "(\d+)"/g)].map((m) =>
+    Number.parseInt(m[1], 10)
+  );
+
+  const apps = zip(appNames, mediaNames, serials)
+    .map(([appName, mediaName, serial]) => ({ appName, mediaName, serial }))
+    .filter((app) => !Number.isNaN(app.serial) && app.appName !== "pacat");
 
   return apps;
 }
@@ -92,7 +99,7 @@ export async function moveAppToSink({
   sink: Sink;
 }): Promise<void> {
   await new Deno.Command("pactl", {
-    args: ["move-sink-input", app.id.toString(), sink.serial.toString()],
+    args: ["move-sink-input", app.serial.toString(), sink.serial.toString()],
   }).spawn().status;
 }
 

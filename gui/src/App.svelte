@@ -30,14 +30,16 @@
         <table>
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>ID</th>
+                    <th>App Name</th>
+                    <th>Media Name</th>
+                    <th>Serial</th>
                     <th>Controls</th>
                 </tr>
             </thead>
             <tbody>
                 {#each apps as app}
-                    <AppRow {app} {apiPort} />
+                    <!-- port set on onMount -->
+                    <AppRow {app} apiPort={apiPort!} />
                 {/each}
             </tbody>
         </table>

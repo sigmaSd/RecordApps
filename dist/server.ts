@@ -68,7 +68,7 @@ export async function main() {
 
     if (req.url.endsWith("/record")) {
       const app = await req.json() as App;
-      const sinkName = `${app.name}-${app.id}`;
+      const sinkName = `${app.appName}-${app.serial}`;
       const currentSinks = await listSinks();
       if (currentSinks.find((s) => s.name === sinkName) === undefined) {
         const _virtualSinkId = await createVirtualSink({ name: sinkName });
@@ -82,8 +82,8 @@ export async function main() {
       await moveAppToSink({ app, sink: virtualSink });
 
       const abortController = new AbortController();
-      recordings.set(app.id, abortController);
-      await ensureDir(`${recordAppsDir}/${app.name}`);
+      recordings.set(app.serial, abortController);
+      await ensureDir(`${recordAppsDir}/${app.appName}`);
       const timestamp = new Date().toISOString()
         .replace(/[:.]/g, "-") // Replace colons and dots with hyphens
         .replace("T", "_"); // Replace T with underscore for better readability
@@ -91,7 +91,7 @@ export async function main() {
         {
           sink: virtualSink,
           outputFile:
-            `${recordAppsDir}/${app.name}/${timestamp}.${app.id}.flac`,
+            `${recordAppsDir}/${app.appName}/${timestamp}.${app.serial}.flac`,
           abortController,
         },
       );
@@ -100,26 +100,26 @@ export async function main() {
 
     if (req.url.endsWith("/stop-recording")) {
       const app = await req.json() as App;
-      const recordingAbortController = recordings.get(app.id);
+      const recordingAbortController = recordings.get(app.serial);
       if (recordingAbortController === undefined) {
         return new Response("Recording not found", { status: 404, headers });
       }
-      const playingAbortController = playing.get(app.id);
+      const playingAbortController = playing.get(app.serial);
       if (playingAbortController !== undefined) {
         playingAbortController.abort();
-        playing.delete(app.id);
+        playing.delete(app.serial);
       }
 
       recordingAbortController.abort();
       await moveAppToSink({ app, sink: originalSink });
-      recordings.delete(app.id);
+      recordings.delete(app.serial);
 
       return new Response("Recording stopped", { headers });
     }
 
     if (req.url.endsWith("/play")) {
       const app = await req.json() as App;
-      const sinkName = `${app.name}-${app.id}`;
+      const sinkName = `${app.appName}-${app.serial}`;
       const virtualSink = await listSinks().then((sinks) =>
         sinks.find((s) => s.name === sinkName)
       );
@@ -127,7 +127,7 @@ export async function main() {
         return new Response("Sink not found", { status: 404, headers });
       }
       const abortController = new AbortController();
-      playing.set(app.id, abortController);
+      playing.set(app.serial, abortController);
       playSinkAudio(virtualSink, abortController);
 
       return new Response("Playing", { headers });
@@ -135,12 +135,12 @@ export async function main() {
 
     if (req.url.endsWith("/stop-playing")) {
       const app = await req.json() as App;
-      const abortController = playing.get(app.id);
+      const abortController = playing.get(app.serial);
       if (abortController === undefined) {
         return new Response("Playing not found", { status: 404, headers });
       }
       abortController.abort();
-      playing.delete(app.id);
+      playing.delete(app.serial);
       return new Response("Playing stopped", { headers });
     }
 
