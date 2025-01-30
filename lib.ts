@@ -4,7 +4,7 @@ export interface App {
 }
 
 export interface Sink {
-  index: number;
+  serial: number;
   name: string;
 }
 
@@ -76,7 +76,7 @@ export async function listSinks(): Promise<Sink[]> {
     const name = parts.at(1);
     if (index === undefined || name === undefined) continue;
     sinks.push({
-      index: Number.parseInt(index, 10),
+      serial: Number.parseInt(index, 10),
       name,
     });
   }
@@ -92,7 +92,7 @@ export async function moveAppToSink({
   sink: Sink;
 }): Promise<void> {
   await new Deno.Command("pactl", {
-    args: ["move-sink-input", app.id.toString(), sink.index.toString()],
+    args: ["move-sink-input", app.id.toString(), sink.serial.toString()],
   }).spawn().status;
 }
 
@@ -115,7 +115,7 @@ export async function playSinkAudio(
   abortController?: AbortController,
 ): Promise<void> {
   const pacatRecord = new Deno.Command("pacat", {
-    args: ["--record", "-d", sink.index.toString()],
+    args: ["--record", "-d", sink.serial.toString()],
     stdout: "piped",
     signal: abortController?.signal,
   }).spawn();
