@@ -2,6 +2,7 @@ import { ensureDir } from "jsr:@std/fs/ensure-dir";
 import {
   type App,
   createVirtualSink,
+  getDefaultSink,
   listSinks,
   moveAppToSink,
   playingApps,
@@ -34,8 +35,8 @@ export async function main() {
   ensureDirSync(recordAppsDir);
 
   await unloadAllVirtualSinks();
-  const originalSink = await listSinks().then((sinks) => sinks.at(0));
-  if (originalSink === undefined) {
+  const defaultSink = await getDefaultSink();
+  if (defaultSink === undefined) {
     throw new Error("No sinks found");
   }
 
@@ -111,7 +112,7 @@ export async function main() {
       }
 
       recordingAbortController.abort();
-      await moveAppToSink({ app, sink: originalSink });
+      await moveAppToSink({ app, sink: defaultSink });
       recordings.delete(app.serial);
 
       return new Response("Recording stopped", { headers });

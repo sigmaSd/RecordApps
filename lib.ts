@@ -142,3 +142,18 @@ export async function playSinkAudio(
     await pacatPlayWriter.write(value);
   }
 }
+
+export async function getDefaultSink(): Promise<Sink | undefined> {
+  const name = await new Deno.Command("pactl", {
+    args: ["get-default-sink"],
+  })
+    .output()
+    .then((o) => new TextDecoder().decode(o.stdout))
+    .then((output) => output.trim());
+  return findSinkByName(name);
+}
+
+export async function findSinkByName(name: string): Promise<Sink | undefined> {
+  const sinks = await listSinks();
+  return sinks.find((s) => s.name === name);
+}
