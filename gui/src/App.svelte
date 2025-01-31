@@ -37,7 +37,7 @@
                 </tr>
             </thead>
             <tbody>
-                {#each apps as app}
+                {#each apps as app (app.serial)}
                     <!-- port set on onMount -->
                     <AppRow {app} apiPort={apiPort!} />
                 {/each}
