@@ -1,27 +1,24 @@
 import { assert } from "jsr:@std/assert@1";
 import {
   createVirtualSink,
-  listSinks,
-  unloadAllVirtualSinks,
-  unloadSink,
+  findSinkByName,
+  removeAllVirtualSinks,
+  removeVirtualSink,
 } from "./lib.ts";
 
 Deno.test("smoke", async () => {
+  await removeAllVirtualSinks();
   {
-    const virtualSinkId = await createVirtualSink({ name: "virtualSink" });
-    assert((await listSinks()).find((sink) => sink.name === "virtualSink"));
-    await unloadSink(virtualSinkId);
-    assert(
-      (await listSinks())
-        .find(
-          (sink) => sink.name === "virtualSink",
-        ) === undefined,
-    );
+    const sink = await createVirtualSink({ name: "virtualSink" });
+    assert(await findSinkByName("virtualSink") !== undefined);
+    await removeVirtualSink(sink);
+    assert(await findSinkByName("virtualSink") === undefined);
   }
+  // biome-ignore lint/complexity/noUselessLoneBlockStatements: <explanation>
   {
     await createVirtualSink({ name: "virtualSink2" });
-    assert((await listSinks()).find((sink) => sink.name === "virtualSink2"));
-    await unloadAllVirtualSinks();
-    assert(!(await listSinks()).find((sink) => sink.name === "virtualSink2"));
+    assert(await findSinkByName("virtualSink2") !== undefined);
+    await removeAllVirtualSinks();
+    assert(await findSinkByName("virtualSink") === undefined);
   }
 });

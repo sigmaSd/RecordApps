@@ -1,5 +1,3 @@
-import { zip } from "jsr:@std/collections@1";
-
 export interface App {
   appName: string;
   mediaName: string;
@@ -9,61 +7,59 @@ export interface App {
 export interface Sink {
   serial: number;
   name: string;
+  ownerModule: number;
 }
 
 export async function playingApps(): Promise<App[]> {
   const output = await new Deno.Command("pactl", {
-    args: ["list", "sink-inputs"],
+    args: ["--format=json", "list", "sink-inputs"],
   })
     .output()
-    .then((o) => new TextDecoder().decode(o.stdout));
+    .then((o) => new TextDecoder().decode(o.stdout))
+    .then((o) => JSON.parse(o));
 
-  const appNames = [...output.matchAll(/application\.name = "(.*?)"/g)].map(
-    (m) => m[1],
-  );
-  const mediaNames = [...output.matchAll(/media\.name = "(.*?)"/g)].map((m) =>
-    m[1]
-  );
-  const serials = [...output.matchAll(/object\.serial = "(\d+)"/g)].map((m) =>
-    Number.parseInt(m[1], 10)
-  );
-
-  const apps = zip(appNames, mediaNames, serials)
-    .map(([appName, mediaName, serial]) => ({ appName, mediaName, serial }))
-    .filter((app) => !Number.isNaN(app.serial) && app.appName !== "pacat");
-
-  return apps;
+  return output.map((appData: any) => {
+    return {
+      appName: appData.properties["application.name"],
+      mediaName: appData.properties["media.name"],
+      serial: Number.parseInt(appData.properties["object.serial"]),
+    };
+  });
 }
 
 /**
  * Creates a virtual audio sink.
- * @param {Object} options - Optional parameters for creating the virtual sink.
- * @param {string} options.name - Optional name for the virtual sink. The name should be unique.
- * @returns {Promise<number>} The ID of the newly created sink.
+ *
+ * @param {object} options - The options for creating the virtual sink.
+ * @param {string} options.name - The name of the virtual sink.
+ * @returns {Promise<Sink>} A promise that resolves with the created sink.
+ * @throws {Error} If the sink is not found after creation.
  */
 export async function createVirtualSink({
   name,
-}: { name?: string } = {}): Promise<number> {
+}: { name: string }): Promise<Sink> {
   const args = ["load-module", "module-null-sink"];
   if (name !== undefined) {
     args.push(`sink_name=${name}`);
   }
 
-  const id = await new Deno.Command("pactl", {
+  await new Deno.Command("pactl", {
     args,
-  })
-    .output()
-    .then((o) => new TextDecoder().decode(o.stdout));
-  return Number.parseInt(id);
+  }).spawn().status;
+  const sink = await findSinkByName(name);
+  if (sink === undefined) {
+    throw new Error("Sink not found");
+  }
+  return sink;
 }
 
-export async function unloadSink(id: number): Promise<void> {
+export async function removeVirtualSink(sink: Sink): Promise<void> {
   await new Deno.Command("pactl", {
-    args: ["unload-module", id.toString()],
+    args: ["unload-module", sink.ownerModule.toString()],
   }).spawn().status;
 }
 
-export async function unloadAllVirtualSinks(): Promise<void> {
+export async function removeAllVirtualSinks(): Promise<void> {
   await new Deno.Command("pactl", {
     args: ["unload-module", "module-null-sink"],
     stderr: "null",
@@ -72,24 +68,20 @@ export async function unloadAllVirtualSinks(): Promise<void> {
 
 export async function listSinks(): Promise<Sink[]> {
   const output = await new Deno.Command("pactl", {
-    args: ["list", "short", "sinks"],
+    args: ["--format=json", "list", "sinks"],
   })
     .output()
-    .then((o) => new TextDecoder().decode(o.stdout));
+    .then((o) => new TextDecoder().decode(o.stdout))
+    .then((output) => JSON.parse(output));
 
-  const sinks: Sink[] = [];
-  for (const line of output.trim().split("\n")) {
-    const parts = line.split(/\s+/);
-    const index = parts.at(0);
-    const name = parts.at(1);
-    if (index === undefined || name === undefined) continue;
-    sinks.push({
-      serial: Number.parseInt(index, 10),
-      name,
-    });
-  }
-
-  return sinks;
+  // deno-lint-ignore no-explicit-any
+  return output.map((sinkData: any) => {
+    return {
+      name: sinkData.name,
+      serial: Number.parseInt(sinkData.properties["object.serial"]),
+      ownerModule: Number.parseInt(sinkData.owner_module),
+    };
+  });
 }
 
 export async function moveAppToSink({

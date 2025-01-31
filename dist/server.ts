@@ -2,15 +2,15 @@ import { ensureDir } from "jsr:@std/fs/ensure-dir";
 import {
   type App,
   createVirtualSink,
+  findSinkByName,
   getDefaultSink,
-  listSinks,
   moveAppToSink,
   playingApps,
   playSinkAudio,
   recordFromSink,
 } from "../lib.ts";
 import { ensureDirSync } from "jsr:@std/fs";
-import { unloadAllVirtualSinks } from "../lib.ts";
+import { removeAllVirtualSinks } from "../lib.ts";
 
 if (import.meta.main) {
   main();
@@ -34,7 +34,7 @@ export async function main() {
   const recordAppsDir = `${musicDir}/RecordApps`;
   ensureDirSync(recordAppsDir);
 
-  await unloadAllVirtualSinks();
+  await removeAllVirtualSinks();
   const defaultSink = await getDefaultSink();
   if (defaultSink === undefined) {
     throw new Error("No sinks found");
@@ -70,15 +70,9 @@ export async function main() {
     if (req.url.endsWith("/record")) {
       const app = await req.json() as App;
       const sinkName = `${app.appName}-${app.serial}`;
-      const currentSinks = await listSinks();
-      if (currentSinks.find((s) => s.name === sinkName) === undefined) {
-        const _virtualSinkId = await createVirtualSink({ name: sinkName });
-      }
-      const virtualSink = await listSinks().then((sinks) =>
-        sinks.find((s) => s.name === sinkName)
-      );
+      let virtualSink = await findSinkByName(sinkName);
       if (virtualSink === undefined) {
-        return new Response("Sink not found", { status: 404, headers });
+        virtualSink = await createVirtualSink({ name: sinkName });
       }
       await moveAppToSink({ app, sink: virtualSink });
 
@@ -121,9 +115,7 @@ export async function main() {
     if (req.url.endsWith("/play")) {
       const app = await req.json() as App;
       const sinkName = `${app.appName}-${app.serial}`;
-      const virtualSink = await listSinks().then((sinks) =>
-        sinks.find((s) => s.name === sinkName)
-      );
+      const virtualSink = await findSinkByName(sinkName);
       if (virtualSink === undefined) {
         return new Response("Sink not found", { status: 404, headers });
       }

@@ -1,5 +1,5 @@
 import { Webview } from "jsr:@webview/webview@0.9.0";
-import { unloadAllVirtualSinks } from "../lib.ts";
+import { removeAllVirtualSinks } from "../lib.ts";
 
 const worker = new Worker(import.meta.resolve("./start.ts"), {
   type: "module",
@@ -12,6 +12,6 @@ worker.onmessage = async (e) => {
   webview.navigate(`http://localhost:${port}`);
   webview.run();
   worker.terminate();
-  await unloadAllVirtualSinks();
+  await removeAllVirtualSinks();
   Deno.exit(0);
 };

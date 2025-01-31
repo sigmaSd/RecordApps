@@ -2,15 +2,12 @@
   "version": "4",
   "specifiers": {
     "jsr:@denosaurs/plug@1": "1.0.6",
-    "jsr:@denosaurs/plug@^1.0.6": "1.0.6",
-    "jsr:@sigmasd/webview-temp-fork@0.9.1": "0.9.1",
     "jsr:@std/assert@0.221": "0.221.0",
     "jsr:@std/cli@^1.0.8": "1.0.11",
-    "jsr:@std/collections@1": "1.0.9",
     "jsr:@std/encoding@0.221": "0.221.0",
-    "jsr:@std/encoding@^1.0.5": "1.0.6",
+    "jsr:@std/encoding@^1.0.5": "1.0.7",
     "jsr:@std/fmt@0.221": "0.221.0",
-    "jsr:@std/fmt@^1.0.3": "1.0.4",
+    "jsr:@std/fmt@^1.0.3": "1.0.5",
     "jsr:@std/fs@*": "0.221.0",
     "jsr:@std/fs@0.221": "0.221.0",
     "jsr:@std/html@^1.0.3": "1.0.3",
@@ -32,32 +29,23 @@
         "jsr:@std/path@0.221"
       ]
     },
-    "@sigmasd/webview-temp-fork@0.9.1": {
-      "integrity": "cda563939adfc592f64ee3ea88a61e5ca5e80d0f5e5e8c8a800869882ecc4393",
-      "dependencies": [
-        "jsr:@denosaurs/plug@^1.0.6"
-      ]
-    },
     "@std/assert@0.221.0": {
       "integrity": "a5f1aa6e7909dbea271754fd4ab3f4e687aeff4873b4cef9a320af813adb489a"
     },
     "@std/cli@1.0.11": {
       "integrity": "ec219619fdcd31bcf0d8e53bee1e2706ec9a02f70255365a094f69755dadd340"
     },
-    "@std/collections@1.0.9": {
-      "integrity": "4f58104ead08a04a2199374247f07befe50ba01d9cca8cbb23ab9a0419921e71"
-    },
     "@std/encoding@0.221.0": {
       "integrity": "d1dd76ef0dc5d14088411e6dc1dede53bf8308c95d1537df1214c97137208e45"
     },
-    "@std/encoding@1.0.6": {
-      "integrity": "ca87122c196e8831737d9547acf001766618e78cd8c33920776c7f5885546069"
+    "@std/encoding@1.0.7": {
+      "integrity": "f631247c1698fef289f2de9e2a33d571e46133b38d042905e3eac3715030a82d"
     },
     "@std/fmt@0.221.0": {
       "integrity": "379fed69bdd9731110f26b9085aeb740606b20428ce6af31ef6bd45ef8efa62a"
     },
-    "@std/fmt@1.0.4": {
-      "integrity": "e14fe5bedee26f80877e6705a97a79c7eed599e81bb1669127ef9e8bc1e29a74"
+    "@std/fmt@1.0.5": {
+      "integrity": "0cfab43364bc36650d83c425cd6d99910fc20c4576631149f0f987eddede1a4d"
     },
     "@std/fs@0.221.0": {
       "integrity": "028044450299de8ed5a716ade4e6d524399f035513b85913794f4e81f07da286",
@@ -103,7 +91,7 @@
     "@webview/webview@0.9.0": {
       "integrity": "a7c4d787aafa43258ff287f71a16679d5ca3d9b65e5d232c60c3985f9ab3e0ce",
       "dependencies": [
-        "jsr:@denosaurs/plug@1"
+        "jsr:@denosaurs/plug"
       ]
     }
   }
