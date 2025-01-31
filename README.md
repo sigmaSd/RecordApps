@@ -8,9 +8,8 @@ A desktop application that allows you to record audio from specific applications
 
 - List running applications with audio output
 - Record audio from specific applications
-- Monitor recording in real-time
+- Record audio from different outputs of a specific applications
 - Save recordings automatically to your Music directory
-- Modern, dark-themed user interface
 
 ## Prerequisites
 
@@ -49,9 +48,6 @@ deno task start
 
 This will start both the backend server and the frontend development server.
 
-- Backend runs on port 3000
-- Frontend development server runs on port 5173
-- WebView connects to port 8000 (production build)
 
 ## Project Structure
 
