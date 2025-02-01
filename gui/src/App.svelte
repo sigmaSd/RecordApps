@@ -25,7 +25,7 @@
 </script>
 
 <main class="container">
-    <h1>Record Apps</h1>
+    <h1>Applications</h1>
     <div class="table-wrapper">
         <table>
             <thead>
