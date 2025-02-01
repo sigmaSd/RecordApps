@@ -24,7 +24,8 @@ export async function playingApps(): Promise<App[]> {
       mediaName: appData.properties["media.name"],
       serial: Number.parseInt(appData.properties["object.serial"]),
     };
-  });
+  })
+    .filter((app: any) => app.appName !== "pacat");
 }
 
 /**
