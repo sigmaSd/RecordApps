@@ -8,6 +8,11 @@
     let apps: App[] = $state([]);
 
     onMount(async () => {
+        // Disable right-click context menu
+        window.addEventListener("contextmenu", (e) => {
+            e.preventDefault();
+        });
+
         await fetch(`http://localhost:${fontPort}/apiPort`)
             .then((res) => res.text())
             .then((p) => {
@@ -54,6 +59,8 @@
         color: #e0e0e0;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
             Oxygen, Ubuntu, Cantarell, sans-serif;
+        user-select: none;
+        cursor: default;
     }
 
     .container {
