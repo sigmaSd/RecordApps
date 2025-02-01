@@ -1,4 +1,4 @@
-import { Webview } from "jsr:@webview/webview@0.9.0";
+import { SizeHint, Webview } from "jsr:@webview/webview@0.9.0";
 import { removeAllVirtualSinks } from "../lib.ts";
 
 const worker = new Worker(import.meta.resolve("./start.ts"), {
@@ -10,6 +10,7 @@ webview.title = "Record Apps";
 worker.onmessage = async (e) => {
   const { port } = e.data;
   webview.navigate(`http://localhost:${port}`);
+  webview.size = { width: 1000, height: 600, hint: SizeHint.NONE };
   webview.run();
   worker.terminate();
   await removeAllVirtualSinks();
