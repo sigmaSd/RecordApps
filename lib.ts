@@ -46,6 +46,7 @@ export async function createVirtualSink({
 
   await new Deno.Command("pactl", {
     args,
+    stdout: "null",
   }).spawn().status;
   const sink = await findSinkByName(name);
   if (sink === undefined) {
