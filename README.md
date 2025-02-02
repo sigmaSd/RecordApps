@@ -38,17 +38,6 @@ This will create an executable named `record` in the project root directory.
 ./record
 ```
 
-## Development
-
-To run the application in development mode:
-
-```bash
-deno task start
-```
-
-This will start both the backend server and the frontend development server.
-
-
 ## Project Structure
 
 ```
