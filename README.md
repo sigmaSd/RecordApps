@@ -4,6 +4,10 @@ A desktop application that allows you to record audio from specific applications
 
 ![image](https://github.com/user-attachments/assets/c7943bd6-d96c-46de-86de-5f062655a258)
 
+<a href='https://flathub.org/apps/io.github.sigmasd.recordapps'>
+  <img width='240' alt='Download on Flathub' src='https://dl.flathub.org/assets/badges/flathub-badge-i-en.png'/>
+</a>
+
 ## Features
 
 - List running applications with audio output
