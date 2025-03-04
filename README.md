@@ -2,7 +2,7 @@
 
 A desktop application that allows you to record audio from specific applications on Linux. Built with Deno, Svelte, and WebView.
 
-![image](https://github.com/user-attachments/assets/c7943bd6-d96c-46de-86de-5f062655a258)
+![image](https://github.com/user-attachments/assets/4c543220-78cc-47f2-a54f-fe6f6ad5f16d)
 
 <a href='https://flathub.org/apps/io.github.sigmasd.recordapps'>
   <img width='240' alt='Download on Flathub' src='https://dl.flathub.org/assets/badges/flathub-badge-i-en.png'/>
