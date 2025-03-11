@@ -21,6 +21,6 @@
         "build"
       ]
     },
-    "build": "cd gui && deno task build && cd .. && rm -rf ./dist && mv gui/dist . && cp gui/server.ts ./dist && cp scripts/* ./dist"
+    "build": "cd gui && deno install && deno task build && cd .. && rm -rf ./dist && mv gui/dist . && cp gui/server.ts ./dist && cp scripts/* ./dist"
   }
 }
