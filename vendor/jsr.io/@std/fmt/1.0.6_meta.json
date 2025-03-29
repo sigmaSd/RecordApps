@@ -1,0 +1,78 @@
+{
+  "manifest": {
+    "/LICENSE": {
+      "size": 1075,
+      "checksum": "sha256-0961f97da6619d5fe9ddb98649191d5ca6e958856ea5252f4cce7c9b85513819"
+    },
+    "/README.md": {
+      "size": 464,
+      "checksum": "sha256-df54055e214802f0089f6d71ca85c66b898a5fa2bc69fa7c4683503dcd8cc3f8"
+    },
+    "/bytes.ts": {
+      "size": 5630,
+      "checksum": "sha256-f6c871654dad0b558f54f025e9afa1fd07b5f4c64aa89a10b452489ab22dd506"
+    },
+    "/colors.ts": {
+      "size": 21810,
+      "checksum": "sha256-1617e16c704274f0afcf3fefd16145e54082604a84833d0a42acece330fb92b4"
+    },
+    "/colors_test.ts": {
+      "size": 6398,
+      "checksum": "sha256-11d06a5464c94a38edd65786a550dc076204e9e904977edf906610755d0a8873"
+    },
+    "/deno.json": {
+      "size": 192,
+      "checksum": "sha256-9fbcd8acf4fc4480872d0d25824a3d140c6b1edd907ba075e4a40de5d6f12e0e"
+    },
+    "/printf.ts": {
+      "size": 30000,
+      "checksum": "sha256-7ad917144fe41eae8c9b2716568f053ea86a8ac3d9d0e69d30f274e6cfd1cd49"
+    },
+    "/printf_test.ts": {
+      "size": 30312,
+      "checksum": "sha256-902a97c48a060b8e4e6585573694af6ebcf33fc9531eecc796bab1374b8c6b8e"
+    },
+    "/duration_test.ts": {
+      "size": 2312,
+      "checksum": "sha256-e990e67d5b6b10d92de269039de713f6f38c5c1f5cd126bdf5c96bd56b8e982b"
+    },
+    "/duration.ts": {
+      "size": 4663,
+      "checksum": "sha256-ec36957b8a97c4cd6c3133eca28f4088a8e91279bd89e90d9811588d51f54723"
+    },
+    "/bytes_test.ts": {
+      "size": 8620,
+      "checksum": "sha256-e9c369074dc62cf4584e5398593c05e7fd66a97dee4d15b00bd3b5fcd7d0febb"
+    }
+  },
+  "moduleGraph2": {
+    "/printf.ts": {
+      "dependencies": [
+        {
+          "type": "static",
+          "kind": "import",
+          "specifier": "./colors.ts",
+          "specifierRange": [
+            [
+              160,
+              30
+            ],
+            [
+              160,
+              43
+            ]
+          ]
+        }
+      ]
+    },
+    "/bytes.ts": {},
+    "/duration.ts": {},
+    "/colors.ts": {}
+  },
+  "exports": {
+    "./bytes": "./bytes.ts",
+    "./colors": "./colors.ts",
+    "./duration": "./duration.ts",
+    "./printf": "./printf.ts"
+  }
+}
