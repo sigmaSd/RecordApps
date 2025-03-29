@@ -30,6 +30,15 @@
   <project_license>MIT</project_license>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.8.0" date="2025-03-29">
+        <description>
+        <ul>
+            <li>Implements an empty state UI to inform users when no applications are detected.</li>
+            <li>Use Adwaita theme</li>
+            <li>New Icon</li><>
+        </ul>
+        </description>
+    </release>
     <release version="1.7.1" date="2025-03-04">
         <description>
         <ul>
