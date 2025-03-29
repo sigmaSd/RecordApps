@@ -3,3 +3,4 @@ gui/dist
 record
 distro/build-dir
 distro/.flatpak-builder
+node_modules
