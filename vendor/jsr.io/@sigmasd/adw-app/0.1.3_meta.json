@@ -1,0 +1,34 @@
+{
+  "manifest": {
+    "/README.md": {
+      "size": 2587,
+      "checksum": "sha256-599dfff2f93defa71d788883d6cb4bbfe43f9634521149919a945f4a7714ce53"
+    },
+    "/deno.lock": {
+      "size": 1519,
+      "checksum": "sha256-710ce88e53d30819e908c650e6ecd2d46ec257acc8bc0122b7535ec40ac512b2"
+    },
+    "/deno.json": {
+      "size": 100,
+      "checksum": "sha256-c1f9df5f85f5655703d17e8035923be9177d687032d259c8e1cfaf84cf54ebfb"
+    },
+    "/.github/workflows/deno.yml": {
+      "size": 734,
+      "checksum": "sha256-2db6371efb46e229914f39a1f1554c1db094c8117e89e83c22b392dc5bcefdf9"
+    },
+    "/.github/workflows/publish-jsr.yml": {
+      "size": 267,
+      "checksum": "sha256-dbedb4bc0736138a0daed7f029e0fb758c5ac22bb8be0c8f0518c5fd46243104"
+    },
+    "/lib.ts": {
+      "size": 3420,
+      "checksum": "sha256-a978a7c273a51b7254da55536cb6b0cdbc18e76bce30388b36e6df1c15709895"
+    }
+  },
+  "moduleGraph2": {
+    "/lib.ts": {}
+  },
+  "exports": {
+    ".": "./lib.ts"
+  }
+}
