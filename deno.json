@@ -21,6 +21,12 @@
         "build"
       ]
     },
-    "build": "cd gui && deno install && deno task build && cd .. && rm -rf ./dist && mv gui/dist . && cp gui/server.ts ./dist && cp scripts/* ./dist"
+    "build": "cd gui && deno install && deno task build && cd .. && rm -rf ./dist && mv gui/dist . && cp gui/server.ts ./dist && cp scripts/* ./dist",
+    "flatpak": {
+      "command": "cd distro && flatpak-builder build-dir io.github.sigmasd.recordapps.yml --force-clean --user --install && flatpak run io.github.sigmasd.recordapps",
+      "dependencies": [
+        "compile"
+      ]
+    }
   }
 }
