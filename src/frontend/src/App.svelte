@@ -2,7 +2,7 @@
 <script lang="ts">
     import AppRow from "./lib/AppRow.svelte";
     import { onMount } from "svelte";
-    import type { App } from "../../lib";
+    import type { App } from "../../backend/lib.ts";
 
     const fontPort = Number.parseInt(window.location.port);
     let apiPort: number | undefined = $state(undefined);
@@ -19,6 +19,7 @@
             .then((res) => res.text())
             .then((p) => {
                 apiPort = Number.parseInt(p);
+                if (Number.isNaN(apiPort)) apiPort = 8000;
                 loading = false;
             })
             .catch((err) => {

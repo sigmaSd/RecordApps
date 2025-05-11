@@ -20,7 +20,7 @@ export async function main({ apiPort }: { apiPort: number }) {
     }
     if (pathname.startsWith("/")) {
       return serveDir(req, {
-        fsRoot: import.meta.dirname,
+        fsRoot: import.meta.dirname + "/build",
         quiet: true,
       });
     }

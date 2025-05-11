@@ -1,31 +1,33 @@
 {
   "tasks": {
-    "start": {
+    "start": "deno task backend:dev 8000 & deno task frontend:dev",
+    "frontend:dev": "cd src/frontend && deno task dev",
+    "frontend:build": "cd src/frontend && deno install && deno task build && cd ../.. && rm -rf ./src/dist/build && mv src/frontend/dist src/dist/build",
+    "backend:dev": "deno -A src/backend/server.ts",
+    "webview": {
+      "command": "deno -A src/webview/webview.ts",
       "dependencies": [
-        "backend",
-        "frontend"
-      ]
-    },
-    "backend": "cd gui && deno run -A server.ts",
-    "frontend": "cd gui && deno task dev",
-    "gui": {
-      "command": "deno -A dist/webview.ts",
-      "dependencies": [
-        "build"
+        "frontend:build"
       ]
     },
     "compile": {
-      "command": "cd dist && deno compile -o record --include start.ts --include . -A webview.ts && mv record ../",
+      "command": "deno compile -o record --include src/webview/app.worker.ts --include src/dist -A src/webview/webview.ts",
       "dependencies": [
-        "build"
+        "frontend:build"
       ]
     },
-    "build": "cd gui && deno install && deno task build && cd .. && rm -rf ./dist && mv gui/dist . && cp gui/server.ts ./dist && cp scripts/* ./dist",
     "flatpak": {
       "command": "cd distro && flatpak-builder build-dir io.github.sigmasd.recordapps.yml --force-clean --user --install && flatpak run io.github.sigmasd.recordapps",
       "dependencies": [
         "compile"
       ]
     }
-  }
+  },
+  "workspace": [
+    "./src/frontend"
+  ],
+  "nodeModulesDir": "auto",
+  "exclude": [
+    "src/dist/build"
+  ]
 }

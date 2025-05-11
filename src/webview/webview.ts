@@ -1,9 +1,9 @@
 import { SizeHint, Webview } from "jsr:@webview/webview@0.9.0";
-import { removeAllVirtualSinks } from "../lib.ts";
-import { AdwApp } from "jsr:@sigmasd/adw-app";
+import { AdwApp } from "jsr:@sigmasd/adw-app@0.1.3";
+import { removeAllVirtualSinks } from "../backend/lib.ts";
 
 if (import.meta.main) {
-  const worker = new Worker(import.meta.resolve("./start.ts"), {
+  const worker = new Worker(import.meta.resolve("./app.worker.ts"), {
     type: "module",
   });
   const port = await new Promise<number>((resolve) => {

@@ -18,6 +18,7 @@ export async function playingApps(): Promise<App[]> {
     .then((o) => new TextDecoder().decode(o.stdout))
     .then((o) => JSON.parse(o));
 
+  // deno-lint-ignore no-explicit-any
   return output.map((appData: any) => {
     return {
       appName: appData.properties["application.name"],
@@ -25,6 +26,7 @@ export async function playingApps(): Promise<App[]> {
       serial: Number.parseInt(appData.properties["object.serial"]),
     };
   })
+    // deno-lint-ignore no-explicit-any
     .filter((app: any) => app.appName !== "pacat");
 }
 

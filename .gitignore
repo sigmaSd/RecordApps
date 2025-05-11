@@ -4,3 +4,4 @@ record
 distro/build-dir
 distro/.flatpak-builder
 node_modules
+src/dist/build
