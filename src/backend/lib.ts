@@ -26,8 +26,8 @@ export async function playingApps(): Promise<App[]> {
       serial: Number.parseInt(appData.properties["object.serial"]),
     };
   })
-    // deno-lint-ignore no-explicit-any
-    .filter((app: any) => app.appName !== "pacat");
+    .filter((app: App) => app.appName !== "pacat")
+    .filter((app: App) => app.appName !== "speech-dispatcher-dummy");
 }
 
 /**
