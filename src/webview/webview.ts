@@ -1,5 +1,5 @@
-import { SizeHint, Webview } from "jsr:@webview/webview@0.9.0";
-import { AdwApp } from "jsr:@sigmasd/adw-app@0.1.3";
+import { SizeHint, Webview } from "@webview/webview";
+import { AdwApp } from "@sigmasd/adw-app";
 import { removeAllVirtualSinks } from "../backend/lib.ts";
 
 if (import.meta.main) {

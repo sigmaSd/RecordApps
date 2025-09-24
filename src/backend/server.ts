@@ -1,4 +1,4 @@
-import { ensureDir } from "jsr:@std/fs@1/ensure-dir";
+import { ensureDir } from "@std/fs";
 import {
   type App,
   createVirtualSink,
@@ -9,7 +9,7 @@ import {
   playSinkAudio,
   recordFromSink,
 } from "./lib.ts";
-import { ensureDirSync } from "jsr:@std/fs@1";
+import { ensureDirSync } from "@std/fs";
 import { removeAllVirtualSinks } from "./lib.ts";
 
 if (import.meta.main) {
