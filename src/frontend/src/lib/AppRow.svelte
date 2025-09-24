@@ -1,23 +1,22 @@
 <script lang="ts">
-    import type { App } from "../../../lib";
+    import type { RpcStub } from "capnweb";
+    import type { App, RecordRpc } from "../../../backend/lib.ts";
 
-    const { app, apiPort }: { app: App; apiPort: number } = $props();
+    const {
+        app,
+        apiPort,
+        api,
+    }: { app: App; apiPort: number; api: RpcStub<RecordRpc> } = $props();
 
     let recording = $state();
     let playing = $state();
 
     async function recordApp(app: App) {
         if (!recording) {
-            await fetch(`http://localhost:${apiPort}/record`, {
-                method: "POST",
-                body: JSON.stringify(app),
-            });
+            await api.record(app);
             recording = true;
         } else {
-            await fetch(`http://localhost:${apiPort}/stop-recording`, {
-                method: "POST",
-                body: JSON.stringify(app),
-            });
+            await api.stopRecord(app);
             playing = false;
             recording = false;
         }
@@ -25,16 +24,10 @@
 
     async function playAudio(app: App) {
         if (!playing) {
-            await fetch(`http://localhost:${apiPort}/play`, {
-                method: "POST",
-                body: JSON.stringify(app),
-            });
+            await api.play(app);
             playing = true;
         } else {
-            await fetch(`http://localhost:${apiPort}/stop-playing`, {
-                method: "POST",
-                body: JSON.stringify(app),
-            });
+            await api.stopPlay(app);
             playing = false;
         }
     }

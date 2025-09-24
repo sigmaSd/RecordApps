@@ -9,6 +9,13 @@ export interface Sink {
   name: string;
   ownerModule: number;
 }
+export interface RecordRpc {
+  apps: () => Promise<App[]>;
+  record: (app: App) => Promise<void>;
+  stopRecord: (app: App) => Promise<void>;
+  play: (app: App) => Promise<void>;
+  stopPlay: (app: App) => void;
+}
 
 export async function playingApps(): Promise<App[]> {
   const output = await new Deno.Command("pactl", {

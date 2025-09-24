@@ -2,10 +2,12 @@
 <script lang="ts">
     import AppRow from "./lib/AppRow.svelte";
     import { onMount } from "svelte";
-    import type { App } from "../../backend/lib.ts";
+    import type { App, RecordRpc } from "../../backend/lib.ts";
+    import { newWebSocketRpcSession, RpcStub } from "capnweb";
 
     const fontPort = Number.parseInt(window.location.port);
     let apiPort: number | undefined = $state(undefined);
+    let api: RpcStub<RecordRpc> | undefined = $state(undefined);
     let apps: App[] = $state([]);
     let loading: boolean = $state(true);
 
@@ -20,6 +22,7 @@
             .then((p) => {
                 apiPort = Number.parseInt(p);
                 if (Number.isNaN(apiPort)) apiPort = 8000;
+                api = newWebSocketRpcSession(`ws://localhost:${apiPort}/api`);
                 loading = false;
             })
             .catch((err) => {
@@ -27,18 +30,10 @@
                 loading = false;
             });
 
-        setInterval(() => {
-            if (apiPort) {
-                fetch(`http://localhost:${apiPort}/apps`)
-                    .then((res) => res.json())
-                    .then((data) => {
-                        apps = data;
-                        loading = false;
-                    })
-                    .catch((err) => {
-                        console.error("Failed to fetch apps:", err);
-                        loading = false;
-                    });
+        setInterval(async () => {
+            if (api) {
+                apps = await api.apps();
+                loading = false;
             }
         }, 1000);
     });
@@ -77,9 +72,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {#each apps as app (app.serial)}
-                        <AppRow {app} apiPort={apiPort!} />
-                    {/each}
+                    {#if api !== undefined && apiPort !== undefined}
+                        {#each apps as app (app.serial)}
+                            <AppRow {app} {apiPort} {api} />
+                        {/each}
+                    {/if}
                 </tbody>
             </table>
         {/if}
