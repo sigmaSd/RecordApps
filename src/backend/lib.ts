@@ -50,7 +50,7 @@ export async function createVirtualSink({
 }: { name: string }): Promise<Sink> {
   const args = ["load-module", "module-null-sink"];
   if (name !== undefined) {
-    args.push(`sink_name=${name}`);
+    args.push(`sink_name="${name}"`);
   }
 
   await new Deno.Command("pactl", {
