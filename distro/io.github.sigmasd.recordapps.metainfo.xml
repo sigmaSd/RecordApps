@@ -30,6 +30,14 @@
   <project_license>MIT</project_license>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.9.0" date="2025-09-30">
+        <description>
+        <ul>
+            <li>Fix: record applications that contain a space in their name correctly</li>
+            <li>Internal refactor: use capn'web for rpc</li>
+        </ul>
+        </description>
+    </release>
     <release version="1.8.2" date="2025-03-29">
         <description>
         <ul>
