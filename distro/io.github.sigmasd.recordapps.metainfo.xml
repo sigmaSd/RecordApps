@@ -30,6 +30,14 @@
   <project_license>MIT</project_license>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.10.0" date="2025-12-02">
+        <description>
+        <ul>
+            <li>Add record location to the UI and a button to quickly open it</li>
+            <li>UI improvements</li>
+        </ul>
+        </description>
+    </release>
     <release version="1.9.0" date="2025-09-30">
         <description>
         <ul>
