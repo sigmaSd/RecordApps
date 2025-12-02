@@ -96,7 +96,6 @@
                     <tr>
                         <th>App Name</th>
                         <th>Media Name</th>
-                        <th>Serial</th>
                         <th>Controls</th>
                     </tr>
                 </thead>

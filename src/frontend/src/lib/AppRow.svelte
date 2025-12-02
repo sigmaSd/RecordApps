@@ -34,56 +34,57 @@
 </script>
 
 <tr class:recording>
-    <td>{app.appName}</td>
-    <td>{app.mediaName}</td>
-    <td>{app.serial}</td>
+    <td class="app-name" title={app.appName}>{app.appName}</td>
+    <td class="media-name" title={app.mediaName}>{app.mediaName}</td>
     <td class="controls">
-        <button
-            class="control-btn record-btn"
-            class:active={recording}
-            onclick={() => recordApp(app)}
-            aria-label={recording ? "Stop recording" : "Start recording"}
-        >
-            <span class="icon">
-                {#if recording}
-                    <svg viewBox="0 0 24 24" width="16" height="16">
-                        <rect width="18" height="18" x="3" y="3" rx="2" />
-                    </svg>
-                {:else}
-                    <svg viewBox="0 0 24 24" width="16" height="16">
-                        <circle cx="12" cy="12" r="8" />
-                    </svg>
-                {/if}
-            </span>
-            <span class="btn-text">{recording ? "Stop" : "Record"}</span>
-        </button>
-
-        <div class="play-btn-container">
+        <div class="controls-wrapper">
             <button
-                class="control-btn play-btn"
-                class:active={playing}
-                onclick={() => playAudio(app)}
-                aria-label={playing ? "Mute" : "Play audio"}
-                disabled={!recording}
-                style={recording ? "" : "opacity: 0; pointer-events: none;"}
+                class="control-btn record-btn"
+                class:active={recording}
+                onclick={() => recordApp(app)}
+                aria-label={recording ? "Stop recording" : "Start recording"}
             >
                 <span class="icon">
-                    {#if playing}
-                        <svg viewBox="0 0 24 24" width="16" height="16">
-                            <path
-                                d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.84 14,18.7V20.77C18,19.86 21,16.28 21,12C21,7.72 18,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.76 16.5,12M3,9V15H7L12,20V4L7,9H3Z"
-                            />
+                    {#if recording}
+                        <svg viewBox="0 0 24 24" width="18" height="18">
+                            <rect width="18" height="18" x="3" y="3" rx="2" />
                         </svg>
                     {:else}
-                        <svg viewBox="0 0 24 24" width="16" height="16">
-                            <path
-                                d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.84 14,18.7V20.77C18,19.86 21,16.28 21,12C21,7.72 18,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.76 16.5,12M3,9V15H7L12,20V4L7,9H3Z"
-                            />
+                        <svg viewBox="0 0 24 24" width="18" height="18">
+                            <circle cx="12" cy="12" r="8" />
                         </svg>
                     {/if}
                 </span>
-                <span class="btn-text">{playing ? "Mute" : "Listen"}</span>
+                <span class="btn-text">{recording ? "Stop" : "Record"}</span>
             </button>
+
+            <div class="play-btn-container">
+                <button
+                    class="control-btn play-btn"
+                    class:active={playing}
+                    onclick={() => playAudio(app)}
+                    aria-label={playing ? "Mute" : "Play audio"}
+                    disabled={!recording}
+                    style={recording ? "" : "opacity: 0; pointer-events: none;"}
+                >
+                    <span class="icon">
+                        {#if playing}
+                            <svg viewBox="0 0 24 24" width="18" height="18">
+                                <path
+                                    d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.84 14,18.7V20.77C18,19.86 21,16.28 21,12C21,7.72 18,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.76 16.5,12M3,9V15H7L12,20V4L7,9H3Z"
+                                />
+                            </svg>
+                        {:else}
+                            <svg viewBox="0 0 24 24" width="18" height="18">
+                                <path
+                                    d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.84 14,18.7V20.77C18,19.86 21,16.28 21,12C21,7.72 18,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.76 16.5,12M3,9V15H7L12,20V4L7,9H3Z"
+                                />
+                            </svg>
+                        {/if}
+                    </span>
+                    <span class="btn-text">{playing ? "Mute" : "Listen"}</span>
+                </button>
+            </div>
         </div>
     </td>
 </tr>
@@ -103,24 +104,35 @@
     }
 
     td {
-        padding: 14px 16px;
+        padding: 16px 16px;
         color: #e0e0e0;
         font-weight: 500;
         font-size: 0.95rem;
         text-align: left;
+        vertical-align: middle;
     }
 
-    td:first-child {
-        min-width: 180px;
+    .app-name {
+        width: 30%;
+        font-weight: 600;
+        color: #fff;
     }
 
-    td:nth-child(2) {
-        min-width: 180px;
+    .media-name {
+        width: 40%;
+        color: #aaa;
     }
 
     .controls {
+        width: 30%;
+        text-align: right;
+    }
+
+    /* Container for buttons to ensure they align right */
+    .controls-wrapper {
         display: flex;
         gap: 12px;
+        justify-content: flex-end; /* Align buttons to the right */
         align-items: center;
     }
 
@@ -134,17 +146,18 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 6px;
+        gap: 8px;
         background: rgba(255, 255, 255, 0.08);
         border: none;
         border-radius: 6px;
-        padding: 8px 12px;
-        font-size: 0.85rem;
+        padding: 10px 16px; /* Larger click area */
+        font-size: 0.9rem;
         font-weight: 600;
         color: #ffffff;
         cursor: pointer;
         transition: all 0.2s ease;
-        min-width: 95px; /* Ensure consistent button width */
+        min-width: 110px; /* Ensure consistent button width */
+        white-space: nowrap;
     }
 
     .record-btn {
