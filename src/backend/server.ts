@@ -107,6 +107,16 @@ class RecordServer extends RpcTarget implements RecordRpc {
     abortController.abort();
     this.#playing.delete(app.serial);
   }
+
+  async getDownloadPath() {
+    return this.#recordAppsDir;
+  }
+
+  async openDownloadFolder() {
+    await new Deno.Command("xdg-open", {
+      args: [this.#recordAppsDir],
+    }).spawn();
+  }
 }
 
 export async function main(port?: number): Promise<{ port: number }> {

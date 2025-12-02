@@ -10,6 +10,7 @@
     let api: RpcStub<RecordRpc> | undefined = $state(undefined);
     let apps: App[] = $state([]);
     let loading: boolean = $state(true);
+    let downloadPath: string | undefined = $state(undefined);
 
     onMount(async () => {
         // Disable right-click context menu
@@ -19,10 +20,11 @@
 
         await fetch(`http://localhost:${fontPort}/apiPort`)
             .then((res) => res.text())
-            .then((p) => {
+            .then(async (p) => {
                 apiPort = Number.parseInt(p);
                 if (Number.isNaN(apiPort)) apiPort = 8000;
                 api = newWebSocketRpcSession(`ws://localhost:${apiPort}/api`);
+                downloadPath = await api.getDownloadPath();
                 loading = false;
             })
             .catch((err) => {
@@ -37,10 +39,37 @@
             }
         }, 1000);
     });
+
+    async function openFolder() {
+        if (api) {
+            await api.openDownloadFolder();
+        }
+    }
 </script>
 
 <main class="container">
-    <h1>Applications</h1>
+    <header class="app-header">
+        <h1>Applications</h1>
+        {#if downloadPath}
+            <div class="path-display">
+                <span class="label">Save Location:</span>
+                <code class="path" title={downloadPath}>{downloadPath}</code>
+                <button
+                    class="icon-btn"
+                    onclick={openFolder}
+                    title="Open Save Folder"
+                    aria-label="Open Save Folder"
+                >
+                    <svg viewBox="0 0 24 24" width="20" height="20">
+                        <path
+                            d="M19,20H5A2,2 0 0,1 3,18V6A2,2 0 0,1 5,4H9L11,6H19A2,2 0 0,1 21,8V18A2,2 0 0,1 19,20M19,8H5V18H19V8Z"
+                        />
+                    </svg>
+                </button>
+            </div>
+        {/if}
+    </header>
+
     <div class="table-wrapper">
         {#if loading}
             <div class="empty-state">
@@ -96,22 +125,82 @@
     }
 
     .container {
-        max-width: 1200px;
+        width: 95%;
+        max-width: 1600px;
         margin: 0 auto;
         padding: 20px;
     }
 
+    .app-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding: 0 10px;
+    }
+
     h1 {
-        text-align: center;
         color: #e0e0e0;
-        margin-bottom: 30px;
+        margin: 0;
+        font-size: 2rem;
+    }
+
+    .path-display {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: #2a2a2a;
+        padding: 8px 16px;
+        border-radius: 8px;
+        border: 1px solid #333;
+    }
+
+    .label {
+        color: #999;
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+
+    .path {
+        font-family: "JetBrains Mono", "Fira Code", monospace;
+        color: #4ec9b0;
+        background: rgba(0, 0, 0, 0.2);
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        max-width: 400px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .icon-btn {
+        background: transparent;
+        border: none;
+        padding: 6px;
+        border-radius: 4px;
+        color: #e0e0e0;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+    }
+
+    .icon-btn:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: #fff;
+    }
+
+    .icon-btn svg {
+        fill: currentColor;
     }
 
     .table-wrapper {
         background: #222222;
         padding: 20px;
         border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         min-height: 300px;
     }
 
@@ -122,10 +211,11 @@
 
     th {
         text-align: left;
-        padding: 12px;
+        padding: 16px;
         border-bottom: 2px solid #2c2c2c;
-        color: #999;
+        color: #aaa;
         font-weight: 600;
+        font-size: 1rem;
     }
 
     .empty-state {
@@ -133,33 +223,33 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        padding: 40px 20px;
+        padding: 60px 20px;
         text-align: center;
-        height: 240px;
+        height: 300px;
     }
 
     .empty-state svg {
         fill: #555;
-        margin-bottom: 16px;
+        margin-bottom: 20px;
     }
 
     .empty-state h3 {
         color: #ccc;
-        margin: 0 0 8px 0;
-        font-size: 1.4rem;
+        margin: 0 0 12px 0;
+        font-size: 1.5rem;
     }
 
     .empty-state p {
         color: #999;
         margin: 0 0 8px 0;
         max-width: 400px;
-        font-size: 1rem;
+        font-size: 1.1rem;
     }
 
     .empty-state .hint {
-        font-size: 0.9rem;
+        font-size: 0.95rem;
         color: #777;
-        margin-top: 16px;
+        margin-top: 20px;
     }
 
     .spinner {
