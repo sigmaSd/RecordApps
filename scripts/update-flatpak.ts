@@ -10,7 +10,8 @@ const metainfo = parseXML(
   Deno.readTextFileSync(
     metainfoFile,
   ),
-);
+  // deno-lint-ignore no-explicit-any
+) as any;
 const version = metainfo.component.releases.release[0]["@version"];
 const oldVersion = metainfo.component.releases.release[1]["@version"];
 

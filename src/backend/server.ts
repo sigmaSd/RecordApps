@@ -108,7 +108,7 @@ class RecordServer extends RpcTarget implements RecordRpc {
     this.#playing.delete(app.serial);
   }
 
-  async getDownloadPath() {
+  getDownloadPath() {
     return this.#recordAppsDir;
   }
 

@@ -15,7 +15,7 @@ export interface RecordRpc {
   stopRecord: (app: App) => Promise<void>;
   play: (app: App) => Promise<void>;
   stopPlay: (app: App) => void;
-  getDownloadPath: () => Promise<string>;
+  getDownloadPath: () => string;
   openDownloadFolder: () => Promise<void>;
 }
 
