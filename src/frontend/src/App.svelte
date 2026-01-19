@@ -1,6 +1,7 @@
 <!-- App.svelte -->
 <script lang="ts">
     import AppRow from "./lib/AppRow.svelte";
+    import NotificationToast from "./lib/NotificationToast.svelte";
     import { onMount } from "svelte";
     import type { App, RecordRpc } from "../../backend/lib.ts";
     import { newWebSocketRpcSession, RpcStub } from "capnweb";
@@ -11,6 +12,15 @@
     let apps: App[] = $state([]);
     let loading: boolean = $state(true);
     let downloadPath: string | undefined = $state(undefined);
+    let recordingApps: Map<number, App> = $state(new Map());
+
+    let toastMessage = $state("");
+    let toastVisible = $state(false);
+
+    function showToast(path: string) {
+        toastMessage = path;
+        toastVisible = true;
+    }
 
     onMount(async () => {
         // Disable right-click context menu
@@ -34,11 +44,47 @@
 
         setInterval(async () => {
             if (api) {
-                apps = await api.apps();
+                const currentApps = await api.apps();
+                
+                // Check for stopped apps that were recording
+                const currentSerials = new Set(currentApps.map(a => a.serial));
+                for (const [serial, app] of recordingApps) {
+                    if (!currentSerials.has(serial)) {
+                        stopRecord(app);
+                    }
+                }
+
+                apps = currentApps;
                 loading = false;
             }
         }, 1000);
     });
+
+    async function record(app: App) {
+        if (!api) return;
+        try {
+            await api.record(app);
+            recordingApps.set(app.serial, app);
+            recordingApps = new Map(recordingApps);
+        } catch (err) {
+            console.error("Failed to start recording:", err);
+        }
+    }
+
+    async function stopRecord(app: App) {
+        if (!api) return;
+        // Optimistically remove from map to prevent double-calls
+        if (recordingApps.has(app.serial)) {
+            recordingApps.delete(app.serial);
+            recordingApps = new Map(recordingApps);
+            try {
+                const path = await api.stopRecord(app);
+                showToast(path);
+            } catch (err) {
+                console.error("Failed to stop recording:", err);
+            }
+        }
+    }
 
     async function openFolder() {
         if (api) {
@@ -103,7 +149,18 @@
                     <tbody>
                         {#if api !== undefined && apiPort !== undefined}
                             {#each apps as app (app.serial)}
-                                <AppRow {app} {apiPort} {api} />
+                                <AppRow 
+                                    {app} 
+                                    {api} 
+                                    isRecording={recordingApps.has(app.serial)}
+                                    onToggleRecord={() => {
+                                        if (recordingApps.has(app.serial)) {
+                                            stopRecord(app);
+                                        } else {
+                                            record(app);
+                                        }
+                                    }}
+                                />
                             {/each}
                         {/if}
                     </tbody>
@@ -111,6 +168,8 @@
             </div>
         {/if}
     </div>
+
+    <NotificationToast message={toastMessage} bind:visible={toastVisible} />
 </main>
 
 <style>

@@ -4,23 +4,17 @@
 
     const {
         app,
-        apiPort,
         api,
-    }: { app: App; apiPort: number; api: RpcStub<RecordRpc> } = $props();
+        isRecording,
+        onToggleRecord,
+    }: {
+        app: App;
+        api: RpcStub<RecordRpc>;
+        isRecording: boolean;
+        onToggleRecord: () => void;
+    } = $props();
 
-    let recording = $state();
-    let playing = $state();
-
-    async function recordApp(app: App) {
-        if (!recording) {
-            await api.record(app);
-            recording = true;
-        } else {
-            await api.stopRecord(app);
-            playing = false;
-            recording = false;
-        }
-    }
+    let playing = $state(false);
 
     async function playAudio(app: App) {
         if (!playing) {
@@ -33,19 +27,19 @@
     }
 </script>
 
-<tr class:recording>
+<tr class:recording={isRecording}>
     <td class="app-name" title={app.appName}>{app.appName}</td>
     <td class="media-name" title={app.mediaName}>{app.mediaName}</td>
     <td class="controls">
         <div class="controls-wrapper">
             <button
                 class="control-btn record-btn"
-                class:active={recording}
-                onclick={() => recordApp(app)}
-                aria-label={recording ? "Stop recording" : "Start recording"}
+                class:active={isRecording}
+                onclick={onToggleRecord}
+                aria-label={isRecording ? "Stop recording" : "Start recording"}
             >
                 <span class="icon">
-                    {#if recording}
+                    {#if isRecording}
                         <svg viewBox="0 0 24 24" width="18" height="18">
                             <rect width="18" height="18" x="3" y="3" rx="2" />
                         </svg>
@@ -55,7 +49,7 @@
                         </svg>
                     {/if}
                 </span>
-                <span class="btn-text">{recording ? "Stop" : "Record"}</span>
+                <span class="btn-text">{isRecording ? "Stop" : "Record"}</span>
             </button>
 
             <div class="play-btn-container">
@@ -64,8 +58,10 @@
                     class:active={playing}
                     onclick={() => playAudio(app)}
                     aria-label={playing ? "Mute" : "Play audio"}
-                    disabled={!recording}
-                    style={recording ? "" : "opacity: 0; pointer-events: none;"}
+                    disabled={!isRecording}
+                    style={isRecording
+                        ? ""
+                        : "opacity: 0; pointer-events: none;"}
                 >
                     <span class="icon">
                         {#if playing}

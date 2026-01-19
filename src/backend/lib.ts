@@ -12,7 +12,7 @@ export interface Sink {
 export interface RecordRpc {
   apps: () => Promise<App[]>;
   record: (app: App) => Promise<void>;
-  stopRecord: (app: App) => Promise<void>;
+  stopRecord: (app: App) => Promise<string>;
   play: (app: App) => Promise<void>;
   stopPlay: (app: App) => void;
   getDownloadPath: () => string;
@@ -69,6 +69,7 @@ export async function createVirtualSink({
 export async function removeVirtualSink(sink: Sink): Promise<void> {
   await new Deno.Command("pactl", {
     args: ["unload-module", sink.ownerModule.toString()],
+    stderr: "null",
   }).spawn().status;
 }
 
@@ -106,6 +107,7 @@ export async function moveAppToSink({
 }): Promise<void> {
   await new Deno.Command("pactl", {
     args: ["move-sink-input", app.serial.toString(), sink.serial.toString()],
+    stderr: "null",
   }).spawn().status;
 }
 

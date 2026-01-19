@@ -9,6 +9,7 @@ import {
   playSinkAudio,
   recordFromSink,
   RecordRpc,
+  removeVirtualSink,
   Sink,
 } from "./lib.ts";
 import { ensureDirSync } from "@std/fs";
@@ -20,7 +21,7 @@ if (import.meta.main) {
 }
 
 class RecordServer extends RpcTarget implements RecordRpc {
-  #recordings: Map<number, AbortController>;
+  #recordings: Map<number, { controller: AbortController; filePath: string }>;
   #playing: Map<number, AbortController>;
   #recordAppsDir: string;
   #defaultSink: Sink;
@@ -32,7 +33,10 @@ class RecordServer extends RpcTarget implements RecordRpc {
       recordAppsDir,
       defaultSink,
     }: {
-      recordings: Map<number, AbortController>;
+      recordings: Map<
+        number,
+        { controller: AbortController; filePath: string }
+      >;
       playing: Map<number, AbortController>;
       recordAppsDir: string;
       defaultSink: Sink;
@@ -58,34 +62,52 @@ class RecordServer extends RpcTarget implements RecordRpc {
     await moveAppToSink({ app, sink: virtualSink });
 
     const abortController = new AbortController();
-    this.#recordings.set(app.serial, abortController);
-    await ensureDir(`${this.#recordAppsDir}/${app.appName}`);
     const timestamp = new Date().toISOString()
       .replace(/[:.]/g, "-") // Replace colons and dots with hyphens
       .replace("T", "_"); // Replace T with underscore for better readability
+    const filePath =
+      `${this.#recordAppsDir}/${app.appName}/${timestamp}.${app.serial}.flac`;
+
+    this.#recordings.set(app.serial, { controller: abortController, filePath });
+    await ensureDir(`${this.#recordAppsDir}/${app.appName}`);
+
     recordFromSink(
       {
         sink: virtualSink,
-        outputFile:
-          `${this.#recordAppsDir}/${app.appName}/${timestamp}.${app.serial}.flac`,
+        outputFile: filePath,
         abortController,
       },
     );
   }
-  async stopRecord(app: App) {
-    const recordingAbortController = this.#recordings.get(app.serial);
-    if (recordingAbortController === undefined) {
+
+  async stopRecord(app: App): Promise<string> {
+    const recordingData = this.#recordings.get(app.serial);
+    if (recordingData === undefined) {
       throw new Error("Recording not found");
     }
+    const { controller, filePath } = recordingData;
+
     const playingAbortController = this.#playing.get(app.serial);
     if (playingAbortController !== undefined) {
       playingAbortController.abort();
       this.#playing.delete(app.serial);
     }
 
-    recordingAbortController.abort();
-    await moveAppToSink({ app, sink: this.#defaultSink });
+    controller.abort();
+    try {
+      await moveAppToSink({ app, sink: this.#defaultSink });
+    } catch {
+      // App might be gone, ignore
+    }
+
+    const sinkName = `${app.appName}-${app.serial}`;
+    const virtualSink = await findSinkByName(sinkName);
+    if (virtualSink) {
+      await removeVirtualSink(virtualSink);
+    }
+
     this.#recordings.delete(app.serial);
+    return filePath;
   }
 
   async play(app: App) {
@@ -144,7 +166,10 @@ export async function main(port?: number): Promise<{ port: number }> {
     throw new Error("No sinks found");
   }
 
-  const recordings = new Map<number, AbortController>();
+  const recordings = new Map<
+    number,
+    { controller: AbortController; filePath: string }
+  >();
   const playing = new Map<number, AbortController>();
 
   return new Promise((resolve) => {
