@@ -18,14 +18,14 @@ if (import.meta.main) {
   app.onActivate(() => {
     const window = new ApplicationWindow(app);
     window.setTitle("Record Apps");
-    window.setDefaultSize(1000, 800);
+    window.setDefaultSize(1200, 800);
 
     const webview = new Webview(false, undefined, window.ptr);
     webview.bind("show_app", () => {
       window.setVisible(true);
     });
     webview.title = "Record Apps";
-    webview.size = { width: 1000, height: 800, hint: SizeHint.NONE };
+    webview.size = { width: 1200, height: 800, hint: SizeHint.NONE };
 
     webview.navigate(`http://localhost:${port}`);
   });

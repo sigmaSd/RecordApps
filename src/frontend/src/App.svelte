@@ -91,22 +91,24 @@
                 </p>
             </div>
         {:else}
-            <table>
-                <thead>
-                    <tr>
-                        <th>App Name</th>
-                        <th>Media Name</th>
-                        <th>Controls</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {#if api !== undefined && apiPort !== undefined}
-                        {#each apps as app (app.serial)}
-                            <AppRow {app} {apiPort} {api} />
-                        {/each}
-                    {/if}
-                </tbody>
-            </table>
+            <div class="scroll-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>App Name</th>
+                            <th>Media Name</th>
+                            <th>Controls</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {#if api !== undefined && apiPort !== undefined}
+                            {#each apps as app (app.serial)}
+                                <AppRow {app} {apiPort} {api} />
+                            {/each}
+                        {/if}
+                    </tbody>
+                </table>
+            </div>
         {/if}
     </div>
 </main>
@@ -163,13 +165,19 @@
             Oxygen, Ubuntu, Cantarell, sans-serif;
         user-select: none;
         cursor: default;
+        height: 100vh;
+        overflow: hidden; /* Prevent body scroll */
     }
 
     .container {
         width: 95%;
         max-width: 1600px;
+        height: 100vh; /* Fill full height */
         margin: 0 auto;
         padding: 20px;
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box; /* Important for padding */
     }
 
     .app-header {
@@ -178,6 +186,7 @@
         align-items: center;
         margin-bottom: 20px;
         padding: 0 10px;
+        flex-shrink: 0; /* Header doesn't shrink */
     }
 
     h1 {
@@ -190,7 +199,7 @@
         display: flex;
         align-items: center;
         gap: 12px;
-        background: var(--surface-color); /* Adjusted to match light/dark */
+        background: var(--surface-color);
         padding: 8px 16px;
         border-radius: 8px;
         border: 1px solid var(--surface-border);
@@ -239,10 +248,19 @@
 
     .table-wrapper {
         background: var(--surface-color);
-        padding: 20px;
         border-radius: 8px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        min-height: 300px;
+        display: flex;
+        flex-direction: column;
+        flex: 1; /* Fill remaining vertical space */
+        min-height: 0; /* Required for nested flex scrolling */
+        overflow: hidden; /* Manage overflow internally */
+    }
+
+    .scroll-container {
+        overflow-y: auto;
+        flex: 1;
+        width: 100%;
     }
 
     table {
@@ -257,6 +275,10 @@
         color: var(--secondary-text);
         font-weight: 600;
         font-size: 1rem;
+        background-color: var(--surface-color); /* For sticky header */
+        position: sticky;
+        top: 0;
+        z-index: 10;
     }
 
     .empty-state {
@@ -266,7 +288,7 @@
         justify-content: center;
         padding: 60px 20px;
         text-align: center;
-        height: 300px;
+        flex: 1; /* Center vertically in the available space */
     }
 
     .empty-state svg {
