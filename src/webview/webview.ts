@@ -1,5 +1,5 @@
 import { SizeHint, Webview } from "@webview/webview";
-import { AdwApp } from "@sigmasd/adw-app";
+import { Application, ApplicationWindow } from "@sigmasd/gtk/gtk";
 import { removeAllVirtualSinks } from "../backend/lib.ts";
 
 if (import.meta.main) {
@@ -13,14 +13,24 @@ if (import.meta.main) {
     };
   });
 
-  const app = new AdwApp({ id: "io.github.sigmasd.recordapps" });
-  app.run((window) => {
-    const webview = new Webview(false, undefined, window);
+  const app = new Application("io.github.sigmasd.recordapps", 0);
+
+  app.onActivate(() => {
+    const window = new ApplicationWindow(app);
+    window.setTitle("Record Apps");
+    window.setDefaultSize(1000, 800);
+
+    const webview = new Webview(false, undefined, window.ptr);
+    webview.bind("show_app", () => {
+      window.setVisible(true);
+    });
     webview.title = "Record Apps";
-    webview.size = { width: 1000, height: 600, hint: SizeHint.NONE };
+    webview.size = { width: 1000, height: 800, hint: SizeHint.NONE };
 
     webview.navigate(`http://localhost:${port}`);
   });
+
+  app.run(Deno.args);
   worker.terminate();
   await removeAllVirtualSinks();
   Deno.exit(0);

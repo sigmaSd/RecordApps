@@ -5,9 +5,41 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + Svelte + TS</title>
+    <style>
+      /* Pre-apply dark background to body to ensure immediate effect */
+      html.dark-theme body {
+        background-color: #1a1a1a;
+        color: #e0e0e0;
+      }
+    </style>
+    <script>
+      const darkModeMediaQuery = window.matchMedia(
+        "(prefers-color-scheme: dark)",
+      );
+
+      function updateTheme(e) {
+        if (e.matches) {
+          document.documentElement.classList.add("dark-theme");
+        } else {
+          document.documentElement.classList.remove("dark-theme");
+        }
+      }
+
+      // Initial check
+      updateTheme(darkModeMediaQuery);
+
+      // Listen for changes
+      darkModeMediaQuery.addEventListener("change", updateTheme);
+    </script>
   </head>
   <body>
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
+    <script>
+      window.addEventListener("load", () => {
+        // @ts-ignore
+        if (typeof show_app === "function") show_app();
+      });
+    </script>
   </body>
 </html>

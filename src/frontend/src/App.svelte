@@ -112,11 +112,53 @@
 </main>
 
 <style>
+    :global(:root) {
+        --bg-color: #ffffff;
+        --text-color: #333333;
+        --surface-color: #f5f5f5;
+        --surface-border: #e0e0e0;
+        --border-color: #dddddd;
+        --secondary-text: #666666;
+        --tertiary-text: #888888;
+        --path-bg: rgba(0, 0, 0, 0.05);
+        --hover-bg: rgba(0, 0, 0, 0.05);
+        --header-text: #222222;
+        --icon-color: #555555;
+        --path-text: #007acc;
+        --spinner-color: rgba(255, 62, 0, 0.8);
+        --spinner-bg: rgba(255, 62, 0, 0.1);
+        --row-hover: rgba(0, 0, 0, 0.03);
+        --row-border: rgba(0, 0, 0, 0.1);
+        --control-bg: rgba(0, 0, 0, 0.08);
+        --control-text: #333333;
+    }
+
+    :global(html.dark-theme) {
+        --bg-color: #1a1a1a;
+        --text-color: #e0e0e0;
+        --surface-color: #222222;
+        --surface-border: #333333;
+        --border-color: #2c2c2c;
+        --secondary-text: #aaaaaa;
+        --tertiary-text: #999999;
+        --path-bg: rgba(0, 0, 0, 0.2);
+        --hover-bg: rgba(255, 255, 255, 0.1);
+        --header-text: #e0e0e0;
+        --icon-color: #e0e0e0;
+        --path-text: #4ec9b0;
+        --spinner-color: rgba(255, 62, 0, 0.8);
+        --spinner-bg: rgba(255, 62, 0, 0.1);
+        --row-hover: rgba(255, 255, 255, 0.03);
+        --row-border: rgba(255, 255, 255, 0.1);
+        --control-bg: rgba(255, 255, 255, 0.08);
+        --control-text: #ffffff;
+    }
+
     :global(body) {
         margin: 0;
         padding: 0;
-        background-color: #1a1a1a;
-        color: #e0e0e0;
+        background-color: var(--bg-color);
+        color: var(--text-color);
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
             Oxygen, Ubuntu, Cantarell, sans-serif;
         user-select: none;
@@ -139,7 +181,7 @@
     }
 
     h1 {
-        color: #e0e0e0;
+        color: var(--header-text);
         margin: 0;
         font-size: 2rem;
     }
@@ -148,22 +190,22 @@
         display: flex;
         align-items: center;
         gap: 12px;
-        background: #2a2a2a;
+        background: var(--surface-color); /* Adjusted to match light/dark */
         padding: 8px 16px;
         border-radius: 8px;
-        border: 1px solid #333;
+        border: 1px solid var(--surface-border);
     }
 
     .label {
-        color: #999;
+        color: var(--secondary-text);
         font-size: 0.9rem;
         font-weight: 500;
     }
 
     .path {
         font-family: "JetBrains Mono", "Fira Code", monospace;
-        color: #4ec9b0;
-        background: rgba(0, 0, 0, 0.2);
+        color: var(--path-text);
+        background: var(--path-bg);
         padding: 4px 8px;
         border-radius: 4px;
         font-size: 0.9rem;
@@ -178,7 +220,7 @@
         border: none;
         padding: 6px;
         border-radius: 4px;
-        color: #e0e0e0;
+        color: var(--icon-color);
         cursor: pointer;
         display: flex;
         align-items: center;
@@ -187,8 +229,8 @@
     }
 
     .icon-btn:hover {
-        background: rgba(255, 255, 255, 0.1);
-        color: #fff;
+        background: var(--hover-bg);
+        color: var(--text-color);
     }
 
     .icon-btn svg {
@@ -196,10 +238,10 @@
     }
 
     .table-wrapper {
-        background: #222222;
+        background: var(--surface-color);
         padding: 20px;
         border-radius: 8px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         min-height: 300px;
     }
 
@@ -211,8 +253,8 @@
     th {
         text-align: left;
         padding: 16px;
-        border-bottom: 2px solid #2c2c2c;
-        color: #aaa;
+        border-bottom: 2px solid var(--border-color);
+        color: var(--secondary-text);
         font-weight: 600;
         font-size: 1rem;
     }
@@ -228,18 +270,19 @@
     }
 
     .empty-state svg {
-        fill: #555;
+        fill: var(--icon-color);
         margin-bottom: 20px;
+        opacity: 0.7;
     }
 
     .empty-state h3 {
-        color: #ccc;
+        color: var(--header-text);
         margin: 0 0 12px 0;
         font-size: 1.5rem;
     }
 
     .empty-state p {
-        color: #999;
+        color: var(--secondary-text);
         margin: 0 0 8px 0;
         max-width: 400px;
         font-size: 1.1rem;
@@ -247,15 +290,15 @@
 
     .empty-state .hint {
         font-size: 0.95rem;
-        color: #777;
+        color: var(--tertiary-text);
         margin-top: 20px;
     }
 
     .spinner {
         width: 40px;
         height: 40px;
-        border: 4px solid rgba(255, 62, 0, 0.1);
-        border-left-color: rgba(255, 62, 0, 0.8);
+        border: 4px solid var(--spinner-bg);
+        border-left-color: var(--spinner-color);
         border-radius: 50%;
         margin-bottom: 20px;
         animation: spin 1s linear infinite;

@@ -91,12 +91,12 @@
 
 <style>
     tr {
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        border-bottom: 1px solid var(--row-border);
         transition: background-color 0.2s ease;
     }
 
     tr:hover {
-        background-color: rgba(255, 255, 255, 0.03);
+        background-color: var(--row-hover);
     }
 
     tr.recording {
@@ -105,7 +105,7 @@
 
     td {
         padding: 16px 16px;
-        color: #e0e0e0;
+        color: var(--text-color);
         font-weight: 500;
         font-size: 0.95rem;
         text-align: left;
@@ -115,12 +115,12 @@
     .app-name {
         width: 30%;
         font-weight: 600;
-        color: #fff;
+        color: var(--header-text);
     }
 
     .media-name {
         width: 40%;
-        color: #aaa;
+        color: var(--secondary-text);
     }
 
     .controls {
@@ -147,13 +147,13 @@
         align-items: center;
         justify-content: center;
         gap: 8px;
-        background: rgba(255, 255, 255, 0.08);
+        background: var(--control-bg);
         border: none;
         border-radius: 6px;
         padding: 10px 16px; /* Larger click area */
         font-size: 0.9rem;
         font-weight: 600;
-        color: #ffffff;
+        color: var(--control-text);
         cursor: pointer;
         transition: all 0.2s ease;
         min-width: 110px; /* Ensure consistent button width */
@@ -173,18 +173,20 @@
     }
 
     .control-btn:hover:not(:disabled) {
-        background: rgba(255, 255, 255, 0.12);
+        background: var(--hover-bg);
         transform: translateY(-1px);
     }
 
     .record-btn.active {
         background: rgba(255, 62, 0, 0.8);
         box-shadow: 0 2px 10px rgba(255, 62, 0, 0.3);
+        color: white; /* Force white text on active buttons */
     }
 
     .play-btn.active {
         background: rgba(100, 148, 237, 0.8);
         box-shadow: 0 2px 10px rgba(100, 148, 237, 0.3);
+        color: white; /* Force white text on active buttons */
     }
 
     .icon {
