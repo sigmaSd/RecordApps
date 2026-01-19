@@ -30,6 +30,14 @@
   <project_license>MIT</project_license>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.11.0" date="2026-01-19">
+        <description>
+        <ul>
+            <li>Add light theme, and dynamic theme detection</li>
+            <li>Add record feedback</li>
+        </ul>
+        </description>
+    </release>
     <release version="1.10.0" date="2025-12-02">
         <description>
         <ul>
