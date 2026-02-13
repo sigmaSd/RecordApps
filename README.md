@@ -67,7 +67,8 @@ This will create an executable named `record` in the project root directory.
    recorded
 2. Audio is redirected from the original application to its dedicated virtual
    sink
-3. The virtual sink's audio is recorded to a FLAC file
+3. The virtual sink's audio is recorded to the selected audio format (Opus, MP3,
+   FLAC, WAV, etc.)
 4. Recordings are saved in `~/Music/RecordApps/<app-name>/` with timestamp-based
    filenames
 

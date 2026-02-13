@@ -11,12 +11,12 @@ export interface Sink {
 }
 export interface RecordRpc {
   apps: () => Promise<App[]>;
-  record: (app: App) => Promise<void>;
+  record: (app: App, format?: string) => Promise<void>;
   stopRecord: (app: App) => Promise<string>;
   play: (app: App) => Promise<void>;
   stopPlay: (app: App) => void;
   getDownloadPath: () => string;
-  openDownloadFolder: () => Promise<void>;
+  openDownloadFolder: () => void;
 }
 
 export async function playingApps(): Promise<App[]> {

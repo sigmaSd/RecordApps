@@ -1,5 +1,5 @@
 import { SizeHint, Webview } from "@webview/webview";
-import { Application, ApplicationWindow } from "@sigmasd/gtk/gtk";
+import { Application, ApplicationWindow } from "@sigmasd/gtk/gtk4";
 import { removeAllVirtualSinks } from "../backend/lib.ts";
 
 if (import.meta.main) {
@@ -23,6 +23,7 @@ if (import.meta.main) {
     const webview = new Webview(false, undefined, window.ptr);
     webview.bind("show_app", () => {
       window.setVisible(true);
+      return null;
     });
     webview.title = "Record Apps";
     webview.size = { width: 1200, height: 800, hint: SizeHint.NONE };

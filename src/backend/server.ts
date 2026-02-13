@@ -53,7 +53,7 @@ class RecordServer extends RpcTarget implements RecordRpc {
     return playingApps();
   }
 
-  async record(app: App) {
+  async record(app: App, format: string = "opus") {
     const sinkName = `${app.appName}-${app.serial}`;
     let virtualSink = await findSinkByName(sinkName);
     if (virtualSink === undefined) {
@@ -66,7 +66,7 @@ class RecordServer extends RpcTarget implements RecordRpc {
       .replace(/[:.]/g, "-") // Replace colons and dots with hyphens
       .replace("T", "_"); // Replace T with underscore for better readability
     const filePath =
-      `${this.#recordAppsDir}/${app.appName}/${timestamp}.${app.serial}.flac`;
+      `${this.#recordAppsDir}/${app.appName}/${timestamp}.${app.serial}.${format}`;
 
     this.#recordings.set(app.serial, { controller: abortController, filePath });
     await ensureDir(`${this.#recordAppsDir}/${app.appName}`);
@@ -134,8 +134,8 @@ class RecordServer extends RpcTarget implements RecordRpc {
     return this.#recordAppsDir;
   }
 
-  async openDownloadFolder() {
-    await new Deno.Command("xdg-open", {
+  openDownloadFolder() {
+    new Deno.Command("xdg-open", {
       args: [this.#recordAppsDir],
     }).spawn();
   }

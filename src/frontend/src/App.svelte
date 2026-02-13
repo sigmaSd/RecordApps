@@ -13,6 +13,8 @@
     let loading: boolean = $state(true);
     let downloadPath: string | undefined = $state(undefined);
     let recordingApps: Map<number, App> = $state(new Map());
+    let selectedFormat = $state("opus");
+    const formats = ["opus", "mp3", "flac", "wav", "ogg"];
 
     let toastMessage = $state("");
     let toastVisible = $state(false);
@@ -63,7 +65,7 @@
     async function record(app: App) {
         if (!api) return;
         try {
-            await api.record(app);
+            await api.record(app, selectedFormat);
             recordingApps.set(app.serial, app);
             recordingApps = new Map(recordingApps);
         } catch (err) {
@@ -96,24 +98,34 @@
 <main class="container">
     <header class="app-header">
         <h1>Applications</h1>
-        {#if downloadPath}
-            <div class="path-display">
-                <span class="label">Save Location:</span>
-                <code class="path" title={downloadPath}>{downloadPath}</code>
-                <button
-                    class="icon-btn"
-                    onclick={openFolder}
-                    title="Open Save Folder"
-                    aria-label="Open Save Folder"
-                >
-                    <svg viewBox="0 0 24 24" width="20" height="20">
-                        <path
-                            d="M19,20H5A2,2 0 0,1 3,18V6A2,2 0 0,1 5,4H9L11,6H19A2,2 0 0,1 21,8V18A2,2 0 0,1 19,20M19,8H5V18H19V8Z"
-                        />
-                    </svg>
-                </button>
+        <div class="header-right">
+            <div class="format-display">
+                <span class="label">Format:</span>
+                <select bind:value={selectedFormat} class="format-select">
+                    {#each formats as format}
+                        <option value={format}>{format.toUpperCase()}</option>
+                    {/each}
+                </select>
             </div>
-        {/if}
+            {#if downloadPath}
+                <div class="path-display">
+                    <span class="label">Save Location:</span>
+                    <code class="path" title={downloadPath}>{downloadPath}</code>
+                    <button
+                        class="icon-btn"
+                        onclick={openFolder}
+                        title="Open Save Folder"
+                        aria-label="Open Save Folder"
+                    >
+                        <svg viewBox="0 0 24 24" width="20" height="20">
+                            <path
+                                d="M19,20H5A2,2 0 0,1 3,18V6A2,2 0 0,1 5,4H9L11,6H19A2,2 0 0,1 21,8V18A2,2 0 0,1 19,20M19,8H5V18H19V8Z"
+                            />
+                        </svg>
+                    </button>
+                </div>
+            {/if}
+        </div>
     </header>
 
     <div class="table-wrapper">
@@ -174,6 +186,7 @@
 
 <style>
     :global(:root) {
+        color-scheme: light;
         --bg-color: #ffffff;
         --text-color: #333333;
         --surface-color: #f5f5f5;
@@ -192,9 +205,11 @@
         --row-border: rgba(0, 0, 0, 0.1);
         --control-bg: rgba(0, 0, 0, 0.08);
         --control-text: #333333;
+        --select-bg: #ffffff;
     }
 
     :global(html.dark-theme) {
+        color-scheme: dark;
         --bg-color: #1a1a1a;
         --text-color: #e0e0e0;
         --surface-color: #222222;
@@ -213,6 +228,7 @@
         --row-border: rgba(255, 255, 255, 0.1);
         --control-bg: rgba(255, 255, 255, 0.08);
         --control-text: #ffffff;
+        --select-bg: #2c2c2c;
     }
 
     :global(body) {
@@ -246,6 +262,45 @@
         margin-bottom: 20px;
         padding: 0 10px;
         flex-shrink: 0; /* Header doesn't shrink */
+    }
+
+    .header-right {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .format-display {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--surface-color);
+        padding: 8px 16px;
+        border-radius: 8px;
+        border: 1px solid var(--surface-border);
+    }
+
+    .format-select {
+        background: var(--select-bg);
+        color: var(--text-color);
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        padding: 4px 8px;
+        font-family: inherit;
+        font-size: 0.9rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .format-select:hover {
+        border-color: var(--path-text);
+    }
+
+    .format-select:focus {
+        outline: none;
+        border-color: var(--path-text);
+        box-shadow: 0 0 0 2px rgba(0, 122, 204, 0.2);
     }
 
     h1 {
