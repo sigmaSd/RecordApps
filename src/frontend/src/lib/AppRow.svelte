@@ -16,6 +16,12 @@
 
     let playing = $state(false);
 
+    $effect(() => {
+        if (!isRecording) {
+            playing = false;
+        }
+    });
+
     async function playAudio(app: App) {
         if (!playing) {
             await api.play(app);

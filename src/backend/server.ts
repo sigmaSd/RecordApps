@@ -123,11 +123,10 @@ class RecordServer extends RpcTarget implements RecordRpc {
 
   stopPlay(app: App) {
     const abortController = this.#playing.get(app.serial);
-    if (abortController === undefined) {
-      throw new Error("Playing app not found");
+    if (abortController !== undefined) {
+      abortController.abort();
+      this.#playing.delete(app.serial);
     }
-    abortController.abort();
-    this.#playing.delete(app.serial);
   }
 
   getDownloadPath() {
