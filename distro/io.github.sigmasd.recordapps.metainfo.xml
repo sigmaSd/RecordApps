@@ -30,6 +30,13 @@
   <project_license>MIT</project_license>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.13.0" date="2026-02-14">
+        <description>
+        <ul>
+            <li>Fix a bug where mute button got stuck</li>
+        </ul>
+        </description>
+    </release>
     <release version="1.12.1" date="2026-02-13">
         <description>
         <ul>
