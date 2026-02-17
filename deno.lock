@@ -9,7 +9,7 @@
     "jsr:@denosaurs/plug@1": "1.1.0",
     "jsr:@libs/xml@7.0.2": "7.0.2",
     "jsr:@sigma/deno-compat@0.21.0": "0.21.0",
-    "jsr:@sigmasd/gtk@0.38": "0.38.0",
+    "jsr:@sigmasd/gtk@0.41": "0.41.0",
     "jsr:@std/assert@^1.0.18": "1.0.18",
     "jsr:@std/bytes@^1.0.6": "1.0.6",
     "jsr:@std/cli@^1.0.27": "1.0.27",
@@ -85,8 +85,8 @@
     "@sigma/deno-compat@0.21.0": {
       "integrity": "9fccd523e88e5f542985f4b31b7839d5ffbddc83f6f57737b96b500b713a5ca1"
     },
-    "@sigmasd/gtk@0.38.0": {
-      "integrity": "5641902e1e32560d28feb67e8862c8325ed2b8a33e88cbf927e0cf3e7ccd4ac8",
+    "@sigmasd/gtk@0.41.0": {
+      "integrity": "8550a2eb96f661c17c310de491b93ac6d91507aa1274b1ae9652f9685dfad775",
       "dependencies": [
         "jsr:@sigma/deno-compat"
       ]
@@ -731,7 +731,7 @@
   },
   "workspace": {
     "dependencies": [
-      "jsr:@sigmasd/gtk@0.38",
+      "jsr:@sigmasd/gtk@0.41",
       "jsr:@std/assert@^1.0.18",
       "jsr:@std/fs@^1.0.22",
       "jsr:@std/http@^1.0.24",
