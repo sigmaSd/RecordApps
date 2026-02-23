@@ -19,9 +19,11 @@ on Linux. Built with Deno, Svelte, and WebView.
 ## Prerequisites
 
 - Linux operating system
-- PulseAudio/PipeWire audio system
+- PipeWire audio system (with `pipewire-pulse` for compatibility)
 - Deno runtime installed
-- `pactl` command-line utility
+- `pipewire-utils` (for `pw-dump`, `pw-metadata`, `pw-record`, `pw-play`)
+- `pulseaudio-utils` (for `pactl`)
+- `ffmpeg` (for recording)
 
 ## Installation
 

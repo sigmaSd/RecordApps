@@ -7,7 +7,7 @@
   <description>
     <p>
       Record Apps is a simple application that allows you to record audio from individual applications.
-      It uses PulseAudio to capture the audio output of each application separately.
+      It uses PipeWire to capture the audio output of each application separately.
     </p>
   </description>
   <launchable type="desktop-id">io.github.sigmasd.recordapps.desktop</launchable>
@@ -23,6 +23,7 @@
     <keywords>
       <keyword>audio</keyword>
       <keyword>record</keyword>
+      <keyword>pipewire</keyword>
       <keyword>pulseaudio</keyword>
       <keyword>application</keyword>
     </keywords>
