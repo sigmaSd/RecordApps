@@ -13,11 +13,87 @@
     let loading: boolean = $state(true);
     let downloadPath: string | undefined = $state(undefined);
     let recordingApps: Map<number, App> = $state(new Map());
+    let playingSerials: Set<number> = $state(new Set());
     let selectedFormat = $state("opus");
     const formats = ["opus", "mp3", "flac", "wav", "ogg"];
 
+    // Pinned apps state: Record<string, { autoRecord: boolean, autoListen: boolean }>
+    // Key can be appName or appName::mediaName
+    let pinnedApps: Record<string, { autoRecord: boolean; autoListen: boolean }> =
+        $state({});
+
     let toastMessage = $state("");
     let toastVisible = $state(false);
+
+    async function syncPinnedApps() {
+        if (api) {
+            await api.setPinnedApps(pinnedApps);
+        }
+    }
+
+    function togglePin(appName: string, mediaName?: string) {
+        const key = mediaName ? `${appName}::${mediaName}` : appName;
+        if (pinnedApps[key]) {
+            delete pinnedApps[key];
+        } else {
+            pinnedApps[key] = { autoRecord: false, autoListen: false };
+        }
+        pinnedApps = { ...pinnedApps };
+        syncPinnedApps();
+    }
+
+    function toggleAutoRecord(appName: string, mediaName?: string) {
+        const key = mediaName ? `${appName}::${mediaName}` : appName;
+        if (pinnedApps[key]) {
+            pinnedApps[key].autoRecord = !pinnedApps[key].autoRecord;
+            pinnedApps = { ...pinnedApps };
+            syncPinnedApps();
+        }
+    }
+
+    async function play(app: App) {
+        if (!api) return;
+        try {
+            await api.play(app);
+            playingSerials.add(app.serial);
+            playingSerials = new Set(playingSerials);
+            // Store preference if pinned
+            const specificKey = `${app.appName}::${app.mediaName}`;
+            if (pinnedApps[specificKey]) {
+                pinnedApps[specificKey].autoListen = true;
+                pinnedApps = { ...pinnedApps };
+                syncPinnedApps();
+            } else if (pinnedApps[app.appName]) {
+                pinnedApps[app.appName].autoListen = true;
+                pinnedApps = { ...pinnedApps };
+                syncPinnedApps();
+            }
+        } catch (err) {
+            console.error("Failed to start playback:", err);
+        }
+    }
+
+    async function stopPlay(app: App) {
+        if (!api) return;
+        try {
+            await api.stopPlay(app);
+            playingSerials.delete(app.serial);
+            playingSerials = new Set(playingSerials);
+            // Store preference if pinned
+            const specificKey = `${app.appName}::${app.mediaName}`;
+            if (pinnedApps[specificKey]) {
+                pinnedApps[specificKey].autoListen = false;
+                pinnedApps = { ...pinnedApps };
+                syncPinnedApps();
+            } else if (pinnedApps[app.appName]) {
+                pinnedApps[app.appName].autoListen = false;
+                pinnedApps = { ...pinnedApps };
+                syncPinnedApps();
+            }
+        } catch (err) {
+            console.error("Failed to stop playback:", err);
+        }
+    }
 
     function showToast(path: string) {
         toastMessage = path;
@@ -37,6 +113,7 @@
                 if (Number.isNaN(apiPort)) apiPort = 8000;
                 api = newWebSocketRpcSession(`ws://localhost:${apiPort}/api`);
                 downloadPath = await api.getDownloadPath();
+                pinnedApps = await api.getPinnedApps();
                 loading = false;
             })
             .catch((err) => {
@@ -56,7 +133,60 @@
                     }
                 }
 
-                apps = currentApps;
+                // Auto-record & Auto-listen logic (only for active apps)
+                for (const app of currentApps) {
+                    const specificKey = `${app.appName}::${app.mediaName}`;
+                    const pinConfig = pinnedApps[specificKey] || pinnedApps[app.appName];
+
+                    if (pinConfig) {
+                        if (pinConfig.autoRecord && !recordingApps.has(app.serial)) {
+                            record(app);
+                        }
+                        if (pinConfig.autoListen && recordingApps.has(app.serial) && !playingSerials.has(app.serial)) {
+                            play(app);
+                        }
+                    }
+                }
+
+                // Create a list that includes all pinned apps even if they're not running
+                const activePinnedKeys = new Set();
+                for (const app of currentApps) {
+                    if (pinnedApps[app.appName]) activePinnedKeys.add(app.appName);
+                    if (pinnedApps[`${app.appName}::${app.mediaName}`]) activePinnedKeys.add(`${app.appName}::${app.mediaName}`);
+                }
+
+                const displayApps = [...currentApps];
+
+                for (const key in pinnedApps) {
+                    if (!activePinnedKeys.has(key)) {
+                        let appName = key;
+                        let mediaName = "(inactive)";
+                        if (key.includes("::")) {
+                            const parts = key.split("::");
+                            appName = parts[0];
+                            mediaName = parts[1];
+                        }
+
+                        displayApps.push({
+                            appName,
+                            mediaName,
+                            serial: -1,
+                            id: -1
+                        });
+                    }
+                }
+
+                // Sort apps: pinned first, then by appName
+                apps = displayApps.sort((a, b) => {
+                    const aKey = a.serial === -1 && a.mediaName !== "(inactive)" ? `${a.appName}::${a.mediaName}` : a.appName;
+                    const bKey = b.serial === -1 && b.mediaName !== "(inactive)" ? `${b.appName}::${b.mediaName}` : b.appName;
+
+                    const aPinned = !!pinnedApps[aKey] || !!pinnedApps[`${a.appName}::${a.mediaName}`];
+                    const bPinned = !!pinnedApps[bKey] || !!pinnedApps[`${b.appName}::${b.mediaName}`];
+
+                    if (aPinned !== bPinned) return aPinned ? -1 : 1;
+                    return a.appName.localeCompare(b.appName);
+                });
                 loading = false;
             }
         }, 1000);
@@ -79,6 +209,8 @@
         if (recordingApps.has(app.serial)) {
             recordingApps.delete(app.serial);
             recordingApps = new Map(recordingApps);
+            playingSerials.delete(app.serial);
+            playingSerials = new Set(playingSerials);
             try {
                 const path = await api.stopRecord(app);
                 showToast(path);
@@ -165,6 +297,17 @@
                                     {app} 
                                     {api} 
                                     isRecording={recordingApps.has(app.serial)}
+                                    isPinned={!!pinnedApps[app.appName]}
+                                    isMediaPinned={!!pinnedApps[`${app.appName}::${app.mediaName}`]}
+                                    autoRecord={pinnedApps[app.appName]?.autoRecord || false}
+                                    autoRecordMedia={pinnedApps[`${app.appName}::${app.mediaName}`]?.autoRecord || false}
+                                    isPlaying={playingSerials.has(app.serial) || (!!pinnedApps[`${app.appName}::${app.mediaName}`]?.autoListen && recordingApps.has(app.serial)) || (!!pinnedApps[app.appName]?.autoListen && recordingApps.has(app.serial))}
+                                    onTogglePin={() => togglePin(app.appName)}
+                                    onToggleMediaPin={() => togglePin(app.appName, app.mediaName)}
+                                    onToggleAutoRecord={() => toggleAutoRecord(app.appName)}
+                                    onToggleAutoRecordMedia={() => toggleAutoRecord(app.appName, app.mediaName)}
+                                    onPlay={() => play(app)}
+                                    onStopPlay={() => stopPlay(app)}
                                     onToggleRecord={() => {
                                         if (recordingApps.has(app.serial)) {
                                             stopRecord(app);

@@ -12,6 +12,13 @@ export interface Sink {
   id: number;
 }
 
+export interface PinConfig {
+  autoRecord: boolean;
+  autoListen: boolean;
+}
+
+export type PinnedApps = Record<string, PinConfig>;
+
 interface PipeWireObject {
   id: number;
   type: string;
@@ -27,6 +34,8 @@ export interface RecordRpc {
   stopPlay: (app: App) => void;
   getDownloadPath: () => string;
   openDownloadFolder: () => void;
+  getPinnedApps: () => Promise<PinnedApps>;
+  setPinnedApps: (pinnedApps: PinnedApps) => Promise<void>;
 }
 
 export async function playingApps(): Promise<App[]> {

@@ -8,6 +8,7 @@ finish-args:
   - --socket=fallback-x11
   - --socket=wayland
   - --socket=pulseaudio
+  - --filesystem=xdg-run/pipewire-0
   - --device=all # audio + grpahics
   - --filesystem=xdg-music # for saving recordings
   - --share=network # local server

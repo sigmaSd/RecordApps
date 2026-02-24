@@ -6,71 +6,152 @@
         app,
         api,
         isRecording,
+        isPinned,
+        isMediaPinned,
+        autoRecord,
+        autoRecordMedia,
+        isPlaying,
         onToggleRecord,
+        onTogglePin,
+        onToggleMediaPin,
+        onToggleAutoRecord,
+        onToggleAutoRecordMedia,
+        onPlay,
+        onStopPlay,
     }: {
         app: App;
         api: RpcStub<RecordRpc>;
         isRecording: boolean;
+        isPinned: boolean;
+        isMediaPinned: boolean;
+        autoRecord: boolean;
+        autoRecordMedia: boolean;
+        isPlaying: boolean;
         onToggleRecord: () => void;
+        onTogglePin: () => void;
+        onToggleMediaPin: () => void;
+        onToggleAutoRecord: () => void;
+        onToggleAutoRecordMedia: () => void;
+        onPlay: () => void;
+        onStopPlay: () => void;
     } = $props();
 
-    let playing = $state(false);
-
-    $effect(() => {
-        if (!isRecording) {
-            playing = false;
-        }
-    });
-
-    async function playAudio(app: App) {
-        if (!playing) {
-            await api.play(app);
-            playing = true;
-        } else {
-            await api.stopPlay(app);
-            playing = false;
-        }
-    }
+    let isActive = $derived(app.serial !== -1);
 </script>
 
-<tr class:recording={isRecording}>
-    <td class="app-name" title={app.appName}>{app.appName}</td>
-    <td class="media-name" title={app.mediaName}>{app.mediaName}</td>
+<tr class:recording={isRecording} class:inactive={!isActive}>
+    <td class="app-info">
+        <div class="app-info-wrapper">
+            <button
+                class="icon-btn pin-btn"
+                class:active={isPinned}
+                onclick={onTogglePin}
+                title={isPinned ? "Unpin application" : "Pin application"}
+            >
+                <svg viewBox="0 0 24 24" width="18" height="18">
+                    <path
+                        d="M16,12V4H17V2H7V4H8V12L6,14V16H11.2V22H12.8V16H18V14L16,12M8.8,14L10,12.8V4H14V12.8L15.2,14H8.8Z"
+                    />
+                </svg>
+            </button>
+            <button
+                class="icon-btn auto-record-btn"
+                class:active={autoRecord}
+                onclick={onToggleAutoRecord}
+                disabled={!isPinned}
+                title={autoRecord
+                    ? "Disable auto-record"
+                    : "Enable auto-record"}
+            >
+                <svg viewBox="0 0 24 24" width="18" height="18">
+                    <path
+                        d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z"
+                    />
+                </svg>
+            </button>
+            <span class="app-name" title={app.appName}>{app.appName}</span>
+        </div>
+    </td>
+    <td class="media-info">
+        <div class="media-info-wrapper">
+            <button
+                class="icon-btn pin-btn"
+                class:active={isMediaPinned}
+                onclick={onToggleMediaPin}
+                title={isMediaPinned ? "Unpin specific media" : "Pin specific media"}
+            >
+                <svg viewBox="0 0 24 24" width="18" height="18">
+                    <path
+                        d="M16,12V4H17V2H7V4H8V12L6,14V16H11.2V22H12.8V16H18V14L16,12M8.8,14L10,12.8V4H14V12.8L15.2,14H8.8Z"
+                    />
+                </svg>
+            </button>
+            <button
+                class="icon-btn auto-record-btn"
+                class:active={autoRecordMedia}
+                onclick={onToggleAutoRecordMedia}
+                disabled={!isMediaPinned}
+                title={autoRecordMedia
+                    ? "Disable auto-record for this media"
+                    : "Enable auto-record for this media"}
+            >
+                <svg viewBox="0 0 24 24" width="18" height="18">
+                    <path
+                        d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z"
+                    />
+                </svg>
+            </button>
+            <span class="media-name" title={app.mediaName}>{app.mediaName}</span>
+        </div>
+    </td>
     <td class="controls">
         <div class="controls-wrapper">
-            <button
-                class="control-btn record-btn"
-                class:active={isRecording}
-                onclick={onToggleRecord}
-                aria-label={isRecording ? "Stop recording" : "Start recording"}
-            >
-                <span class="icon">
-                    {#if isRecording}
-                        <svg viewBox="0 0 24 24" width="18" height="18">
-                            <rect width="18" height="18" x="3" y="3" rx="2" />
-                        </svg>
-                    {:else}
-                        <svg viewBox="0 0 24 24" width="18" height="18">
-                            <circle cx="12" cy="12" r="8" />
-                        </svg>
-                    {/if}
-                </span>
-                <span class="btn-text">{isRecording ? "Stop" : "Record"}</span>
-            </button>
+            {#if !autoRecord && !autoRecordMedia}
+                <button
+                    class="control-btn record-btn"
+                    class:active={isRecording}
+                    onclick={onToggleRecord}
+                    disabled={!isActive}
+                    aria-label={isRecording
+                        ? "Stop recording"
+                        : "Start recording"}
+                >
+                    <span class="icon">
+                        {#if isRecording}
+                            <svg viewBox="0 0 24 24" width="18" height="18">
+                                <rect
+                                    width="18"
+                                    height="18"
+                                    x="3"
+                                    y="3"
+                                    rx="2"
+                                />
+                            </svg>
+                        {:else}
+                            <svg viewBox="0 0 24 24" width="18" height="18">
+                                <circle cx="12" cy="12" r="8" />
+                            </svg>
+                        {/if}
+                    </span>
+                    <span class="btn-text"
+                        >{isRecording ? "Stop" : "Record"}</span
+                    >
+                </button>
+            {/if}
 
             <div class="play-btn-container">
                 <button
                     class="control-btn play-btn"
-                    class:active={playing}
-                    onclick={() => playAudio(app)}
-                    aria-label={playing ? "Mute" : "Play audio"}
-                    disabled={!isRecording}
-                    style={isRecording
+                    class:active={isPlaying}
+                    onclick={() => (isPlaying ? onStopPlay() : onPlay())}
+                    aria-label={isPlaying ? "Mute" : "Play audio"}
+                    disabled={!isRecording || !isActive}
+                    style={isRecording && isActive
                         ? ""
                         : "opacity: 0; pointer-events: none;"}
                 >
                     <span class="icon">
-                        {#if playing}
+                        {#if isPlaying}
                             <svg viewBox="0 0 24 24" width="18" height="18">
                                 <path
                                     d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.84 14,18.7V20.77C18,19.86 21,16.28 21,12C21,7.72 18,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.76 16.5,12M3,9V15H7L12,20V4L7,9H3Z"
@@ -84,7 +165,7 @@
                             </svg>
                         {/if}
                     </span>
-                    <span class="btn-text">{playing ? "Mute" : "Listen"}</span>
+                    <span class="btn-text">{isPlaying ? "Mute" : "Listen"}</span>
                 </button>
             </div>
         </div>
@@ -105,6 +186,11 @@
         background-color: rgba(255, 62, 0, 0.1);
     }
 
+    tr.inactive {
+        opacity: 0.6;
+        filter: grayscale(0.8);
+    }
+
     td {
         padding: 16px 16px;
         color: var(--text-color);
@@ -114,15 +200,72 @@
         vertical-align: middle;
     }
 
-    .app-name {
+    .app-info {
         width: 30%;
+    }
+
+    .app-info-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .app-name {
         font-weight: 600;
         color: var(--header-text);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .icon-btn {
+        background: transparent;
+        border: none;
+        padding: 4px;
+        border-radius: 4px;
+        color: var(--secondary-text);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+        opacity: 0.5;
+    }
+
+    .icon-btn:hover:not(:disabled) {
+        background: var(--hover-bg);
+        opacity: 1;
+    }
+
+    .icon-btn.active {
+        opacity: 1;
+        color: var(--path-text);
+    }
+
+    .auto-record-btn.active {
+        color: rgb(255, 62, 0);
+    }
+
+    .icon-btn:disabled {
+        opacity: 0.1;
+        cursor: not-allowed;
+    }
+
+    .media-info {
+        width: 40%;
+    }
+
+    .media-info-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 8px;
     }
 
     .media-name {
-        width: 40%;
         color: var(--secondary-text);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 
     .controls {

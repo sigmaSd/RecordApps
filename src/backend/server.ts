@@ -5,6 +5,7 @@ import {
   findSinkByName,
   getDefaultSink,
   moveAppToSink,
+  PinnedApps,
   playingApps,
   playSinkAudio,
   recordFromSink,
@@ -25,6 +26,8 @@ class RecordServer extends RpcTarget implements RecordRpc {
   #playing: Map<number, AbortController>;
   #recordAppsDir: string;
   #defaultSink: Sink;
+  #pinnedApps: PinnedApps;
+  #onPinnedAppsChange: (pinnedApps: PinnedApps) => Promise<void>;
 
   constructor(
     {
@@ -32,6 +35,8 @@ class RecordServer extends RpcTarget implements RecordRpc {
       playing,
       recordAppsDir,
       defaultSink,
+      pinnedApps,
+      onPinnedAppsChange,
     }: {
       recordings: Map<
         number,
@@ -40,6 +45,8 @@ class RecordServer extends RpcTarget implements RecordRpc {
       playing: Map<number, AbortController>;
       recordAppsDir: string;
       defaultSink: Sink;
+      pinnedApps: PinnedApps;
+      onPinnedAppsChange: (pinnedApps: PinnedApps) => Promise<void>;
     },
   ) {
     super();
@@ -47,6 +54,8 @@ class RecordServer extends RpcTarget implements RecordRpc {
     this.#playing = playing;
     this.#recordAppsDir = recordAppsDir;
     this.#defaultSink = defaultSink;
+    this.#pinnedApps = pinnedApps;
+    this.#onPinnedAppsChange = onPinnedAppsChange;
   }
 
   apps() {
@@ -138,6 +147,15 @@ class RecordServer extends RpcTarget implements RecordRpc {
       args: [this.#recordAppsDir],
     }).spawn();
   }
+
+  getPinnedApps(): Promise<PinnedApps> {
+    return Promise.resolve(this.#pinnedApps);
+  }
+
+  async setPinnedApps(pinnedApps: PinnedApps): Promise<void> {
+    this.#pinnedApps = pinnedApps;
+    await this.#onPinnedAppsChange(pinnedApps);
+  }
 }
 
 export async function main(port?: number): Promise<{ port: number }> {
@@ -157,6 +175,25 @@ export async function main(port?: number): Promise<{ port: number }> {
   }
   const recordAppsDir = `${musicDir}/RecordApps`;
   ensureDirSync(recordAppsDir);
+
+  const configDir = `${Deno.env.get("HOME")}/.config/recordapps`;
+  ensureDirSync(configDir);
+  const pinnedAppsFile = `${configDir}/pinned.json`;
+
+  let pinnedApps: PinnedApps = {};
+  try {
+    pinnedApps = JSON.parse(Deno.readTextFileSync(pinnedAppsFile));
+  } catch {
+    /* noop */
+  }
+
+  const onPinnedAppsChange = async (newPinnedApps: PinnedApps) => {
+    pinnedApps = newPinnedApps;
+    await Deno.writeTextFile(
+      pinnedAppsFile,
+      JSON.stringify(pinnedApps, null, 2),
+    );
+  };
 
   await removeAllVirtualSinks();
 
@@ -190,6 +227,8 @@ export async function main(port?: number): Promise<{ port: number }> {
                 defaultSink,
                 recordings,
                 playing,
+                pinnedApps,
+                onPinnedAppsChange,
               }),
             );
           });
