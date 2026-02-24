@@ -31,6 +31,17 @@
   <project_license>MIT</project_license>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.14.0" date="2026-02-24">
+        <description>
+        <ul>
+            <li>Migrate to PipeWire-native tools (pw-dump, pw-metadata, etc.)</li>
+            <li>Fix an issue where media names appeared as (null)</li>
+            <li>Add granular pinning by App Name and Media Name</li>
+            <li>Add Auto-Record and Auto-Listen features for pinned items</li>
+            <li>Implement backend state persistence for settings</li>
+        </ul>
+        </description>
+    </release>
     <release version="1.13.0" date="2026-02-14">
         <description>
         <ul>
