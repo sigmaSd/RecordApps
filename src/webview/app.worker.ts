@@ -3,7 +3,7 @@ import { main as frontendServer } from "../dist/front-server.ts";
 import { main as apiServer } from "../backend/server.ts";
 
 if (import.meta.main) {
-  main();
+  main().catch(console.error);
 }
 
 export async function main() {

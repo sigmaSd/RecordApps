@@ -2,7 +2,6 @@ export interface App {
   appName: string;
   mediaName: string;
   serial: number;
-  id: number;
 }
 
 export interface Sink {
@@ -36,6 +35,7 @@ export interface RecordRpc {
   openDownloadFolder: () => void;
   getPinnedApps: () => Promise<PinnedApps>;
   setPinnedApps: (pinnedApps: PinnedApps) => Promise<void>;
+  activeRecordings: () => Promise<number[]>;
 }
 
 // Uses pw-dump because pactl sometimes returns null for media.name
@@ -57,7 +57,6 @@ export async function playingApps(): Promise<App[]> {
         appName: props["application.name"] || props["node.name"] || "Unknown",
         mediaName: props["media.name"] || props["node.name"] || "Unknown",
         serial: Number.parseInt(props["object.serial"]),
-        id: appData.id,
       };
     })
     .filter((app: App) =>

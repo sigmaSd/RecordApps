@@ -13,17 +13,21 @@
     let loading: boolean = $state(true);
     let downloadPath: string | undefined = $state(undefined);
     let recordingApps: Map<number, App> = $state(new Map());
+    let recordingInProgress: Set<number> = $state(new Set());
     let playingSerials: Set<number> = $state(new Set());
+    let playingInProgress: Set<number> = $state(new Set());
     let selectedFormat = $state("opus");
     const formats = ["opus", "mp3", "flac", "wav", "ogg"];
 
     // Pinned apps state: Record<string, { autoRecord: boolean, autoListen: boolean }>
-    // Key can be appName or appName::mediaName
+    // Key is appName
     let pinnedApps: Record<string, { autoRecord: boolean; autoListen: boolean }> =
         $state({});
 
     let toastMessage = $state("");
     let toastVisible = $state(false);
+    let toastType: "success" | "error" = $state("success");
+    let connected = $state(true);
 
     async function syncPinnedApps() {
         if (api) {
@@ -31,45 +35,54 @@
         }
     }
 
-    function togglePin(appName: string, mediaName?: string) {
-        const key = mediaName ? `${appName}::${mediaName}` : appName;
-        if (pinnedApps[key]) {
-            delete pinnedApps[key];
+    function togglePin(appName: string) {
+        if (pinnedApps[appName]) {
+            delete pinnedApps[appName];
         } else {
-            pinnedApps[key] = { autoRecord: false, autoListen: false };
+            pinnedApps[appName] = { autoRecord: false, autoListen: false };
         }
         pinnedApps = { ...pinnedApps };
         syncPinnedApps();
     }
 
-    function toggleAutoRecord(appName: string, mediaName?: string) {
-        const key = mediaName ? `${appName}::${mediaName}` : appName;
-        if (pinnedApps[key]) {
-            pinnedApps[key].autoRecord = !pinnedApps[key].autoRecord;
+    function toggleAutoRecord(appName: string) {
+        if (pinnedApps[appName]) {
+            const wasAutoRecording = pinnedApps[appName].autoRecord;
+            pinnedApps[appName].autoRecord = !wasAutoRecording;
             pinnedApps = { ...pinnedApps };
             syncPinnedApps();
+
+            // If auto-record was just turned off, stop any active recordings for matching apps
+            if (wasAutoRecording) {
+                for (const [serial, app] of recordingApps) {
+                    if (app.appName === appName) {
+                        stopRecord(app);
+                    }
+                }
+            }
         }
     }
 
     async function play(app: App) {
         if (!api) return;
+        playingInProgress.add(app.serial);
+        playingInProgress = new Set(playingInProgress);
         try {
             await api.play(app);
             playingSerials.add(app.serial);
             playingSerials = new Set(playingSerials);
             // Store preference if pinned
-            const specificKey = `${app.appName}::${app.mediaName}`;
-            if (pinnedApps[specificKey]) {
-                pinnedApps[specificKey].autoListen = true;
-                pinnedApps = { ...pinnedApps };
-                syncPinnedApps();
-            } else if (pinnedApps[app.appName]) {
+            if (pinnedApps[app.appName]) {
                 pinnedApps[app.appName].autoListen = true;
                 pinnedApps = { ...pinnedApps };
                 syncPinnedApps();
             }
         } catch (err) {
             console.error("Failed to start playback:", err);
+            showToast("Failed to start monitoring", "error");
+        } finally {
+            playingInProgress.delete(app.serial);
+            playingInProgress = new Set(playingInProgress);
         }
     }
 
@@ -80,23 +93,67 @@
             playingSerials.delete(app.serial);
             playingSerials = new Set(playingSerials);
             // Store preference if pinned
-            const specificKey = `${app.appName}::${app.mediaName}`;
-            if (pinnedApps[specificKey]) {
-                pinnedApps[specificKey].autoListen = false;
-                pinnedApps = { ...pinnedApps };
-                syncPinnedApps();
-            } else if (pinnedApps[app.appName]) {
+            if (pinnedApps[app.appName]) {
                 pinnedApps[app.appName].autoListen = false;
                 pinnedApps = { ...pinnedApps };
                 syncPinnedApps();
             }
         } catch (err) {
             console.error("Failed to stop playback:", err);
+            showToast("Failed to stop monitoring", "error");
         }
     }
 
-    function showToast(path: string) {
-        toastMessage = path;
+    async function connectApi(port: number) {
+        const wsUrl = `ws://localhost:${port}/api`;
+        const ws = new WebSocket(wsUrl);
+
+        try {
+            await new Promise<void>((resolve, reject) => {
+                ws.addEventListener("open", () => resolve());
+                ws.addEventListener("error", () => reject(new Error("WebSocket connection failed")));
+            });
+        } catch {
+            // Connection failed — retry after delay
+            connected = false;
+            setTimeout(() => connectApi(port), 2000);
+            return;
+        }
+
+        ws.addEventListener("close", () => {
+            connected = false;
+            api = undefined;
+            // Reconnect after a short delay
+            setTimeout(() => connectApi(port), 1000);
+        });
+
+        api = newWebSocketRpcSession(ws);
+        connected = true;
+
+        try {
+            downloadPath = await api.getDownloadPath();
+            pinnedApps = await api.getPinnedApps();
+
+            // Sync recording state from backend
+            const activeSerials = await api.activeRecordings();
+            if (activeSerials.length > 0) {
+                const currentApps = await api.apps();
+                for (const serial of activeSerials) {
+                    const app = currentApps.find(a => a.serial === serial);
+                    if (app) {
+                        recordingApps.set(serial, app);
+                    }
+                }
+                recordingApps = new Map(recordingApps);
+            }
+        } catch (err) {
+            console.error("Failed to sync state:", err);
+        }
+    }
+
+    function showToast(message: string, type: "success" | "error" = "success") {
+        toastMessage = message;
+        toastType = type;
         toastVisible = true;
     }
 
@@ -111,9 +168,7 @@
             .then(async (p) => {
                 apiPort = Number.parseInt(p);
                 if (Number.isNaN(apiPort)) apiPort = 8000;
-                api = newWebSocketRpcSession(`ws://localhost:${apiPort}/api`);
-                downloadPath = await api.getDownloadPath();
-                pinnedApps = await api.getPinnedApps();
+                await connectApi(apiPort);
                 loading = false;
             })
             .catch((err) => {
@@ -122,7 +177,8 @@
             });
 
         setInterval(async () => {
-            if (api) {
+            if (!api || !connected) return;
+            try {
                 const currentApps = await api.apps();
                 
                 // Check for stopped apps that were recording
@@ -135,14 +191,13 @@
 
                 // Auto-record & Auto-listen logic (only for active apps)
                 for (const app of currentApps) {
-                    const specificKey = `${app.appName}::${app.mediaName}`;
-                    const pinConfig = pinnedApps[specificKey] || pinnedApps[app.appName];
+                    const pinConfig = pinnedApps[app.appName];
 
                     if (pinConfig) {
-                        if (pinConfig.autoRecord && !recordingApps.has(app.serial)) {
+                        if (pinConfig.autoRecord && !recordingApps.has(app.serial) && !recordingInProgress.has(app.serial)) {
                             record(app);
                         }
-                        if (pinConfig.autoListen && recordingApps.has(app.serial) && !playingSerials.has(app.serial)) {
+                        if (pinConfig.autoListen && recordingApps.has(app.serial) && !playingSerials.has(app.serial) && !playingInProgress.has(app.serial)) {
                             play(app);
                         }
                     }
@@ -152,54 +207,58 @@
                 const activePinnedKeys = new Set();
                 for (const app of currentApps) {
                     if (pinnedApps[app.appName]) activePinnedKeys.add(app.appName);
-                    if (pinnedApps[`${app.appName}::${app.mediaName}`]) activePinnedKeys.add(`${app.appName}::${app.mediaName}`);
                 }
 
                 const displayApps = [...currentApps];
 
+                let inactiveIdx = 0;
                 for (const key in pinnedApps) {
                     if (!activePinnedKeys.has(key)) {
-                        let appName = key;
-                        let mediaName = "(inactive)";
-                        if (key.includes("::")) {
-                            const parts = key.split("::");
-                            appName = parts[0];
-                            mediaName = parts[1];
-                        }
+                        inactiveIdx--;
 
                         displayApps.push({
-                            appName,
-                            mediaName,
-                            serial: -1,
-                            id: -1
+                            appName: key,
+                            mediaName: "(inactive)",
+                            serial: inactiveIdx,
                         });
                     }
                 }
 
                 // Sort apps: pinned first, then by appName
                 apps = displayApps.sort((a, b) => {
-                    const aKey = a.serial === -1 && a.mediaName !== "(inactive)" ? `${a.appName}::${a.mediaName}` : a.appName;
-                    const bKey = b.serial === -1 && b.mediaName !== "(inactive)" ? `${b.appName}::${b.mediaName}` : b.appName;
-
-                    const aPinned = !!pinnedApps[aKey] || !!pinnedApps[`${a.appName}::${a.mediaName}`];
-                    const bPinned = !!pinnedApps[bKey] || !!pinnedApps[`${b.appName}::${b.mediaName}`];
+                    const aPinned = !!pinnedApps[a.appName];
+                    const bPinned = !!pinnedApps[b.appName];
 
                     if (aPinned !== bPinned) return aPinned ? -1 : 1;
                     return a.appName.localeCompare(b.appName);
                 });
                 loading = false;
+            } catch (err) {
+                console.warn("Poll failed (WebSocket may be disconnected):", err);
             }
         }, 1000);
     });
 
     async function record(app: App) {
         if (!api) return;
+        recordingInProgress.add(app.serial);
+        recordingInProgress = new Set(recordingInProgress);
         try {
             await api.record(app, selectedFormat);
             recordingApps.set(app.serial, app);
             recordingApps = new Map(recordingApps);
+
+            // If autoListen is enabled, start monitoring immediately
+            const pinConfig = pinnedApps[app.appName];
+            if (pinConfig?.autoListen) {
+                play(app);
+            }
         } catch (err) {
             console.error("Failed to start recording:", err);
+            showToast(`Failed to start recording ${app.appName}`, "error");
+        } finally {
+            recordingInProgress.delete(app.serial);
+            recordingInProgress = new Set(recordingInProgress);
         }
     }
 
@@ -216,6 +275,7 @@
                 showToast(path);
             } catch (err) {
                 console.error("Failed to stop recording:", err);
+                showToast(`Failed to stop recording ${app.appName}`, "error");
             }
         }
     }
@@ -261,6 +321,12 @@
     </header>
 
     <div class="table-wrapper">
+        {#if !connected}
+            <div class="reconnect-banner">
+                <div class="spinner small"></div>
+                <span>Reconnecting...</span>
+            </div>
+        {/if}
         {#if loading}
             <div class="empty-state">
                 <div class="spinner"></div>
@@ -298,14 +364,10 @@
                                     {api} 
                                     isRecording={recordingApps.has(app.serial)}
                                     isPinned={!!pinnedApps[app.appName]}
-                                    isMediaPinned={!!pinnedApps[`${app.appName}::${app.mediaName}`]}
                                     autoRecord={pinnedApps[app.appName]?.autoRecord || false}
-                                    autoRecordMedia={pinnedApps[`${app.appName}::${app.mediaName}`]?.autoRecord || false}
-                                    isPlaying={playingSerials.has(app.serial) || (!!pinnedApps[`${app.appName}::${app.mediaName}`]?.autoListen && recordingApps.has(app.serial)) || (!!pinnedApps[app.appName]?.autoListen && recordingApps.has(app.serial))}
+                                    isPlaying={playingSerials.has(app.serial)}
                                     onTogglePin={() => togglePin(app.appName)}
-                                    onToggleMediaPin={() => togglePin(app.appName, app.mediaName)}
                                     onToggleAutoRecord={() => toggleAutoRecord(app.appName)}
-                                    onToggleAutoRecordMedia={() => toggleAutoRecord(app.appName, app.mediaName)}
                                     onPlay={() => play(app)}
                                     onStopPlay={() => stopPlay(app)}
                                     onToggleRecord={() => {
@@ -324,7 +386,7 @@
         {/if}
     </div>
 
-    <NotificationToast message={toastMessage} bind:visible={toastVisible} />
+    <NotificationToast message={toastMessage} type={toastType} bind:visible={toastVisible} />
 </main>
 
 <style>
@@ -581,6 +643,26 @@
         border-radius: 50%;
         margin-bottom: 20px;
         animation: spin 1s linear infinite;
+    }
+
+    .spinner.small {
+        width: 18px;
+        height: 18px;
+        border-width: 2px;
+        margin-bottom: 0;
+    }
+
+    .reconnect-banner {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        justify-content: center;
+        padding: 8px 16px;
+        background: var(--warning-bg, #4a3600);
+        color: var(--warning-text, #ffd666);
+        font-size: 0.9rem;
+        border-radius: 6px;
+        margin: 8px 16px;
     }
 
     @keyframes spin {

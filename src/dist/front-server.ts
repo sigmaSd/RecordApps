@@ -1,7 +1,7 @@
 import { serveDir } from "@std/http/file-server";
 
 if (import.meta.main) {
-  main({ apiPort: 8000 });
+  main({ apiPort: 8000 }).catch(console.error);
 }
 
 export async function main({ apiPort }: { apiPort: number }) {

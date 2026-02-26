@@ -1,13 +1,13 @@
 <script lang="ts">
     import { fade, fly } from "svelte/transition";
 
-    let { message, visible = $bindable(false) } = $props();
+    let { message, visible = $bindable(false), type = "success" }: { message: string; visible: boolean; type?: "success" | "error" } = $props();
 
     $effect(() => {
         if (visible) {
             const timer = setTimeout(() => {
                 visible = false;
-            }, 3000);
+            }, type === "error" ? 5000 : 3000);
             return () => clearTimeout(timer);
         }
     });
@@ -16,18 +16,27 @@
 {#if visible}
     <div
         class="toast"
+        class:error={type === "error"}
         in:fly={{ y: 50, duration: 300 }}
         out:fade={{ duration: 200 }}
     >
         <div class="icon">
-            <svg viewBox="0 0 24 24" width="20" height="20">
-                <path
-                    d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"
-                />
-            </svg>
+            {#if type === "error"}
+                <svg viewBox="0 0 24 24" width="20" height="20">
+                    <path
+                        d="M13,13H11V7H13M13,17H11V15H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"
+                    />
+                </svg>
+            {:else}
+                <svg viewBox="0 0 24 24" width="20" height="20">
+                    <path
+                        d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"
+                    />
+                </svg>
+            {/if}
         </div>
         <div class="content">
-            <div class="title">Recording Saved</div>
+            <div class="title">{type === "error" ? "Error" : "Recording Saved"}</div>
             <div class="message" title={message}>{message}</div>
         </div>
     </div>
@@ -55,6 +64,10 @@
         color: #4ec9b0;
         display: flex;
         align-items: center;
+    }
+
+    .error .icon {
+        color: #ff3e00;
     }
 
     .icon svg {

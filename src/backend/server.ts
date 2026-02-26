@@ -11,7 +11,6 @@ import {
   recordFromSink,
   RecordRpc,
   removeVirtualSink,
-  Sink,
 } from "./lib.ts";
 import { ensureDirSync } from "@std/fs";
 import { removeAllVirtualSinks } from "./lib.ts";
@@ -25,7 +24,6 @@ class RecordServer extends RpcTarget implements RecordRpc {
   #recordings: Map<number, { controller: AbortController; filePath: string }>;
   #playing: Map<number, AbortController>;
   #recordAppsDir: string;
-  #defaultSink: Sink;
   #pinnedApps: PinnedApps;
   #onPinnedAppsChange: (pinnedApps: PinnedApps) => Promise<void>;
 
@@ -34,7 +32,6 @@ class RecordServer extends RpcTarget implements RecordRpc {
       recordings,
       playing,
       recordAppsDir,
-      defaultSink,
       pinnedApps,
       onPinnedAppsChange,
     }: {
@@ -44,7 +41,6 @@ class RecordServer extends RpcTarget implements RecordRpc {
       >;
       playing: Map<number, AbortController>;
       recordAppsDir: string;
-      defaultSink: Sink;
       pinnedApps: PinnedApps;
       onPinnedAppsChange: (pinnedApps: PinnedApps) => Promise<void>;
     },
@@ -53,7 +49,6 @@ class RecordServer extends RpcTarget implements RecordRpc {
     this.#recordings = recordings;
     this.#playing = playing;
     this.#recordAppsDir = recordAppsDir;
-    this.#defaultSink = defaultSink;
     this.#pinnedApps = pinnedApps;
     this.#onPinnedAppsChange = onPinnedAppsChange;
   }
@@ -86,7 +81,7 @@ class RecordServer extends RpcTarget implements RecordRpc {
         outputFile: filePath,
         abortController,
       },
-    );
+    ).catch((err) => console.error("Recording failed:", err));
   }
 
   async stopRecord(app: App): Promise<string> {
@@ -104,15 +99,22 @@ class RecordServer extends RpcTarget implements RecordRpc {
 
     controller.abort();
     try {
-      await moveAppToSink({ app, sink: this.#defaultSink });
+      const currentDefaultSink = await getDefaultSink();
+      if (currentDefaultSink) {
+        await moveAppToSink({ app, sink: currentDefaultSink });
+      }
     } catch {
       // App might be gone, ignore
     }
 
     const sinkName = `${app.appName}-${app.serial}`;
-    const virtualSink = await findSinkByName(sinkName);
-    if (virtualSink) {
-      await removeVirtualSink(virtualSink);
+    try {
+      const virtualSink = await findSinkByName(sinkName);
+      if (virtualSink) {
+        await removeVirtualSink(virtualSink);
+      }
+    } catch {
+      // Sink might already be gone, ignore
     }
 
     this.#recordings.delete(app.serial);
@@ -127,7 +129,8 @@ class RecordServer extends RpcTarget implements RecordRpc {
     }
     const abortController = new AbortController();
     this.#playing.set(app.serial, abortController);
-    playSinkAudio(virtualSink, abortController);
+    playSinkAudio(virtualSink, abortController)
+      .catch((err) => console.error("Playback failed:", err));
   }
 
   stopPlay(app: App) {
@@ -155,6 +158,10 @@ class RecordServer extends RpcTarget implements RecordRpc {
   async setPinnedApps(pinnedApps: PinnedApps): Promise<void> {
     this.#pinnedApps = pinnedApps;
     await this.#onPinnedAppsChange(pinnedApps);
+  }
+
+  activeRecordings(): Promise<number[]> {
+    return Promise.resolve([...this.#recordings.keys()]);
   }
 }
 
@@ -197,11 +204,6 @@ export async function main(port?: number): Promise<{ port: number }> {
 
   await removeAllVirtualSinks();
 
-  const defaultSink = await getDefaultSink();
-  if (defaultSink === undefined) {
-    throw new Error("No sinks found");
-  }
-
   const recordings = new Map<
     number,
     { controller: AbortController; filePath: string }
@@ -224,7 +226,6 @@ export async function main(port?: number): Promise<{ port: number }> {
               socket,
               new RecordServer({
                 recordAppsDir,
-                defaultSink,
                 recordings,
                 playing,
                 pinnedApps,

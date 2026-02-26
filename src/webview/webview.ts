@@ -20,7 +20,7 @@ if (import.meta.main) {
     window.setTitle("Record Apps");
     window.setDefaultSize(1200, 800);
 
-    const webview = new Webview(false, undefined, window.ptr);
+    const webview = new Webview(true, undefined, window.ptr);
     webview.bind("show_app", () => {
       window.setVisible(true);
       return null;

@@ -7,15 +7,11 @@
         api,
         isRecording,
         isPinned,
-        isMediaPinned,
         autoRecord,
-        autoRecordMedia,
         isPlaying,
         onToggleRecord,
         onTogglePin,
-        onToggleMediaPin,
         onToggleAutoRecord,
-        onToggleAutoRecordMedia,
         onPlay,
         onStopPlay,
     }: {
@@ -23,20 +19,16 @@
         api: RpcStub<RecordRpc>;
         isRecording: boolean;
         isPinned: boolean;
-        isMediaPinned: boolean;
         autoRecord: boolean;
-        autoRecordMedia: boolean;
         isPlaying: boolean;
         onToggleRecord: () => void;
         onTogglePin: () => void;
-        onToggleMediaPin: () => void;
         onToggleAutoRecord: () => void;
-        onToggleAutoRecordMedia: () => void;
         onPlay: () => void;
         onStopPlay: () => void;
     } = $props();
 
-    let isActive = $derived(app.serial !== -1);
+    let isActive = $derived(app.serial > 0);
 </script>
 
 <tr class:recording={isRecording} class:inactive={!isActive}>
@@ -74,39 +66,12 @@
     </td>
     <td class="media-info">
         <div class="media-info-wrapper">
-            <button
-                class="icon-btn pin-btn"
-                class:active={isMediaPinned}
-                onclick={onToggleMediaPin}
-                title={isMediaPinned ? "Unpin specific media" : "Pin specific media"}
-            >
-                <svg viewBox="0 0 24 24" width="18" height="18">
-                    <path
-                        d="M16,12V4H17V2H7V4H8V12L6,14V16H11.2V22H12.8V16H18V14L16,12M8.8,14L10,12.8V4H14V12.8L15.2,14H8.8Z"
-                    />
-                </svg>
-            </button>
-            <button
-                class="icon-btn auto-record-btn"
-                class:active={autoRecordMedia}
-                onclick={onToggleAutoRecordMedia}
-                disabled={!isMediaPinned}
-                title={autoRecordMedia
-                    ? "Disable auto-record for this media"
-                    : "Enable auto-record for this media"}
-            >
-                <svg viewBox="0 0 24 24" width="18" height="18">
-                    <path
-                        d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z"
-                    />
-                </svg>
-            </button>
             <span class="media-name" title={app.mediaName}>{app.mediaName}</span>
         </div>
     </td>
     <td class="controls">
         <div class="controls-wrapper">
-            {#if !autoRecord && !autoRecordMedia}
+            {#if !autoRecord}
                 <button
                     class="control-btn record-btn"
                     class:active={isRecording}
@@ -144,7 +109,7 @@
                     class="control-btn play-btn"
                     class:active={isPlaying}
                     onclick={() => (isPlaying ? onStopPlay() : onPlay())}
-                    aria-label={isPlaying ? "Mute" : "Play audio"}
+                    aria-label={isPlaying ? "Stop monitoring" : "Monitor audio"}
                     disabled={!isRecording || !isActive}
                     style={isRecording && isActive
                         ? ""
@@ -154,18 +119,28 @@
                         {#if isPlaying}
                             <svg viewBox="0 0 24 24" width="18" height="18">
                                 <path
-                                    d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.84 14,18.7V20.77C18,19.86 21,16.28 21,12C21,7.72 18,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.76 16.5,12M3,9V15H7L12,20V4L7,9H3Z"
+                                    d="M3,9V15H7L12,20V4L7,9H3Z"
+                                />
+                                <path
+                                    d="M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.76 16.5,12Z"
+                                />
+                                <path
+                                    d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.84 14,18.7V20.77C18,19.86 21,16.28 21,12C21,7.72 18,4.14 14,3.23Z"
                                 />
                             </svg>
                         {:else}
                             <svg viewBox="0 0 24 24" width="18" height="18">
                                 <path
-                                    d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.84 14,18.7V20.77C18,19.86 21,16.28 21,12C21,7.72 18,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.76 16.5,12M3,9V15H7L12,20V4L7,9H3Z"
+                                    d="M3,9V15H7L12,20V4L7,9H3Z"
                                 />
+                                <path
+                                    d="M5.64,7.22L4.22,5.81L16.06,17.65L19.78,21.37L21.19,19.96L17.47,16.24C18.97,14.68 20,12.46 20,12C20,7.72 17,4.14 13,3.23V5.29C15.89,6.15 18,8.83 18,12C18,13.08 17.65,14.09 17.08,14.95L15.55,13.42C15.83,12.99 16,12.52 16,12C16,10.23 15,8.71 13.5,7.97V12.17L7.83,6.5L5.64,7.22Z"
+                                />
+                                <line x1="2" y1="3" x2="22" y2="21" stroke="currentColor" stroke-width="2" />
                             </svg>
                         {/if}
                     </span>
-                    <span class="btn-text">{isPlaying ? "Mute" : "Listen"}</span>
+                    <span class="btn-text">Monitor</span>
                 </button>
             </div>
         </div>
