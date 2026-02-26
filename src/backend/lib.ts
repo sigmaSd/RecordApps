@@ -9,7 +9,6 @@ export interface Sink {
   serial: number;
   name: string;
   ownerModule: number;
-  id: number;
 }
 
 export interface PinConfig {
@@ -26,6 +25,7 @@ interface PipeWireObject {
     props: Record<string, string>;
   };
 }
+
 export interface RecordRpc {
   apps: () => Promise<App[]>;
   record: (app: App, format?: string) => Promise<void>;
@@ -38,6 +38,7 @@ export interface RecordRpc {
   setPinnedApps: (pinnedApps: PinnedApps) => Promise<void>;
 }
 
+// Uses pw-dump because pactl sometimes returns null for media.name
 export async function playingApps(): Promise<App[]> {
   const output: PipeWireObject[] = await new Deno.Command("pw-dump", {
     args: [],
@@ -60,7 +61,8 @@ export async function playingApps(): Promise<App[]> {
       };
     })
     .filter((app: App) =>
-      app.appName !== "pw-record" && app.appName !== "pw-play" &&
+      app.appName !== "pacat" && app.appName !== "pw-record" &&
+      app.appName !== "pw-play" &&
       app.appName !== "speech-dispatcher-dummy"
     );
 }
@@ -107,26 +109,21 @@ export async function removeAllVirtualSinks(): Promise<void> {
 }
 
 export async function listSinks(): Promise<Sink[]> {
-  const output: PipeWireObject[] = await new Deno.Command("pw-dump", {
-    args: [],
+  const output = await new Deno.Command("pactl", {
+    args: ["--format=json", "list", "sinks"],
   })
     .output()
-    .then((o) => JSON.parse(new TextDecoder().decode(o.stdout)));
+    .then((o) => new TextDecoder().decode(o.stdout))
+    .then((output) => JSON.parse(output));
 
-  return output
-    .filter((obj) =>
-      obj.type === "PipeWire:Interface:Node" &&
-      obj.info?.props?.["media.class"] === "Audio/Sink"
-    )
-    .map((sinkData) => {
-      const props = sinkData.info.props;
-      return {
-        name: props["node.name"],
-        serial: Number.parseInt(props["object.serial"]),
-        id: sinkData.id,
-        ownerModule: Number.parseInt(props["pulse.module.id"] || "0"),
-      };
-    });
+  // deno-lint-ignore no-explicit-any
+  return output.map((sinkData: any) => {
+    return {
+      name: sinkData.name,
+      serial: Number.parseInt(sinkData.properties["object.serial"]),
+      ownerModule: Number.parseInt(sinkData.owner_module),
+    };
+  });
 }
 
 export async function moveAppToSink({
@@ -136,14 +133,8 @@ export async function moveAppToSink({
   app: App;
   sink: Sink;
 }): Promise<void> {
-  await new Deno.Command("pw-metadata", {
-    args: [
-      "-n",
-      "default",
-      app.id.toString(),
-      "target.node",
-      sink.id.toString(),
-    ],
+  await new Deno.Command("pactl", {
+    args: ["move-sink-input", app.serial.toString(), sink.serial.toString()],
     stderr: "null",
   }).spawn().status;
 }
@@ -166,52 +157,35 @@ export async function playSinkAudio(
   sink: Sink,
   abortController?: AbortController,
 ): Promise<void> {
-  const pwRecord = new Deno.Command("pw-record", {
-    args: [
-      "--target",
-      sink.serial.toString(),
-      "--format=s16",
-      "--rate=44100",
-      "--channels=2",
-      "-",
-    ],
+  const pacatRecord = new Deno.Command("pacat", {
+    args: ["--record", "-d", sink.serial.toString()],
     stdout: "piped",
     signal: abortController?.signal,
   }).spawn();
-  const pwPlay = new Deno.Command("pw-play", {
-    args: ["--format=s16", "--rate=44100", "--channels=2", "-"],
+  const pacatPlay = new Deno.Command("pacat", {
+    args: ["--playback"],
     stdin: "piped",
     signal: abortController?.signal,
   }).spawn();
 
-  const pwRecordReader = pwRecord.stdout.getReader();
-  const pwPlayWriter = pwPlay.stdin.getWriter();
+  const pacatRecordReader = pacatRecord.stdout.getReader();
+  const pacatPlayWriter = pacatPlay.stdin.getWriter();
 
   while (true) {
-    const { done, value } = await pwRecordReader.read();
+    const { done, value } = await pacatRecordReader.read();
     if (done) break;
-    await pwPlayWriter.write(value);
+    await pacatPlayWriter.write(value);
   }
 }
 
 export async function getDefaultSink(): Promise<Sink | undefined> {
-  const output = await new Deno.Command("pw-metadata", {
-    args: ["-n", "default", "0", "default.audio.sink"],
+  const name = await new Deno.Command("pactl", {
+    args: ["get-default-sink"],
   })
     .output()
-    .then((o) => new TextDecoder().decode(o.stdout));
-
-  // Example output: update: id:0 key:'default.audio.sink' value:'{"name":"alsa_output.pci-0000_00_1b.0.analog-stereo"}' type:'Spa:String:JSON'
-  const match = output.match(/'default\.audio\.sink'.*value:'(.*)' type/);
-  if (match) {
-    try {
-      const value = JSON.parse(match[1]);
-      return findSinkByName(value.name);
-    } catch {
-      return undefined;
-    }
-  }
-  return undefined;
+    .then((o) => new TextDecoder().decode(o.stdout))
+    .then((output) => output.trim());
+  return findSinkByName(name);
 }
 
 export async function findSinkByName(name: string): Promise<Sink | undefined> {
