@@ -1,15 +1,24 @@
 <!-- App.svelte -->
 <script lang="ts">
-    import AppRow from "./lib/AppRow.svelte";
+    import AppHeaderRow from "./lib/AppHeaderRow.svelte";
+    import MediaRow from "./lib/MediaRow.svelte";
     import NotificationToast from "./lib/NotificationToast.svelte";
     import { onMount } from "svelte";
     import type { App, RecordRpc } from "../../backend/lib.ts";
     import { newWebSocketRpcSession, RpcStub } from "capnweb";
 
+    interface AppGroup {
+        appName: string;
+        isPinned: boolean;
+        autoRecord: boolean;
+        autoListen: boolean;
+        streams: App[];
+    }
+
     const fontPort = Number.parseInt(window.location.port);
     let apiPort: number | undefined = $state(undefined);
     let api: RpcStub<RecordRpc> | undefined = $state(undefined);
-    let apps: App[] = $state([]);
+    let appGroups: AppGroup[] = $state([]);
     let loading: boolean = $state(true);
     let downloadPath: string | undefined = $state(undefined);
     let recordingApps: Map<number, App> = $state(new Map());
@@ -63,6 +72,14 @@
         }
     }
 
+    function toggleAutoListen(appName: string) {
+        if (pinnedApps[appName]) {
+            pinnedApps[appName].autoListen = !pinnedApps[appName].autoListen;
+            pinnedApps = { ...pinnedApps };
+            syncPinnedApps();
+        }
+    }
+
     async function play(app: App) {
         if (!api) return;
         playingInProgress.add(app.serial);
@@ -71,12 +88,6 @@
             await api.play(app);
             playingSerials.add(app.serial);
             playingSerials = new Set(playingSerials);
-            // Store preference if pinned
-            if (pinnedApps[app.appName]) {
-                pinnedApps[app.appName].autoListen = true;
-                pinnedApps = { ...pinnedApps };
-                syncPinnedApps();
-            }
         } catch (err) {
             console.error("Failed to start playback:", err);
             showToast("Failed to start monitoring", "error");
@@ -92,12 +103,6 @@
             await api.stopPlay(app);
             playingSerials.delete(app.serial);
             playingSerials = new Set(playingSerials);
-            // Store preference if pinned
-            if (pinnedApps[app.appName]) {
-                pinnedApps[app.appName].autoListen = false;
-                pinnedApps = { ...pinnedApps };
-                syncPinnedApps();
-            }
         } catch (err) {
             console.error("Failed to stop playback:", err);
             showToast("Failed to stop monitoring", "error");
@@ -203,35 +208,41 @@
                     }
                 }
 
-                // Create a list that includes all pinned apps even if they're not running
-                const activePinnedKeys = new Set();
+                // Create a grouped list that includes all pinned apps even if they're not running
+                const groupsMap = new Map<string, AppGroup>();
+
                 for (const app of currentApps) {
-                    if (pinnedApps[app.appName]) activePinnedKeys.add(app.appName);
+                    if (!groupsMap.has(app.appName)) {
+                        groupsMap.set(app.appName, {
+                            appName: app.appName,
+                            isPinned: !!pinnedApps[app.appName],
+                            autoRecord: pinnedApps[app.appName]?.autoRecord || false,
+                            autoListen: pinnedApps[app.appName]?.autoListen || false,
+                            streams: []
+                        });
+                    }
+                    groupsMap.get(app.appName)!.streams.push(app);
                 }
 
-                const displayApps = [...currentApps];
-
-                let inactiveIdx = 0;
-                for (const key in pinnedApps) {
-                    if (!activePinnedKeys.has(key)) {
-                        inactiveIdx--;
-
-                        displayApps.push({
-                            appName: key,
-                            mediaName: "(inactive)",
-                            serial: inactiveIdx,
+                // Add inactive pinned apps
+                for (const appName in pinnedApps) {
+                    if (!groupsMap.has(appName)) {
+                        groupsMap.set(appName, {
+                            appName,
+                            isPinned: true,
+                            autoRecord: pinnedApps[appName].autoRecord,
+                            autoListen: pinnedApps[appName].autoListen,
+                            streams: []
                         });
                     }
                 }
 
-                // Sort apps: pinned first, then by appName
-                apps = displayApps.sort((a, b) => {
-                    const aPinned = !!pinnedApps[a.appName];
-                    const bPinned = !!pinnedApps[b.appName];
-
-                    if (aPinned !== bPinned) return aPinned ? -1 : 1;
+                // Sort groups: pinned first, then by appName
+                appGroups = Array.from(groupsMap.values()).sort((a, b) => {
+                    if (a.isPinned !== b.isPinned) return a.isPinned ? -1 : 1;
                     return a.appName.localeCompare(b.appName);
                 });
+
                 loading = false;
             } catch (err) {
                 console.warn("Poll failed (WebSocket may be disconnected):", err);
@@ -332,7 +343,7 @@
                 <div class="spinner"></div>
                 <p>Connecting to system...</p>
             </div>
-        {:else if apps.length === 0}
+        {:else if appGroups.length === 0}
             <div class="empty-state">
                 <svg viewBox="0 0 24 24" width="48" height="48">
                     <path
@@ -351,33 +362,51 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>App Name</th>
-                            <th>Media Name</th>
-                            <th>Controls</th>
+                            <th style="width: 40px;"></th>
+                            <th>Application / Media</th>
+                            <th class="controls-header">Controls</th>
                         </tr>
                     </thead>
                     <tbody>
                         {#if api !== undefined && apiPort !== undefined}
-                            {#each apps as app (app.serial)}
-                                <AppRow 
-                                    {app} 
-                                    {api} 
-                                    isRecording={recordingApps.has(app.serial)}
-                                    isPinned={!!pinnedApps[app.appName]}
-                                    autoRecord={pinnedApps[app.appName]?.autoRecord || false}
-                                    isPlaying={playingSerials.has(app.serial)}
-                                    onTogglePin={() => togglePin(app.appName)}
-                                    onToggleAutoRecord={() => toggleAutoRecord(app.appName)}
-                                    onPlay={() => play(app)}
-                                    onStopPlay={() => stopPlay(app)}
-                                    onToggleRecord={() => {
-                                        if (recordingApps.has(app.serial)) {
-                                            stopRecord(app);
-                                        } else {
-                                            record(app);
-                                        }
-                                    }}
+                            {#each appGroups as group (group.appName)}
+                                <AppHeaderRow
+                                    appName={group.appName}
+                                    isPinned={group.isPinned}
+                                    autoRecord={group.autoRecord}
+                                    autoListen={group.autoListen}
+                                    isActive={group.streams.length > 0}
+                                    onTogglePin={() => togglePin(group.appName)}
+                                    onToggleAutoRecord={() => toggleAutoRecord(group.appName)}
+                                    onToggleAutoListen={() => toggleAutoListen(group.appName)}
                                 />
+                                {#each group.streams as app (app.serial)}
+                                    <MediaRow
+                                        {app}
+                                        isRecording={recordingApps.has(app.serial)}
+                                        isPlaying={playingSerials.has(app.serial)}
+                                        autoRecord={group.autoRecord}
+                                        onPlay={() => play(app)}
+                                        onStopPlay={() => stopPlay(app)}
+                                        onToggleRecord={() => {
+                                            if (recordingApps.has(app.serial)) {
+                                                stopRecord(app);
+                                            } else {
+                                                record(app);
+                                            }
+                                        }}
+                                    />
+                                {/each}
+                                {#if group.streams.length === 0}
+                                    <MediaRow
+                                        app={{ appName: group.appName, mediaName: "(no active streams)", serial: -1 }}
+                                        isRecording={false}
+                                        isPlaying={false}
+                                        onPlay={() => {}}
+                                        onStopPlay={() => {}}
+                                        onToggleRecord={() => {}}
+                                    />
+                                {/if}
                             {/each}
                         {/if}
                     </tbody>
@@ -598,6 +627,12 @@
         position: sticky;
         top: 0;
         z-index: 10;
+    }
+
+    .controls-header {
+        text-align: right;
+        padding-right: 24px;
+        width: 300px;
     }
 
     .empty-state {
